@@ -14,8 +14,6 @@ import java.util.Scanner;
 public class BroodjesInMemory {
     private Map<String, Broodje> broodjesDB = new HashMap<>();
 
-
-
     public void readFile() {
         String filePath = "src/bestanden/broodjes.txt";
         try {
@@ -25,7 +23,6 @@ public class BroodjesInMemory {
                 String data = myReader.nextLine();
                 String[] arr = data.split(",");
                 broodjesDB.put(arr[0],new Broodje(arr[0],Double.parseDouble(arr[1]), Integer.parseInt(arr[2]), Integer.parseInt(arr[3])));
-                System.out.println(broodjesDB.get(arr[0]).toString());
             }
             myReader.close();
         } catch (FileNotFoundException e) {
@@ -37,6 +34,4 @@ public class BroodjesInMemory {
     public Map<String, Broodje> getBroodjesDB() {
         return this.broodjesDB;
     }
-
-
 }
