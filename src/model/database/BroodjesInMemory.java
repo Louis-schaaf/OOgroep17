@@ -7,10 +7,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class BroodjesInMemory {
-    private ArrayList<Broodje> broodjesDB = new ArrayList<>();
+    private Map<String, Broodje> broodjesDB = new HashMap<>();
+
 
 
     public void readFile() {
@@ -20,8 +23,9 @@ public class BroodjesInMemory {
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                // TODO: splitten op , zodra broodje class af is
-                System.out.println(data);
+                String[] arr = data.split(",");
+                broodjesDB.put(arr[0],new Broodje(arr[0],Double.parseDouble(arr[1]), Integer.parseInt(arr[2]), Integer.parseInt(arr[3])));
+                System.out.println(broodjesDB.get(arr[0]).toString());
             }
             myReader.close();
         } catch (FileNotFoundException e) {
@@ -29,5 +33,10 @@ public class BroodjesInMemory {
             e.printStackTrace();
         }
     }
+
+    public Map<String, Broodje> getBroodjesDB() {
+        return this.broodjesDB;
+    }
+
 
 }

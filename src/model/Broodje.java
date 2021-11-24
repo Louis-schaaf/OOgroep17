@@ -18,21 +18,21 @@ public class Broodje {
     }
 
     private void setActualStock(int actualStock) {
-        if (actualStock > 0) {
+        if (actualStock < 0) {
             throw new IllegalArgumentException("The actual stock cannot be less than 0.");
         }
         this.actualStock = actualStock;
     }
 
     private void setSoldAmount(int soldAmount) {
-        if (soldAmount > 0) {
+        if (soldAmount < 0) {
             throw new IllegalArgumentException("The sold amount cannot be less than 0.");
         }
         this.soldAmount = soldAmount;
     }
 
     private void setSalePrice(double salePrice) {
-        if (salePrice > 0) {
+        if (salePrice < 0) {
             throw new IllegalArgumentException("The actual stock cannot be less than 0.");
         }
         this.salePrice = salePrice;
