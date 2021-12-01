@@ -14,7 +14,7 @@ public class BelegInMemory {
     private Map<String, Beleg> belegDB = new HashMap<>();
 
     public void readFile() {
-        String filePath = "src/bestanden/broodjes.txt";
+        String filePath = "src/bestanden/beleg.txt";
         try {
             File myObj = new File(filePath);
             Scanner myReader = new Scanner(myObj);
@@ -31,6 +31,7 @@ public class BelegInMemory {
     }
 
     public Map<String, Beleg> getBelegDB() {
+        readFile();
         return this.belegDB;
     }
 }

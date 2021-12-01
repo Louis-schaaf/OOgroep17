@@ -30,6 +30,7 @@ public class BroodjesInMemory {
     }
 
     public Map<String, Broodje> getBroodjesDB() {
+        readFile();
         return this.broodjesDB;
     }
 }

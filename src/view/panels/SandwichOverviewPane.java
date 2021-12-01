@@ -37,27 +37,11 @@ public class SandwichOverviewPane extends GridPane{
 	
 	
 	public SandwichOverviewPane() {
-		//Verwijderen als inlezen werkt!
-		Broodje broodje = new Broodje("kaas", 0.30,1,2);
-		List<Broodje> broodjes1 = new ArrayList();
-		broodjes1.add(broodje);
-		ObservableList<Broodje> observers = FXCollections.observableList(broodjes1);
-		System.out.println("Print werkt");
-		System.out.println(observers.get(0).toString());
-
-		//Verwijderen als inlezen werkt!
-		Beleg beleg = new Beleg("kaas", 30,10,2);
-		List<Beleg> beleg1 = new ArrayList();
-		beleg1.add(beleg);
-		ObservableList<Beleg> observers1 = FXCollections.observableList(beleg1);
-		System.out.println("Print werkt");
-		System.out.println(beleg1.get(0).toString());
-
 		this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);        
 		this.add(new Label("Broodjes:"), 0, 0, 1, 1);
-		table.setItems(observers); //Als inlezen werkt, moeten we observers vervangen door broodjeObservableList
+		table.setItems(broodjeObservableList); //Als inlezen werkt, moeten we observers vervangen door broodjeObservableList
 		TableColumn<Broodje, String> firstNameColumn = new TableColumn<Broodje, String>("Name");
 		TableColumn<Broodje, Double> secondNameColumn = new TableColumn<Broodje, Double>("Sale price");
 		TableColumn<Broodje, Integer> thirdNameColumn = new TableColumn<Broodje, Integer>("Available stock");
@@ -70,7 +54,7 @@ public class SandwichOverviewPane extends GridPane{
 		this.add(table, 0, 1);
 
 		this.add(new Label("Beleg:"), 1, 0, 1, 1);
-		belegTableView.setItems(observers1); //Als inlezen werkt, moeten we observers1 vervangen door belegObservableList
+		belegTableView.setItems(belegObservableList); //Als inlezen werkt, moeten we observers1 vervangen door belegObservableList
 		TableColumn<Beleg, String> firstNameColumn1 = new TableColumn<Beleg, String>("Name");
 		TableColumn<Beleg, Double> secondNameColumn1 = new TableColumn<Beleg, Double>("Sale price");
 		TableColumn<Beleg, Integer> thirdNameColumn1 = new TableColumn<Beleg, Integer>("Available stock");
