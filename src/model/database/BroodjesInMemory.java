@@ -13,18 +13,10 @@ public class BroodjesInMemory {
     private Map<String, Broodje> broodjesDB = new HashMap<>();
 
     public void readFile() {
-        String filePath = "src/bestanden/broodjes.txt";
+        File file = new File("src/bestanden/broodjes.txt");
         try {
-            File myObj = new File(filePath);
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                String[] arr = data.split(",");
-                broodjesDB.put(arr[0],new Broodje(arr[0],Double.parseDouble(arr[1]), Integer.parseInt(arr[2]), Integer.parseInt(arr[3])));
-            }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
+            broodjesDB = new BroodjeTekstReader().load(file);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
