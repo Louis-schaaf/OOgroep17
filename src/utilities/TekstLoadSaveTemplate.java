@@ -1,9 +1,7 @@
 package utilities;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +22,20 @@ public abstract class TekstLoadSaveTemplate<K,V>{
         return returnMap;
     }
 
-    abstract V maakObject(String[] tokens);
+    public void write(File file, ArrayList<ArrayList<String>> args) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            for (int i = 0; i < args.size(); i++) {
+                writer.newLine();
+                String[] list = (String[]) args.get(i).toArray();
+                String line = list.toString();
+                writer.write(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-    abstract K getKey(String[] tokens);
+    public abstract V maakObject(String[] tokens);
+
+    public abstract K getKey(String[] tokens);
 }

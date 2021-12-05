@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.zip.ZipEntry;
+
 public class BelegSoort {
     private String name;
     private double salePrice;
@@ -43,6 +46,15 @@ public class BelegSoort {
             throw new IllegalArgumentException("The name cannot be empty.");
         }
         this.name = name;
+    }
+
+    public ArrayList<String> getArrayList() {
+        ArrayList<String> list = new ArrayList<>();
+        list.add(this.name);
+        list.add(String.valueOf(this.salePrice));
+        list.add(String.valueOf(this.actualStock));
+        list.add(String.valueOf(this.soldAmount));
+        return list;
     }
 
     public String getName() {
