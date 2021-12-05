@@ -1,4 +1,4 @@
-package model.database;
+package utilities;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class TekstLoadTemplate <K,V>{
+public abstract class TekstLoadSaveTemplate<K,V>{
 
     public Map<K,V> load(File file) throws IOException {
         Map<K,V> returnMap = new HashMap<K,V>();

@@ -1,28 +1,26 @@
 package model.database;
 
-import model.Beleg;
-import model.Broodje;
+import model.BelegSoort;
+import model.database.loadSaveStrategies.BelegTekstLoadSaveStrategy;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
-public class BelegInMemory {
-    private Map<String, Beleg> belegDB = new HashMap<>();
+public class BelegDatabase {
+    private Map<String, BelegSoort> belegDB = new HashMap<>();
 
     public void readFile() {
         File file = new File("src/bestanden/beleg.txt");
         try {
-            belegDB = new BelegTekstReader().load(file);
+            belegDB = new BelegTekstLoadSaveStrategy().load(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public Map<String, Beleg> getBelegDB() {
+    public Map<String, BelegSoort> getBelegDB() {
         readFile();
         return this.belegDB;
     }

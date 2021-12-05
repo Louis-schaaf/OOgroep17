@@ -2,7 +2,7 @@ package application;
 	
 import javafx.application.Application;
 import javafx.stage.Stage;
-import model.database.BroodjesInMemory;
+import model.database.BroodjesDatabase;
 import view.AdminView;
 import view.KitchenView;
 import view.OrderView;
@@ -14,7 +14,7 @@ public class BroodjeszaakMain extends Application {
 		AdminView adminView = new AdminView();
 		OrderView orderView = new OrderView();
 		KitchenView kitchenView = new KitchenView();
-		BroodjesInMemory broodjesInMemory = new BroodjesInMemory();
+		BroodjesDatabase broodjesInMemory = new BroodjesDatabase();
 		broodjesInMemory.readFile();
 	}
 	

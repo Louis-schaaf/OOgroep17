@@ -1,21 +1,19 @@
 package model.database;
 
 import model.Broodje;
+import model.database.loadSaveStrategies.BroodjesTekstLoadSaveStrategy;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
-public class BroodjesInMemory {
+public class BroodjesDatabase {
     private Map<String, Broodje> broodjesDB = new HashMap<>();
 
     public void readFile() {
         File file = new File("src/bestanden/broodjes.txt");
         try {
-            broodjesDB = new BroodjeTekstReader().load(file);
+            broodjesDB = new BroodjesTekstLoadSaveStrategy().load(file);
         } catch (IOException e) {
             e.printStackTrace();
         }

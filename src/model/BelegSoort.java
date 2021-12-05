@@ -1,19 +1,19 @@
 package model;
 
-public class Beleg {
+public class BelegSoort {
     private String name;
     private double salePrice;
     private int actualStock;
     private int soldAmount;
 
-    public Beleg(String name, double salePrice, int actualStock, int soldAmount) {
+    public BelegSoort(String name, double salePrice, int actualStock, int soldAmount) {
         setName(name);
         setSalePrice(salePrice);
         setActualStock(actualStock);
         setSoldAmount(soldAmount);
     }
 
-    public Beleg() {
+    public BelegSoort() {
         this("",0.0,0,0);
     }
 
@@ -63,7 +63,7 @@ public class Beleg {
 
     @Override
     public boolean equals (Object o) {
-        Beleg beleg = (Beleg) o;
+        BelegSoort beleg = (BelegSoort) o;
         return this.getName().equals(beleg.getName());
     }
 
