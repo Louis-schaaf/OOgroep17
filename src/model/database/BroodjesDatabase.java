@@ -18,7 +18,7 @@ public class BroodjesDatabase {
         File file = new File("src/bestanden/broodjes.txt");
         try {
             LoadSaveStrategy loadSaveStrategy = LoadSaveStrategyFactory.createLoadSaveStrategy("Tekst");
-            broodjesDB = new BroodjesTekstLoadSaveStrategy().load(file);
+            broodjesDB = new BroodjesTekstLoadSaveStrategy().read(file);
         } catch (IOException e) {
             e.printStackTrace();
         }

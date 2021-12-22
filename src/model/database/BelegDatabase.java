@@ -14,7 +14,7 @@ public class BelegDatabase {
     public void readFile() {
         File file = new File("src/bestanden/beleg.txt");
         try {
-            belegDB = new BelegTekstLoadSaveStrategy().load(file);
+            belegDB = new BelegTekstLoadSaveStrategy().read(file);
         } catch (IOException e) {
             e.printStackTrace();
         }

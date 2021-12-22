@@ -7,7 +7,7 @@ import java.util.Map;
 
 public abstract class TekstLoadSaveTemplate<K,V>{
 
-    public Map<K,V> load(File file) throws IOException {
+    public Map<K,V> read(File file) throws IOException {
         Map<K,V> returnMap = new HashMap<K,V>();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))){
             String line = reader.readLine();
