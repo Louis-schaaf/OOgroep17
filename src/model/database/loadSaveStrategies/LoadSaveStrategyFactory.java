@@ -1,31 +1,24 @@
 package model.database.loadSaveStrategies;
 
+import java.lang.reflect.Constructor;
+
 public class LoadSaveStrategyFactory {
-    String fileTypeUser;
-    public LoadSaveStrategyFactory(){
-    }
-    public Object createLoadSaveStrategy(){;
-        Object terug = null;
-        String fileUserFullName = "model.database.loadSaveStrategies.Beleg"+fileTypeUser+"LoadSaveStrategy";
-        Class loadSaveStrategyEnum = null;
-        try {
-            loadSaveStrategyEnum = Class.forName(fileUserFullName);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+    public static LoadSaveStrategy createLoadSaveStrategy(String type, Object... args){;
+        LoadSaveStrategy instance = null;
+
+        LoadSaveStrategyEnum loadSaveStrategyEnum = LoadSaveStrategyEnum.valueOf(type);
+        String klassenaam = loadSaveStrategyEnum.getKlasseNaam();
+        Class<?>[] dataTypes = new Class[args.length];
+        int tel = 0;
+        for (Object object:args){
+            dataTypes[tel++] = object.getClass();
         }
         try {
-            terug = loadSaveStrategyEnum.newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return terug;
-    }
-    public void init(String fileTypeUser){
-        setFileTypeUser(fileTypeUser);
-    }
-    public void setFileTypeUser(String fileTypeUser) {
-        this.fileTypeUser = fileTypeUser;
+            Class<?> clazz = Class.forName(klassenaam);
+            Constructor<?> constructor = clazz.getConstructor(dataTypes);
+            instance = (LoadSaveStrategy) constructor.newInstance(args);
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }return instance;
     }
 }

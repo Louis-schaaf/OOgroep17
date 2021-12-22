@@ -1,4 +1,13 @@
 package model.database.loadSaveStrategies;
 
-public class BroodjesExcelLoadSaveStrategy {
+import utilities.ExcelLoadSaveTemplate;
+
+public class BroodjesExcelLoadSaveStrategy extends ExcelLoadSaveTemplate implements LoadSaveStrategy{
+    @Override
+    public void load() {
+    }
+
+    @Override
+    public void save() {
+    }
 }
