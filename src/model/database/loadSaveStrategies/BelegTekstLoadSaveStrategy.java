@@ -3,7 +3,7 @@ package model.database.loadSaveStrategies;
 import model.BelegSoort;
 import utilities.TekstLoadSaveTemplate;
 
-public class BelegTekstLoadSaveStrategy extends TekstLoadSaveTemplate {
+public class BelegTekstLoadSaveStrategy extends TekstLoadSaveTemplate implements LoadSaveStrategy{
     @Override
     public Object maakObject(String[] tokens) {
         BelegSoort beleg = new BelegSoort(tokens[0], Double.parseDouble(tokens[1]), Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]));
@@ -13,5 +13,15 @@ public class BelegTekstLoadSaveStrategy extends TekstLoadSaveTemplate {
     @Override
     public Object getKey(String[] tokens) {
         return tokens[0];
+    }
+
+    @Override
+    public void load() {
+
+    }
+
+    @Override
+    public void save() {
+
     }
 }

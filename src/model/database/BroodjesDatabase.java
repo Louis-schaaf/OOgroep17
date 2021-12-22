@@ -4,6 +4,7 @@ import model.BelegSoort;
 import model.Broodje;
 import model.database.loadSaveStrategies.BelegTekstLoadSaveStrategy;
 import model.database.loadSaveStrategies.BroodjesTekstLoadSaveStrategy;
+import model.database.loadSaveStrategies.LoadSaveStrategyFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.util.*;
 
 public class BroodjesDatabase {
     private Map<String, Broodje> broodjesDB = new TreeMap<>();
+    private LoadSaveStrategyFactory loadSaveStrategyFactory = new LoadSaveStrategyFactory();
 
     public void readFile() {
         File file = new File("src/bestanden/broodjes.txt");
