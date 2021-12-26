@@ -3,7 +3,7 @@ package model.database.loadSaveStrategies;
 import java.lang.reflect.Constructor;
 
 public class LoadSaveStrategyFactory {
-    public static LoadSaveStrategy createLoadSaveStrategy(String type, Object... args){;
+    public static LoadSaveStrategy createLoadSaveStrategy(String type, Object... args){
         LoadSaveStrategy instance = null;
 
         LoadSaveStrategyEnum loadSaveStrategyEnum = LoadSaveStrategyEnum.valueOf(type);
