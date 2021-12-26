@@ -22,7 +22,7 @@ public class SandwichOverviewPane extends GridPane{
 	//private TableView<Speler> table;
 	private TableView<Broodje> table = new TableView<>();
 	BroodjesDatabase broodjes = new BroodjesDatabase();
-	List<Broodje> list = new ArrayList<>(broodjes.getBroodjesDB().values());
+	List<Broodje> list = new ArrayList<>(broodjes.getBroodjes().values());
 	ObservableList<Broodje> broodjeObservableList =  FXCollections.observableList(list);
 
 	private TableView<BelegSoort> belegTableView = new TableView<>();

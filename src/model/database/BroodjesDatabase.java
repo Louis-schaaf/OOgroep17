@@ -1,6 +1,7 @@
 package model.database;
 
 import model.Broodje;
+import model.database.loadSaveStrategies.BroodjesExcelLoadSaveStrategy;
 import model.database.loadSaveStrategies.LoadSaveStrategy;
 
 import java.util.*;
@@ -11,6 +12,8 @@ public class BroodjesDatabase {
 
     public BroodjesDatabase() {
         broodjes = new TreeMap<>();
+        setStrategy(new BroodjesExcelLoadSaveStrategy());
+        this.load();
     }
 
     public void voegItemToe(Broodje broodje){
@@ -40,4 +43,12 @@ public class BroodjesDatabase {
         loadSaveStrategy.save(this.getAll());
     }
 
+    public Map<String, Broodje> getBroodjes() {
+        return broodjes;
+    }
+
+    public void sellBroodjes(Broodje broodje) {
+        broodje.setActualStock(broodje.getActualStock()-1);
+
+    }
 }

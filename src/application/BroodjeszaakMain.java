@@ -3,6 +3,7 @@ package application;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.database.BroodjesDatabase;
+import model.database.loadSaveStrategies.BroodjesExcelLoadSaveStrategy;
 import view.AdminView;
 import view.KitchenView;
 import view.OrderView;
@@ -16,7 +17,10 @@ public class BroodjeszaakMain extends Application {
 		KitchenView kitchenView = new KitchenView();
 		String fileUseType = "Excel";
 		BroodjesDatabase broodjesInMemory = new BroodjesDatabase();
+		broodjesInMemory.setStrategy(new BroodjesExcelLoadSaveStrategy());
 		broodjesInMemory.load();
+		broodjesInMemory.sellBroodjes(broodjesInMemory.getBroodjes().get("wit"));
+		broodjesInMemory.save();
 	}
 	
 	public static void main(String[] args) {
