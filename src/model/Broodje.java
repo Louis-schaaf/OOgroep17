@@ -19,7 +19,7 @@ public class Broodje {
         this("",0.0,0,0);
     }
 
-    private void setActualStock(int actualStock) {
+    public void setActualStock(int actualStock) {
         if (actualStock < 0) {
             throw new IllegalArgumentException("The actual stock cannot be less than 0.");
         }

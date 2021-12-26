@@ -12,7 +12,7 @@ import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
-public abstract class ExcelLoadSaveTemplate <K,V>{
+public abstract class ExcelLoadSaveTemplate {
 
     public void write(File file, ArrayList<ArrayList<String>> args)
             throws BiffException, IOException, RowsExceededException, WriteException {
@@ -56,4 +56,6 @@ public abstract class ExcelLoadSaveTemplate <K,V>{
         workbook.close();
         return info;
     }
+
+
 }

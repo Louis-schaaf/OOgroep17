@@ -3,6 +3,9 @@ package model.database.loadSaveStrategies;
 import model.BelegSoort;
 import utilities.TekstLoadSaveTemplate;
 
+import java.util.List;
+import java.util.Map;
+
 public class BelegTekstLoadSaveStrategy extends TekstLoadSaveTemplate implements LoadSaveStrategy{
     @Override
     public Object maakObject(String[] tokens) {
@@ -16,12 +19,12 @@ public class BelegTekstLoadSaveStrategy extends TekstLoadSaveTemplate implements
     }
 
     @Override
-    public void load() {
-
+    public Map load() {
+        return null;
     }
 
     @Override
-    public void save() {
+    public void save(List list) {
 
     }
 }
