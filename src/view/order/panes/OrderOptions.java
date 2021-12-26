@@ -14,6 +14,8 @@ import java.lang.reflect.Field;
 import java.util.Map;
 
 public class OrderOptions extends GridPane {
+    //TODO
+    //Check Observer Style methode toepassen! (Story 3.3)
     public OrderOptions(){
         this.setPadding(new Insets(10,0,10,20));
         this.setHgap(30); //horizontal gap in pixels => that's what you are asking for
