@@ -3,9 +3,9 @@ package application;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.database.BroodjesDatabase;
-import view.AdminView;
-import view.KitchenView;
-import view.OrderView;
+import view.admin.AdminView;
+import view.kitchen.KitchenView;
+import view.order.OrderView;
 
 
 public class BroodjeszaakMain extends Application {

@@ -1,20 +1,21 @@
-package view;
+package view.kitchen;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;	
+import javafx.stage.StageStyle;
 
-public class OrderView {
+public class KitchenView {
+	
 	private Stage stage = new Stage();		
-		
-	public OrderView(){			
-		stage.setTitle("ORDER VIEW");
+	
+	public KitchenView(){			
+		stage.setTitle("KITCHEN VIEW");
 		stage.initStyle(StageStyle.UTILITY);
-		stage.setX(20);
-		stage.setY(20);
+		stage.setX(680);
+		stage.setY(470);
 		Group root = new Group();
-		Scene scene = new Scene(root, 650, 650);			
+		Scene scene = new Scene(root, 650, 200);			
 		stage.setScene(scene);
 		stage.sizeToScene();			
 		stage.show();		

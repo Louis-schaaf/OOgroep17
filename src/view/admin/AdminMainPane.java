@@ -1,10 +1,10 @@
-package view;
+package view.admin;
 
 
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
-import view.panels.SandwichOverviewPane;
+import view.admin.panes.SandwichOverviewPane;
 
 public class AdminMainPane extends BorderPane {
 	public AdminMainPane(){		

@@ -1,4 +1,4 @@
-package view.panels;
+package view.admin.panes;
 
 
 import javafx.collections.FXCollections;
