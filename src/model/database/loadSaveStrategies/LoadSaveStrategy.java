@@ -10,5 +10,5 @@ import java.util.Map;
 
 public interface LoadSaveStrategy {
     Map load();
-    void save(List<Broodje> arrayList);
+    void save(List arrayList);
 }

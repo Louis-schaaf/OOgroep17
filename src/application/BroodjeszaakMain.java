@@ -16,11 +16,7 @@ public class BroodjeszaakMain extends Application {
 		OrderView orderView = new OrderView();
 		KitchenView kitchenView = new KitchenView();
 		String fileUseType = "Excel";
-		BroodjesDatabase broodjesInMemory = new BroodjesDatabase();
-		broodjesInMemory.setStrategy(new BroodjesExcelLoadSaveStrategy());
-		broodjesInMemory.load();
-		broodjesInMemory.sellBroodjes(broodjesInMemory.getBroodjes().get("wit"));
-		broodjesInMemory.save();
+
 	}
 	
 	public static void main(String[] args) {

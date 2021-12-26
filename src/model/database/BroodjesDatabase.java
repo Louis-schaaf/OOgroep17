@@ -9,13 +9,11 @@ import java.util.*;
 
 public class BroodjesDatabase {
     private Map<String,Broodje> broodjes;
-    private LoadSaveStrategy loadSaveStrategy;;
+    private LoadSaveStrategy loadSaveStrategy;
 
     public BroodjesDatabase() {
         broodjes = new TreeMap<>();
-        //TODO
-        //setStrategy(LoadSaveStrategyFactory.createLoadSaveStrategy("EXCELBROODJES"));
-        setStrategy(new BroodjesExcelLoadSaveStrategy());
+        setStrategy(LoadSaveStrategyFactory.createLoadSaveStrategy("EXCELBROODJES"));
         this.load();
     }
 

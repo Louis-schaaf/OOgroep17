@@ -1,10 +1,10 @@
 package model.database.loadSaveStrategies;
 
 public enum LoadSaveStrategyEnum {
-    EXCELBROODJES("ExcelBroodjes", "domain.loadSaveStrategies.BroodjesExcelLoadSaveStrategy"),
-    TEKSTBROODJES("TekstBroodjes", "domain.loadSaveStrategies.BroodjesTekstLoadSaveStrategy"),
-    EXCELBELEG("ExcelBroodjes", "domain.loadSaveStrategies.BelegExcelLoadSaveStrategy"),
-    TEKSTBELEG("TekstBroodjes", "domain.loadSaveStrategies.BelegTekstLoadSaveStrategy");
+    EXCELBROODJES("ExcelBroodjes", "model.database.loadSaveStrategies.BroodjesExcelLoadSaveStrategy"),
+    TEKSTBROODJES("TekstBroodjes", "model.database.loadSaveStrategies.BroodjesTekstLoadSaveStrategy"),
+    EXCELBELEG("ExcelBeleg", "model.database.loadSaveStrategies.BelegExcelLoadSaveStrategy"),
+    TEKSTBELEG("TekstBeleg", "model.database.loadSaveStrategies.BelegTekstLoadSaveStrategy");
 
     private final String omschrijving;
     private final String klasseNaam;

@@ -42,14 +42,15 @@ public class BroodjesExcelLoadSaveStrategy extends ExcelLoadSaveTemplate impleme
     }
 
     @Override
-    public void save(List<Broodje> list) {
+    public void save(List list) {
          ArrayList arrayList1 = new ArrayList<>();
-         for (Broodje broodje : list) {
+         for (Object broodje : list) {
+             Broodje brood = (Broodje) broodje;
              ArrayList arrayList = new ArrayList<String>();
-             arrayList.add(broodje.getName());
-             arrayList.add(String.valueOf(broodje.getSalePrice()));
-             arrayList.add(String.valueOf(broodje.getActualStock()));
-             arrayList.add(String.valueOf(broodje.getSoldAmount()));
+             arrayList.add(brood.getName());
+             arrayList.add(String.valueOf(brood.getSalePrice()));
+             arrayList.add(String.valueOf(brood.getActualStock()));
+             arrayList.add(String.valueOf(brood.getSoldAmount()));
              arrayList1.add(arrayList);
          }
         try {
