@@ -16,7 +16,7 @@ public class BroodjeszaakMain extends Application {
 		KitchenView kitchenView = new KitchenView();
 		String fileUseType = "Excel";
 		BroodjesDatabase broodjesInMemory = new BroodjesDatabase();
-		broodjesInMemory.readFile();
+		broodjesInMemory.load();
 	}
 	
 	public static void main(String[] args) {
