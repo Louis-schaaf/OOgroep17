@@ -37,7 +37,6 @@ public class BroodjesExcelLoadSaveStrategy extends ExcelLoadSaveTemplate impleme
 
     @Override
     public Map load() {
-
         return getData(file);
     }
 

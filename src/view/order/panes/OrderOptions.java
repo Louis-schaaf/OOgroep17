@@ -6,28 +6,35 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import model.BelegSoort;
+import model.Broodje;
+import model.database.loadSaveStrategies.LoadSaveStrategyFactory;
 
 import java.lang.reflect.Field;
+import java.util.Map;
 
 public class OrderOptions extends GridPane {
     public OrderOptions(){
         this.setPadding(new Insets(10,0,10,20));
         this.setHgap(30); //horizontal gap in pixels => that's what you are asking for
         this.setVgap(10); //vertical gap in pixels
-        this.add(fixButtonColorBorder(new Button("Maïs"),true,true),1, 0);
-        this.add(fixButtonColorBorder(new Button("Wit"),true,true),2, 0);
-        this.add(fixButtonColorBorder(new Button("Volkoren"),true,true),3, 0);
+        Map<String, Broodje> broodjes = LoadSaveStrategyFactory.createLoadSaveStrategy("EXCELBROODJES").load();
+        Map<String, BelegSoort> beleg = LoadSaveStrategyFactory.createLoadSaveStrategy("EXCELBELEG").load();
+        int broodjesIndex = 0;
+        int belegIndex = 0;
+        for (Map.Entry<String, Broodje> entry : broodjes.entrySet()) {;
+            this.add(fixButtonColorBorder(entry.getKey(), true, true),broodjesIndex, 0);
+            broodjesIndex++;
+        }
         this.setHgap(10);
-        this.add(fixButtonColorBorder(new Button("Feta"),false,true),1, 1);
-        this.add(fixButtonColorBorder(new Button("Hesp"),false,true),2, 1);
-        this.add(fixButtonColorBorder(new Button("Kaas"),false,true),3, 1);
-        this.add(fixButtonColorBorder(new Button("Komkommer"),false,true),4, 1);
-        this.add(fixButtonColorBorder(new Button("Olijven"),false,true),5, 1);
-        this.add(fixButtonColorBorder(new Button("Sla"),false,true),6, 1);
-        this.add(fixButtonColorBorder(new Button("Tomaat"),false,true),7, 1);
+        for (Map.Entry<String, BelegSoort> entry : beleg.entrySet()) {;
+            this.add(fixButtonColorBorder(entry.getKey(), false, true), belegIndex, 1);
+            belegIndex++;
+        }
         this.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, new CornerRadii(10), Insets.EMPTY)));
     }
-    private Button fixButtonColorBorder(Button button, boolean gray, boolean border){
+    private Button fixButtonColorBorder(String buttonName, boolean gray, boolean border){
+        Button button = new Button(buttonName);
         if (gray == true){
             button.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(10), Insets.EMPTY)));
         }else{
