@@ -40,6 +40,10 @@ public class Bestelling {
         this.bestellijnen.get(bestelLijn).addNaamBeleg(beleg);
     }
 
+    public Bestellijn verwijderBestellijn(int bestellijn) {
+        return this.bestellijnen.remove(bestellijn);
+    }
+
     public void changeState(BestellingState state) {
         this.state = state;
     }

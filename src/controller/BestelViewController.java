@@ -74,6 +74,13 @@ public class BestelViewController implements Observer {
         this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
     }
 
+    public void annuleerBestelling () throws BiffException, IOException {
+        this.bestelFacade.annuleerBestelling();
+        this.orderView.updateBestellijnen(this.bestelFacade.getLijstBestellijnen());
+        this.orderView.updateStatusBroodjesKnoppen(this.getVoorraadBroodjes());
+        this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
+    }
+
     @Override
     public void update() {
         orderView.update(this.getBestelling());
