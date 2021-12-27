@@ -42,7 +42,7 @@ public class OrderNieuweBestelling extends GridPane {
     // Zet een choicebox op en zet deze als standaardwaarde op disabled.
     private Node setUpChoiceBox() {
         choiceBox.getItems().addAll("Goedkoopste broodje gratis", "Louis", "Jarne", "Jasper");
-        choiceBox.setDisable(false);
+        choiceBox.setDisable(true);
         return choiceBox;
     }
 
@@ -53,8 +53,11 @@ public class OrderNieuweBestelling extends GridPane {
         buttonNieuweBestelling.setText("Nieuwe bestelling");
         buttonNieuweBestelling.setOnAction(event -> {
             try {
-                this.controller.startNieuweBestelling();
-                buttonNieuweBestelling.setDisable(true);
+                if (this.controller.getBestelling().getState().getClass().getName().contains("InWacht")){
+                    this.controller.startNieuweBestelling();
+                    buttonNieuweBestelling.setDisable(true);
+                    choiceBox.setDisable(false);
+                }
             } catch (BiffException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -69,5 +72,6 @@ public class OrderNieuweBestelling extends GridPane {
     // moet de bestelknop gedisabled worden
     // en de choiceBox worden geanabled.
     public void update(Bestelling bestelling) {
+
         }
     }

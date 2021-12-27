@@ -1,6 +1,8 @@
 package view.order.panes;
 
 import controller.BestelViewController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -12,12 +14,15 @@ import model.bestelling.Bestellijn;
 import model.Broodje;
 import model.bestelling.Bestelling;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderBroodjes extends GridPane {
     public BestelViewController controller;
     GridPane broodjes = new GridPane();
     GridPane lijnInLijst = new GridPane();
+    public List<Bestellijn> lijstBestellijnen;
+    TableView<Bestellijn> table;
 
     public OrderBroodjes(BestelViewController controller) {
         this.controller = controller;
@@ -27,10 +32,9 @@ public class OrderBroodjes extends GridPane {
         this.add(new Text("Aantal Broodjes: "), 0, 0);
         setBroodjes(broodjes);
         setLijninLijst(lijnInLijst);
-        this.add(broodjes,0,1,1,2);
-        this.add(lijnInLijst, 1,1);
-        this.add(annuleerKnop(), 0 , 3);
-        this.disableAll();
+        this.add(broodjes, 0, 1, 1, 2);
+        this.add(lijnInLijst, 1, 1);
+        this.add(annuleerKnop(), 0, 3);
     }
 
     // Maak een Gridpane voor LijninLijst
@@ -39,13 +43,13 @@ public class OrderBroodjes extends GridPane {
     //  a) Voeg hetzelfde broodje toe
     //  b) Verwijder broodje
     // Maak de achtergrond van de LijninLijst Blauwachtig
-    private void setLijninLijst(GridPane pane){
+    private void setLijninLijst(GridPane pane) {
         pane.setPadding(new Insets(10));
-        pane.add(new Text("Selecteer lijn in Lijst:"), 0,0);
+        pane.add(new Text("Selecteer lijn in Lijst:"), 0, 0);
         pane.setVgap(30); //vertical gap in pixels
-        pane.add(fixButtonColorBorder(new Button("Voeg hetzelfde broodje toe")),0, 1);
+        pane.add(fixButtonColorBorder(new Button("Voeg hetzelfde broodje toe")), 0, 1);
         pane.setVgap(10);
-        pane.add(fixButtonColorBorder(new Button("Verwijder broodje")),0, 2);
+        pane.add(fixButtonColorBorder(new Button("Verwijder broodje")), 0, 2);
         pane.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, new CornerRadii(10), Insets.EMPTY)));
 
     }
@@ -57,22 +61,21 @@ public class OrderBroodjes extends GridPane {
     // In de onderstaande tabel zou de naam van het broodje komen te staan
     // En in de andere tabel komen alle belegsoorten van het bijhorende broodje.
     private void setBroodjes(GridPane broodjes) {
-        TableView<Broodje> table = new TableView<>();
         broodjes.setPadding(new Insets(5, 5, 5, 5));
         broodjes.setVgap(5);
         broodjes.setHgap(5);
-        TableColumn<Broodje, String> firstNameColumn = new TableColumn<Broodje, String>("Broodje");
-        TableColumn<Broodje, Double> secondNameColumn = new TableColumn<Broodje, Double>("Beleg");
-        firstNameColumn.setCellValueFactory(new PropertyValueFactory<Broodje, String>("name"));
-        secondNameColumn.setCellValueFactory(new PropertyValueFactory<Broodje, Double>("beleg"));
-        table.getColumns().addAll(firstNameColumn,secondNameColumn);
+        table = new TableView<>();
+        TableColumn<Bestellijn, String> firstNameColumn = new TableColumn<>("Broodje");
+        firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("naamBroodje"));
+        table.getColumns().addAll(firstNameColumn);
+        firstNameColumn.setCellFactory(new PropertyValueFactory<Bestellijn, String>("naamBroodje"));
         broodjes.add(table, 0, 1);
     }
 
     // Geef een knop in en pas deze aan en deze wordt daarna teruggegeven
     // Maak de achtegrond van de knop lichtgrijs
     // Maak de border van de knop zwart
-    private Button fixButtonColorBorder(Button button){
+    private Button fixButtonColorBorder(Button button) {
         button.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(10), Insets.EMPTY)));
         button.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10), BorderWidths.DEFAULT)));
         return button;
@@ -88,7 +91,7 @@ public class OrderBroodjes extends GridPane {
 
     // Maak een annuleerKnop aan met "Annuleer Bestelling"
     // Deze krijgt een rode achtergrond met een zwarte border.
-    public Button annuleerKnop(){
+    public Button annuleerKnop() {
         Button buttonAnnuleren = new Button("Annuleer Bestelling");
         buttonAnnuleren.setBackground(new Background(new BackgroundFill(Color.RED, new CornerRadii(10), Insets.EMPTY)));
         buttonAnnuleren.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10), BorderWidths.DEFAULT)));
@@ -102,6 +105,14 @@ public class OrderBroodjes extends GridPane {
     }
 
     public void updateBestellijnen(List<Bestellijn> lijstBestellijnen) {
-        // TODO
+        table.getItems().clear();
+        ObservableList<Bestellijn> bestellijnObservableList = FXCollections.observableList(lijstBestellijnen);
+        table.getItems().addAll(bestellijnObservableList);
+        for (int i = 0; i < table.getItems().size(); i++) {
+            System.out.println(table.getItems().get(i).naamBroodje);
+        }
+        table.refresh();
+        table.setVisible(false);
+        table.setVisible(true);
     }
 }

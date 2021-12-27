@@ -17,6 +17,7 @@ public class Bestelling {
     public BestellingState state;
 
     public Bestelling() {
+        bestellijnen = new ArrayList<>();
         this.state = new InWacht(this);
     }
 
