@@ -1,4 +1,6 @@
-package model;
+package model.bestelling;
+
+import model.Broodje;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,22 +1,11 @@
 package view.order;
 
 import controller.BestelViewController;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import model.Bestellijn;
-import model.Bestelling;
+import model.bestelling.Bestellijn;
 import view.order.panes.OrderAfsluitingBestelling;
 import view.order.panes.OrderBroodjes;
 import view.order.panes.OrderNieuweBestelling;

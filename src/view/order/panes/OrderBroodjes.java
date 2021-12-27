@@ -7,8 +7,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import model.BelegSoort;
-import model.Bestellijn;
+import model.bestelling.Bestellijn;
 import model.Broodje;
 
 import java.util.List;

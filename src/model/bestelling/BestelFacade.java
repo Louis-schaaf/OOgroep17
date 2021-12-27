@@ -1,5 +1,8 @@
-package model;
+package model.bestelling;
 
+import model.Broodje;
+import model.bestelling.Bestellijn;
+import model.bestelling.Bestelling;
 import model.database.BelegDatabase;
 import model.database.BroodjesDatabase;
 

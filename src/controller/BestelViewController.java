@@ -1,7 +1,7 @@
 package controller;
 
-import model.BestelFacade;
-import model.Bestelling;
+import model.bestelling.BestelFacade;
+import model.bestelling.Bestelling;
 import model.Observer;
 import view.order.OrderView;
 
