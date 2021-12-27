@@ -38,18 +38,14 @@ public class OrderOptions extends GridPane {
         int broodjesIndex = 0;
         int belegIndex = 0;
 
-        for (Map.Entry<String, Broodje> entry : broodjes.entrySet()) {
-            if (entry.getValue().getActualStock() > 0) {
-                this.add(fixButtonColorBorder(entry.getKey(), true, true), broodjesIndex, 0);
-                broodjesIndex++;
-            }
+        for (Map.Entry<String, Broodje> entry : broodjes.entrySet()) {;
+            this.add(fixButtonColorBorder(entry.getKey(), true, true),broodjesIndex, 0);
+            broodjesIndex++;
         }
         this.setHgap(10);
-        for (Map.Entry<String, BelegSoort> entry : beleg.entrySet()) {
-            if (entry.getValue().getActualStock() > 0) {
-                this.add(fixButtonColorBorder(entry.getKey(), false, true), belegIndex, 1);
-                belegIndex++;
-            }
+        for (Map.Entry<String, BelegSoort> entry : beleg.entrySet()) {;
+            this.add(fixButtonColorBorder(entry.getKey(), false, true), belegIndex, 1);
+            belegIndex++;
         }
         this.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, new CornerRadii(10), Insets.EMPTY)));
     }
@@ -81,8 +77,8 @@ public class OrderOptions extends GridPane {
         for (Button b : buttons) {
             if (voorraadBroodjes.containsKey(b.getText())) {
                 int i = voorraadBroodjes.get(b.getText());
-                if (i < 0) {
-                    b.setDisable(true);
+                if (i < 1) {
+                    b.setVisible(false);
                 }
             }
         }
@@ -97,7 +93,7 @@ public class OrderOptions extends GridPane {
             if (voorraadBeleg.containsKey(b.getText())) {
                 int i = voorraadBeleg.get(b.getText());
                 if (i < 1) {
-                    b.setDisable(true);
+                    b.setVisible(false);
                 }
             }
         }
@@ -107,13 +103,19 @@ public class OrderOptions extends GridPane {
     public void disableAll() {
         List<Node> nodes = this.getManagedChildren();
         for (Node n : nodes) {
-            n.setDisable(true);
+            n.setVisible(false);
         }
     }
 
+    public void enableAll() {
+        List<Node> nodes = this.getManagedChildren();
+        for (Node n : nodes) {
+            n.setDisable(false);
+        }
+    }
     public void update(Bestelling bestelling) {
-        //TODO De nodes op deze pagina's per state van bestelling apart aanspreken en updaten. Dit lijkt me het makkelijkst
-        // te doen door de Nodes als instantievariabelen van deze klasse te maken. Voor de moment worden alle nodes die niet
-        // nodig zijn gedisabled met de disableAll() hierboven.
+        if (bestelling.getState().getClass().getName().contains("InBestelling")){
+            enableAll();
+        }
     }
 }
