@@ -19,7 +19,6 @@ import java.util.List;
 
 
 public class SandwichOverviewPane extends GridPane{
-	//private TableView<Speler> table;
 	private TableView<Broodje> table = new TableView<>();
 	BroodjesDatabase broodjes = new BroodjesDatabase();
 	List<Broodje> list = new ArrayList<>(broodjes.getBroodjes().values());
