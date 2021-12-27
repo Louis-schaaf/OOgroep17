@@ -48,7 +48,13 @@ public class OrderNieuweBestelling extends GridPane {
     private Button setUpOrderButton() {
         buttonNieuweBestelling.setText("Nieuwe bestelling");
         buttonNieuweBestelling.setOnAction(event -> {
-            this.controller.startNieuweBestelling();
+            try {
+                this.controller.startNieuweBestelling();
+            } catch (BiffException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
         buttonNieuweBestelling.setDisable(false);
         return buttonNieuweBestelling;
