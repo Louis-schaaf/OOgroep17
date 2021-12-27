@@ -20,6 +20,7 @@ public class BelegSoort {
         this("",0.0,0,0);
     }
 
+    // De huidige voorraad wordt ingesteld op de meegegeven waarde.
     private void setActualStock(int actualStock) {
         if (actualStock < 0) {
             throw new IllegalArgumentException("The actual stock cannot be less than 0.");
@@ -27,6 +28,7 @@ public class BelegSoort {
         this.actualStock = actualStock;
     }
 
+    // De
     public void aanpassenVoorraad (int i) {
         this.actualStock += i;
     }
