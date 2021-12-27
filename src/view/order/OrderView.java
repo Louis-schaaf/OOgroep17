@@ -26,9 +26,9 @@ public class OrderView {
 	public OrderView(BestelViewController controller){
 		VBox root = new VBox();
 		orderAfsluitingBestelling = new OrderAfsluitingBestelling();
-		orderNieuweBestelling= new OrderNieuweBestelling(controller);
 		orderOptions = new OrderOptions(controller);
 		orderBroodjes = new OrderBroodjes(controller);
+		orderNieuweBestelling = new OrderNieuweBestelling(controller);
 		stage.setTitle("ORDER VIEW");
 		stage.initStyle(StageStyle.UTILITY);
 		stage.setX(20);

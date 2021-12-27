@@ -59,6 +59,13 @@ public class BestelFacade implements Subject {
     public Bestelling startNieuweBestelling() {
         this.resetBestelling();
         bestelling.setState(bestelling.getInBereiding());
+        try {
+            notifyObservers();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (BiffException e) {
+            e.printStackTrace();
+        }
         return this.bestelling;
     }
 

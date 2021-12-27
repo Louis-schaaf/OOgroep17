@@ -15,6 +15,7 @@ public class BestelViewController implements Observer {
     public BestelViewController() {
         this.bestelFacade = new BestelFacade();
         this.orderView = new OrderView(this);
+        bestelFacade.addObserver(this);
     }
 
     public void setBestelFacade(BestelFacade bestelFacade) {

@@ -41,6 +41,7 @@ public class OrderNieuweBestelling extends GridPane {
 
     private Node setUpChoiceBox() {
         choiceBox.getItems().addAll("Goedkoopste broodje gratis", "Louis", "Jarne", "Jasper");
+        choiceBox.setDisable(true);
         return choiceBox;
     }
 
@@ -49,10 +50,13 @@ public class OrderNieuweBestelling extends GridPane {
         buttonNieuweBestelling.setOnAction(event -> {
             this.controller.startNieuweBestelling();
         });
+        buttonNieuweBestelling.setDisable(false);
         return buttonNieuweBestelling;
     }
 
     public void update(Bestelling bestelling) {
+        System.out.println(bestelling.getState());
+        System.out.println(bestelling.getInWacht());
         if (bestelling.getState() != bestelling.getInWacht()){
             choiceBox.setDisable(false);
             buttonNieuweBestelling.setDisable(true);
