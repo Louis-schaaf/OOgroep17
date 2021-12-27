@@ -54,6 +54,7 @@ public class OrderNieuweBestelling extends GridPane {
         buttonNieuweBestelling.setOnAction(event -> {
             try {
                 this.controller.startNieuweBestelling();
+                buttonNieuweBestelling.setDisable(true);
             } catch (BiffException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -68,7 +69,7 @@ public class OrderNieuweBestelling extends GridPane {
     // moet de bestelknop gedisabled worden
     // en de choiceBox worden geanabled.
     public void update(Bestelling bestelling) {
-        System.out.println(bestelling.getState());
+        /*System.out.println(bestelling.getState());
         System.out.println(bestelling.getInWacht());
         if (bestelling.getState() != bestelling.getInWacht()){
             choiceBox.setDisable(false);
@@ -76,6 +77,6 @@ public class OrderNieuweBestelling extends GridPane {
         }else{
             choiceBox.setDisable(true);
             buttonNieuweBestelling.setDisable(false);
-        }
+        }*/
     }
 }
