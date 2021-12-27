@@ -17,6 +17,7 @@ import java.util.List;
 
 public class OrderAfsluitingBestelling extends GridPane {
 
+
     public OrderAfsluitingBestelling(){
         this.setPadding(new Insets(10,0,10,20));
         this.setHgap(30); //horizontal gap in pixels => that's what you are asking for

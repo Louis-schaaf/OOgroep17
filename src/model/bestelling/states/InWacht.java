@@ -2,7 +2,7 @@ package model.bestelling.states;
 
 import model.bestelling.Bestelling;
 
-public class InWacht implements BestellingState{
+public class InWacht extends BestellingState{
     private Bestelling bestelling;
 
     public InWacht(Bestelling bestelling) {

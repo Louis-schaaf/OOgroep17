@@ -2,7 +2,7 @@ package model.bestelling.states;
 
 import model.bestelling.Bestelling;
 
-public class Betaald implements BestellingState {
+public class Betaald extends BestellingState {
     private Bestelling bestelling;
 
     public Betaald(Bestelling bestelling) {
