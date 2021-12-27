@@ -1,6 +1,7 @@
 package view.order.panes;
 
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -10,6 +11,9 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import model.bestelling.Bestelling;
+
+import java.util.List;
 
 public class OrderAfsluitingBestelling extends GridPane {
 
@@ -22,10 +26,22 @@ public class OrderAfsluitingBestelling extends GridPane {
         this.add(new Button("Betaal"), 3,0);
         this.add(new Button("Naar Keuken"), 4,0);
         this.setBackground(new Background(new BackgroundFill(Color.CADETBLUE, new CornerRadii(10), Insets.EMPTY)));
-}
-
-    public void update() {
+        this.disableAll();
     }
+
+    public void disableAll() {
+        List<Node> nodes = this.getManagedChildren();
+        for (Node n : nodes) {
+            n.setDisable(true);
+        }
+    }
+
+    public void update(Bestelling bestelling) {
+        //TODO De nodes op deze pagina's per state van bestelling apart aanspreken en updaten. Dit lijkt me het makkelijkst
+        // te doen door de Nodes als instantievariabelen van deze klasse te maken. Voor de moment worden alle nodes die niet
+        // nodig zijn gedisabled met de disableAll() hierboven.
+    }
+
     /*private Button setUpStartGameButton() {
         // Creating a Button
         button = new Button();

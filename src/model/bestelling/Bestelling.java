@@ -82,6 +82,15 @@ public class Bestelling implements Subject {
         return this.inWacht;
     }
 
+    public BestellingState getState() {
+        return this.state;
+    }
+
+    public void resetBestelling() {
+        this.state = inWacht;
+        this.bestellijnen.clear();
+    }
+
     @Override
     public void addObserver(Observer observer) {
         observers.add(observer);

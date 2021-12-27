@@ -57,7 +57,7 @@ public class BelegDatabase {
         List<BelegSoort> beleg = this.getAll();
         for (BelegSoort b : beleg) {
             result.put(b.getName(), b.getActualStock());
-            //TODO
+            //TODO Werkt nog niet. Geen idee hoe dit komt.
         }
         return result;
     }

@@ -6,6 +6,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.bestelling.Bestellijn;
+import model.bestelling.Bestelling;
 import view.order.panes.OrderAfsluitingBestelling;
 import view.order.panes.OrderBroodjes;
 import view.order.panes.OrderNieuweBestelling;
@@ -39,11 +40,11 @@ public class OrderView {
 		stage.show();
 	}
 
-	public void refresh() {
-		this.orderNieuweBestelling.update();
-		this.orderOptions.update();
-		this.orderBroodjes.update();
-		this.orderAfsluitingBestelling.update();
+	public void update(Bestelling bestelling) {
+		this.orderNieuweBestelling.update(bestelling);
+		this.orderOptions.update(bestelling);
+		this.orderBroodjes.update(bestelling);
+		this.orderAfsluitingBestelling.update(bestelling);
 	}
 
 	public void updateBestellijnen(List<Bestellijn> lijstBestellijnen) {

@@ -2,6 +2,7 @@ package view.order.panes;
 
 import controller.BestelViewController;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.*;
@@ -9,9 +10,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import model.BelegSoort;
 import model.Broodje;
+import model.bestelling.Bestelling;
 import model.database.loadSaveStrategies.LoadSaveStrategyFactory;
 
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Map;
 
 public class OrderOptions extends GridPane {
@@ -40,8 +43,7 @@ public class OrderOptions extends GridPane {
             belegIndex++;
         }
         this.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, new CornerRadii(10), Insets.EMPTY)));
-        this.updateStatusBroodjesKnoppen(controller.getVoorraadBroodjes());
-        this.updateStatusBelegKnoppen(controller.getVoorraadBeleg());
+        this.disableAll();
     }
     private Button fixButtonColorBorder(String buttonName, boolean gray, boolean border){
         Button button = new Button(buttonName);
@@ -80,8 +82,16 @@ public class OrderOptions extends GridPane {
         }
     }
 
-    public void update() {
-        this.updateStatusBelegKnoppen(controller.getVoorraadBeleg());
-        this.updateStatusBroodjesKnoppen(controller.getVoorraadBroodjes());
+    public void disableAll() {
+        List<Node> nodes = this.getManagedChildren();
+        for (Node n : nodes) {
+            n.setDisable(true);
+        }
+    }
+
+    public void update(Bestelling bestelling) {
+        //TODO De nodes op deze pagina's per state van bestelling apart aanspreken en updaten. Dit lijkt me het makkelijkst
+        // te doen door de Nodes als instantievariabelen van deze klasse te maken. Voor de moment worden alle nodes die niet
+        // nodig zijn gedisabled met de disableAll() hierboven.
     }
 }

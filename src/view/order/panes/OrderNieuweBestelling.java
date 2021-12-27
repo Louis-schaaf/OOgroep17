@@ -14,24 +14,37 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import jxl.read.biff.BiffException;
+import model.bestelling.Bestelling;
+import model.bestelling.states.InWacht;
 
 import java.io.IOException;
 
 public class OrderNieuweBestelling extends GridPane {
     public BestelViewController controller;
+    ChoiceBox choiceBox;
+
 
     public OrderNieuweBestelling(BestelViewController controller){
         this.controller = controller;
         this.setPadding(new Insets(10,0,10,20));
-        ChoiceBox<String> chbx  = new ChoiceBox<>();
-        chbx.getItems().addAll("Goedkoopste broodje gratis", "Louis",
-                "Jarne", "Jasper");
         this.setHgap(30); //horizontal gap in pixels => that's what you are asking for
         this.setVgap(10); //vertical gap in pixels
         this.add(this.setUpOrderButton(),0, 0);
-        this.add(new Text("Volgnr: 1"), 1,0);
+        this.add(new Text("Volgnummer: 1"), 1,0);
         this.setHgap(60);
-        this.add(chbx,3,0);
+        this.add(this.setUpChoiceBox(),3,0);
+    }
+
+    private Node setUpChoiceBox() {
+        ChoiceBox<String> choiceBox  = new ChoiceBox<>();
+        choiceBox.getItems().addAll("Goedkoopste broodje gratis", "Louis",
+                "Jarne", "Jasper");
+        if (this.controller.getState().getClass() == InWacht.class) {
+            choiceBox.setDisable(true);
+        } else {
+            choiceBox.setDisable(false);
+        }
+        return choiceBox;
     }
 
     private Button setUpOrderButton() {
@@ -39,11 +52,15 @@ public class OrderNieuweBestelling extends GridPane {
         button.setText("Nieuwe bestelling");
 
         button.setOnAction(event -> {
+            this.controller.startNieuweBestelling();
             button.setDisable(true);
         });
         return button;
     }
 
-    public void update() {
+    public void update(Bestelling bestelling) {
+        //TODO De nodes op deze pagina's per state van bestelling apart aanspreken en updaten. Dit lijkt me het makkelijkst
+        // te doen door de Nodes als instantievariabelen van deze klasse te maken. Voor de moment worden alle nodes die niet
+        // nodig zijn gedisabled met de disableAll() hierboven.
     }
 }

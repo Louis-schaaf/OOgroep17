@@ -3,6 +3,7 @@ package model.bestelling;
 import model.Broodje;
 import model.bestelling.Bestellijn;
 import model.bestelling.Bestelling;
+import model.bestelling.states.BestellingState;
 import model.database.BelegDatabase;
 import model.database.BroodjesDatabase;
 
@@ -23,7 +24,12 @@ public class BestelFacade {
     public void voegBestellijnToe(String naamBroodje) {
         Broodje broodje = this.broodjesDatabase.getBroodje(naamBroodje);
         this.bestelling.voegBestellijnToe(broodje);
+        //TODO Observers toevoegen.
 
+    }
+
+    public BestellingState getBestellingState() {
+        return this.bestelling.getState();
     }
 
     public List<Bestellijn> getLijstBestellijnen() {
@@ -39,6 +45,15 @@ public class BestelFacade {
     }
 
     public Bestelling getBestelling() {
+        return this.bestelling;
+    }
+
+    public void resetBestelling() {
+        this.bestelling.resetBestelling();
+    }
+
+    public Bestelling startNieuweBestelling() {
+        this.resetBestelling();
         return this.bestelling;
     }
 }

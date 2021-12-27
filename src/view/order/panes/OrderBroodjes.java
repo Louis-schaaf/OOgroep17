@@ -2,6 +2,7 @@ package view.order.panes;
 
 import controller.BestelViewController;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
@@ -9,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import model.bestelling.Bestellijn;
 import model.Broodje;
+import model.bestelling.Bestelling;
 
 import java.util.List;
 
@@ -31,6 +33,7 @@ public class OrderBroodjes extends GridPane {
         buttonAnnuleren.setBackground(new Background(new BackgroundFill(Color.RED, new CornerRadii(10), Insets.EMPTY)));
         buttonAnnuleren.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10), BorderWidths.DEFAULT)));
         this.add(buttonAnnuleren, 0 , 3);
+        this.disableAll();
     }
     private void setLijninLijst(GridPane pane){
         pane.setPadding(new Insets(10));
@@ -61,9 +64,20 @@ public class OrderBroodjes extends GridPane {
         return button;
     }
 
-    public void update() {
+    public void disableAll() {
+        List<Node> nodes = this.getManagedChildren();
+        for (Node n : nodes) {
+            n.setDisable(true);
+        }
+    }
+
+    public void update(Bestelling bestelling) {
+        //TODO De nodes op deze pagina's per state van bestelling apart aanspreken en updaten. Dit lijkt me het makkelijkst
+        // te doen door de Nodes als instantievariabelen van deze klasse te maken. Voor de moment worden alle nodes die niet
+        // nodig zijn gedisabled met de disableAll() hierboven.
     }
 
     public void updateBestellijnen(List<Bestellijn> lijstBestellijnen) {
+        // TODO
     }
 }
