@@ -38,14 +38,18 @@ public class OrderOptions extends GridPane {
         int broodjesIndex = 0;
         int belegIndex = 0;
 
-        for (Map.Entry<String, Broodje> entry : broodjes.entrySet()) {;
-            this.add(fixButtonColorBorder(entry.getKey(), true, true),broodjesIndex, 0);
-            broodjesIndex++;
+        for (Map.Entry<String, Broodje> entry : broodjes.entrySet()) {
+            if (entry.getValue().getActualStock() > 0) {
+                this.add(fixButtonColorBorder(entry.getKey(), true, true), broodjesIndex, 0);
+                broodjesIndex++;
+            }
         }
         this.setHgap(10);
-        for (Map.Entry<String, BelegSoort> entry : beleg.entrySet()) {;
-            this.add(fixButtonColorBorder(entry.getKey(), false, true), belegIndex, 1);
-            belegIndex++;
+        for (Map.Entry<String, BelegSoort> entry : beleg.entrySet()) {
+            if (entry.getValue().getActualStock() > 0) {
+                this.add(fixButtonColorBorder(entry.getKey(), false, true), belegIndex, 1);
+                belegIndex++;
+            }
         }
         this.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, new CornerRadii(10), Insets.EMPTY)));
     }
