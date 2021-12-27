@@ -1,11 +1,13 @@
 package controller;
 
+import jxl.read.biff.BiffException;
 import model.bestelling.BestelFacade;
 import model.bestelling.Bestelling;
 import model.Observer;
 import model.bestelling.states.BestellingState;
 import view.order.OrderView;
 
+import java.io.IOException;
 import java.util.Map;
 
 public class BestelViewController implements Observer {
@@ -13,8 +15,9 @@ public class BestelViewController implements Observer {
     public OrderView orderView;
 
     public BestelViewController() {
-        this.bestelFacade = new BestelFacade();
-        this.orderView = new OrderView(this);
+        setBestelFacade(new BestelFacade());
+        this.bestelFacade.addObserver(this);
+        setOrderView(new OrderView(this));
     }
 
     public void setBestelFacade(BestelFacade bestelFacade) {
@@ -33,26 +36,32 @@ public class BestelViewController implements Observer {
         return this.bestelFacade.getVoorraadBeleg();
     }
 
-    public void voegBestellijnToe (String naamBroodje) {
-        this.bestelFacade.voegBestellijnToe(naamBroodje);
-        this.orderView.updateBestellijnen(this.bestelFacade.getLijstBestellijnen());
-        this.orderView.updateStatusBroodjesKnoppen(this.bestelFacade.getVoorraadBroodjes());
-        this.orderView.updateStatusBelegKnoppen(this.bestelFacade.getVoorraadBroodjes());
-    }
-
     public BestellingState getState() {
         return this.bestelFacade.getBestellingState();
-    }
-
-    @Override
-    public void update() {
-        orderView.update(this.getBestelling());
     }
 
     public Bestelling getBestelling() {
         return this.bestelFacade.getBestelling();
     }
 
-    public Bestelling startNieuweBestelling() {return this.bestelFacade.startNieuweBestelling();
+    public void startNieuweBestelling() throws BiffException, IOException {
+        this.bestelFacade.startNieuweBestelling();
+    }
+
+    public void voegBestellijnToe (String naamBroodje) throws BiffException, IOException {
+        this.bestelFacade.voegBestellijnToe(naamBroodje);
+        this.orderView.updateBestellijnen(this.bestelFacade.getLijstBestellijnen());
+        this.orderView.updateStatusBroodjesKnoppen(this.getVoorraadBroodjes());
+    }
+
+    public void voegBelegToe(String naamBeleg, int bestelLijn) throws BiffException, IOException {
+        this.bestelFacade.voegBelegToe(naamBeleg, bestelLijn);
+        this.orderView.updateBestellijnen(this.bestelFacade.getLijstBestellijnen());
+        this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
+    }
+
+    @Override
+    public void update() {
+        orderView.update(this.getBestelling());
     }
 }

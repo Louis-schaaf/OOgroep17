@@ -1,5 +1,6 @@
 package model.bestelling;
 
+import model.BelegSoort;
 import model.Broodje;
 
 import java.util.ArrayList;
@@ -28,8 +29,9 @@ public class Bestellijn {
         return this.namenBeleg;
     }
 
-    public void addNaamBeleg (String naamBeleg) {
-        this.namenBeleg.add(naamBeleg);
+    public void addNaamBeleg (BelegSoort naamBeleg) {
+        this.namenBeleg.add(naamBeleg.getName());
+        naamBeleg.aanpassenVoorraad(-1);
     }
 }
 

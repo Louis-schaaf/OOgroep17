@@ -1,6 +1,7 @@
 package model.bestelling;
 
 import jxl.read.biff.BiffException;
+import model.BelegSoort;
 import model.Broodje;
 import model.Observer;
 import model.Subject;
@@ -25,13 +26,6 @@ public class BestelFacade implements Subject {
         this.bestelling = new Bestelling();
     }
 
-    public void voegBestellijnToe(String naamBroodje) {
-        Broodje broodje = this.broodjesDatabase.getBroodje(naamBroodje);
-        this.bestelling.voegBestellijnToe(broodje);
-        //TODO Observers toevoegen.
-
-    }
-
     public BestellingState getBestellingState() {
         return this.bestelling.getState();
     }
@@ -52,14 +46,25 @@ public class BestelFacade implements Subject {
         return this.bestelling;
     }
 
-    public void resetBestelling() {
+    public void annuleerBestelling() {
         this.bestelling.resetBestelling();
     }
 
-    public Bestelling startNieuweBestelling() {
-        this.resetBestelling();
-        //TODO state op inBestelling zetten
-        return this.bestelling;
+    public void startNieuweBestelling() throws BiffException, IOException {
+        this.bestelling.starten();
+        notifyObservers();
+    }
+
+    public void voegBestellijnToe(String naamBroodje) throws BiffException, IOException {
+        Broodje broodje = this.broodjesDatabase.getBroodje(naamBroodje);
+        this.bestelling.voegBestellijnToe(broodje);
+        notifyObservers();
+    }
+
+    public void voegBelegToe(String naamBeleg, int bestelLijn) throws BiffException, IOException {
+        BelegSoort beleg = this.belegDatabase.getBeleg(naamBeleg);
+        this.bestelling.voegBelegToe(beleg, bestelLijn);
+        notifyObservers();
     }
 
     @Override

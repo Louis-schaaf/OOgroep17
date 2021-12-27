@@ -16,6 +16,6 @@ public class Afgesloten extends BestellingState{
 
     @Override
     public void annuleren() {
-        bestelling.setState(bestelling.getGeannuleerd());
+        bestelling.setState(bestelling.getInWacht());
     }
 }

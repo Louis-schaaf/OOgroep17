@@ -11,6 +11,6 @@ public class InBereiding extends BestellingState {
 
     @Override
     public void afwerken() {
-        bestelling.setState(bestelling.getAfgewerkt());
+        bestelling.setState(bestelling.getInWacht());
     }
 }

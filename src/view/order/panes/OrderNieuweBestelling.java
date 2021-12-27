@@ -52,7 +52,13 @@ public class OrderNieuweBestelling extends GridPane {
         button.setText("Nieuwe bestelling");
 
         button.setOnAction(event -> {
-            this.controller.startNieuweBestelling();
+            try {
+                this.controller.startNieuweBestelling();
+            } catch (BiffException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             button.setDisable(true);
         });
         return button;
