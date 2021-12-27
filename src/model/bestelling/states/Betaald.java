@@ -9,7 +9,6 @@ public class Betaald extends BestellingState {
         this.bestelling = bestelling;
     }
 
-    @Override
     public void verzenden() {
         bestelling.setState(bestelling.getInKeuken());
     }

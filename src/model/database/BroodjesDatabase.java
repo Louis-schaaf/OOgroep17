@@ -49,9 +49,7 @@ public class BroodjesDatabase {
     }
 
     public void sellBroodjes(Broodje broodje) {
-        //TODO
-        //broodje.setActualStock(broodje.getActualStock()-1);
-
+        broodje.setActualStock(broodje.getActualStock()-1);
     }
 
     public Broodje getBroodje(String naamBroodje) {

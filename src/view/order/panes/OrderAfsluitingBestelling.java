@@ -36,7 +36,6 @@ public class OrderAfsluitingBestelling extends GridPane {
             n.setDisable(true);
         }
     }
-
     public void update(Bestelling bestelling) {
         //TODO De nodes op deze pagina's per state van bestelling apart aanspreken en updaten. Dit lijkt me het makkelijkst
         // te doen door de Nodes als instantievariabelen van deze klasse te maken. Voor de moment worden alle nodes die niet

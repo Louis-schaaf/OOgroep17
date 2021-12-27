@@ -16,6 +16,8 @@ import java.util.List;
 
 public class OrderBroodjes extends GridPane {
     public BestelViewController controller;
+    GridPane broodjes = new GridPane();
+    GridPane lijnInLijst = new GridPane();
 
     public OrderBroodjes(BestelViewController controller) {
         this.controller = controller;
@@ -23,8 +25,6 @@ public class OrderBroodjes extends GridPane {
         this.setHgap(30); //horizontal gap in pixels => that's what you are asking for
         this.setVgap(10); //vertical gap in pixels
         this.add(new Text("Aantal Broodjes: "), 0, 0);
-        GridPane broodjes = new GridPane();
-        GridPane lijnInLijst = new GridPane();
         setBroodjes(broodjes);
         setLijninLijst(lijnInLijst);
         this.add(broodjes,0,1,1,2);

@@ -19,23 +19,12 @@ public class Bestelling {
     private BestellingState inBestelling;
     private BestellingState inKeuken;
     private BestellingState inWacht;
-
-
     public List<Bestellijn> bestellijnen;
     public BestellingState state;
 
     public Bestelling() {
-        this.afgesloten = new Afgesloten(this);
-        this.afgewerkt = new Afgewerkt(this);
-        this.betaald = new Betaald(this);
-        this.geannuleerd = new Geannuleerd(this);
-        this.inBereiding = new InBereiding(this);
-        this.inBestelling = new InBestelling(this);
-        this.inKeuken = new InKeuken(this);
-        this.inWacht = new InWacht(this);
-
         this.bestellijnen = new ArrayList<>();
-        this.state = this.inWacht;
+        this.state = getInWacht();
     }
 
     public List<Bestellijn> getBestellijnen() {
@@ -87,7 +76,7 @@ public class Bestelling {
     }
 
     public void resetBestelling() {
-        this.state = inWacht;
+        this.state = getInWacht();
         this.bestellijnen.clear();
     }
 }
