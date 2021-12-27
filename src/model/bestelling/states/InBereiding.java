@@ -10,6 +10,6 @@ public class InBereiding extends BestellingState {
     }
 
     public void afwerken() {
-        bestelling.setState(bestelling.getAfgewerkt());
+        bestelling.setState(bestelling.getInWacht());
     }
 }

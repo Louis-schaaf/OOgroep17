@@ -14,6 +14,6 @@ public class InBestelling extends BestellingState{
     }
 
     public void annuleren() {
-        bestelling.setState(bestelling.getGeannuleerd());
+        bestelling.setState(bestelling.getInWacht());
     }
 }

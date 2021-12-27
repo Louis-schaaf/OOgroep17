@@ -1,12 +1,12 @@
 package model.bestelling.states;
 
 public abstract class BestellingState {
-    void starten() {}
-    void afronden() {}
-    void betalen() {}
-    void verzenden() {}
-    void bereiden(){}
-    void afwerken(){}
-    void annuleren(){}
-    void wachten(){}
+    public void starten() {}
+    public void afronden() {}
+    public void betalen() {}
+    public void verzenden() {}
+    public void bereiden(){}
+    public void afwerken(){}
+    public void annuleren(){}
+    public void wachten(){}
 }

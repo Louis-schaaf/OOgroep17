@@ -63,6 +63,9 @@ public class BelegDatabase {
         return result;
     }
 
+    public BelegSoort getBeleg(String naamBeleg) {
+        return this.belegDB.get(naamBeleg);
+    }
 
     /*public void readFile() {
         File file = new File("src/bestanden/beleg.txt");
