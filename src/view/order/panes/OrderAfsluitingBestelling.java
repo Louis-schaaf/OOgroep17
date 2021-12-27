@@ -27,7 +27,6 @@ public class OrderAfsluitingBestelling extends GridPane {
         this.add(new Button("Betaal"), 3,0);
         this.add(new Button("Naar Keuken"), 4,0);
         this.setBackground(new Background(new BackgroundFill(Color.CADETBLUE, new CornerRadii(10), Insets.EMPTY)));
-        this.disableAll();
     }
 
     // Alle nodes van deze gridpane worden gedisabled

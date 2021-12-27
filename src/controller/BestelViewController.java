@@ -16,7 +16,8 @@ public class BestelViewController implements Observer {
 
     public BestelViewController() {
         setBestelFacade(new BestelFacade());
-        this.bestelFacade.addObserver(this);
+        this.bestelFacade.addObserver(this, "TOEVOEGEN_BROODJE");
+        this.bestelFacade.addObserver(this, "NIEUWE_BESTELLING");
         setOrderView(new OrderView(this));
     }
 
