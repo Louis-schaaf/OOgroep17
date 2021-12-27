@@ -33,7 +33,6 @@ public class Bestelling {
         this.inBestelling = new InBestelling(this);
         this.inKeuken = new InKeuken(this);
         this.inWacht = new InWacht(this);
-
         this.bestellijnen = new ArrayList<>();
         this.state = this.inWacht;
     }
