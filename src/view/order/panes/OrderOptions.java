@@ -74,7 +74,7 @@ public class OrderOptions extends GridPane {
         for (Button b : buttons) {
             if (voorraadBroodjes.containsKey(b.getText())) {
                 int i = voorraadBroodjes.get(b.getText());
-                if (i < 1) {
+                if (i < 0) {
                     b.setDisable(true);
                 }
             }
@@ -99,6 +99,7 @@ public class OrderOptions extends GridPane {
             n.setDisable(true);
         }
     }
+
     public void update(Bestelling bestelling) {
         //TODO De nodes op deze pagina's per state van bestelling apart aanspreken en updaten. Dit lijkt me het makkelijkst
         // te doen door de Nodes als instantievariabelen van deze klasse te maken. Voor de moment worden alle nodes die niet

@@ -44,10 +44,6 @@ public class BestelFacade implements Subject {
         return this.bestelling;
     }
 
-    public void annuleerBestelling() {
-        this.bestelling.resetBestelling();
-    }
-
     public void startNieuweBestelling() throws BiffException, IOException {
         this.bestelling.starten();
         notifyObservers();
@@ -78,6 +74,10 @@ public class BestelFacade implements Subject {
 
     public void verwijderBestellijn(int bestellijn) {
     // TODO
+    }
+
+    public void annuleerBestelling() {
+        this.bestelling.resetBestelling();
     }
 
     @Override

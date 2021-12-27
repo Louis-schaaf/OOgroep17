@@ -50,18 +50,18 @@ public class OrderNieuweBestelling extends GridPane {
         buttonNieuweBestelling.setOnAction(event -> {
             try {
                 this.controller.startNieuweBestelling();
+                buttonNieuweBestelling.setDisable(true);
             } catch (BiffException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
-        buttonNieuweBestelling.setDisable(false);
         return buttonNieuweBestelling;
     }
 
     public void update(Bestelling bestelling) {
-        System.out.println(bestelling.getState());
+        /*System.out.println(bestelling.getState());
         System.out.println(bestelling.getInWacht());
         if (bestelling.getState() != bestelling.getInWacht()){
             choiceBox.setDisable(false);
@@ -69,6 +69,6 @@ public class OrderNieuweBestelling extends GridPane {
         }else{
             choiceBox.setDisable(true);
             buttonNieuweBestelling.setDisable(false);
-        }
+        }*/
     }
 }
