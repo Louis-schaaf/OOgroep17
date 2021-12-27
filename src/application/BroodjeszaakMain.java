@@ -1,5 +1,6 @@
 package application;
 	
+import controller.BestelViewController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.database.BroodjesDatabase;
@@ -13,7 +14,7 @@ public class BroodjeszaakMain extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		AdminView adminView = new AdminView();
-		OrderView orderView = new OrderView();
+		OrderView orderView = new OrderView(new BestelViewController());
 		KitchenView kitchenView = new KitchenView();
 		String fileUseType = "Excel";
 

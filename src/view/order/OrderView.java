@@ -1,5 +1,6 @@
 package view.order;
 
+import controller.BestelViewController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -14,10 +15,15 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Bestellijn;
+import model.Bestelling;
 import view.order.panes.OrderAfsluitingBestelling;
 import view.order.panes.OrderBroodjes;
 import view.order.panes.OrderNieuweBestelling;
 import view.order.panes.OrderOptions;
+
+import java.util.List;
+import java.util.Map;
 
 public class OrderView {
 	private Stage stage = new Stage();
@@ -27,12 +33,12 @@ public class OrderView {
 	private OrderBroodjes orderBroodjes;
 
 		
-	public OrderView(){
+	public OrderView(BestelViewController controller){
 		VBox root = new VBox();
 		orderAfsluitingBestelling = new OrderAfsluitingBestelling();
-		orderNieuweBestelling= new OrderNieuweBestelling();
-		orderOptions = new OrderOptions();
-		orderBroodjes = new OrderBroodjes();
+		orderNieuweBestelling= new OrderNieuweBestelling(controller);
+		orderOptions = new OrderOptions(controller);
+		orderBroodjes = new OrderBroodjes(controller);
 		stage.setTitle("ORDER VIEW");
 		stage.initStyle(StageStyle.UTILITY);
 		stage.setX(20);
@@ -42,5 +48,24 @@ public class OrderView {
 		stage.setScene(scene);
 		root.getChildren().addAll(orderNieuweBestelling,orderOptions,orderBroodjes,orderAfsluitingBestelling);
 		stage.show();
+	}
+
+	public void refresh() {
+		this.orderNieuweBestelling.update();
+		this.orderOptions.update();
+		this.orderBroodjes.update();
+		this.orderAfsluitingBestelling.update();
+	}
+
+	public void updateBestellijnen(List<Bestellijn> lijstBestellijnen) {
+		this.orderBroodjes.updateBestellijnen(lijstBestellijnen);
+	}
+
+	public void updateStatusBroodjesKnoppen(Map<String, Integer> voorraadBroodjes) {
+		this.orderOptions.updateStatusBroodjesKnoppen(voorraadBroodjes);
+	}
+
+	public void updateStatusBelegKnoppen(Map<String, Integer> voorraadBeleg) {
+		this.orderOptions.updateStatusBelegKnoppen(voorraadBeleg);
 	}
 }

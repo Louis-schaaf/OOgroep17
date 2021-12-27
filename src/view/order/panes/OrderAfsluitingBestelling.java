@@ -23,6 +23,9 @@ public class OrderAfsluitingBestelling extends GridPane {
         this.add(new Button("Naar Keuken"), 4,0);
         this.setBackground(new Background(new BackgroundFill(Color.CADETBLUE, new CornerRadii(10), Insets.EMPTY)));
 }
+
+    public void update() {
+    }
     /*private Button setUpStartGameButton() {
         // Creating a Button
         button = new Button();

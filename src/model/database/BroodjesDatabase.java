@@ -53,4 +53,17 @@ public class BroodjesDatabase {
         //broodje.setActualStock(broodje.getActualStock()-1);
 
     }
+
+    public Broodje getBroodje(String naamBroodje) {
+        return this.broodjes.get(naamBroodje);
+    }
+
+    public Map<String, Integer> getVoorraadlijstBroodjes() {
+        Map result = new TreeMap<String, Integer>();
+        List<Broodje> broodjes = this.getAll();
+        for (Broodje b : broodjes) {
+            result.put(b.getName(), b.getActualStock());
+        }
+        return result;
+    }
 }

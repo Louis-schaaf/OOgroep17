@@ -52,6 +52,15 @@ public class BelegDatabase {
         return belegDB;
     }
 
+    public Map<String, Integer> getVoorraadlijstBeleg() {
+        Map result = new TreeMap<String, Integer>();
+        List<BelegSoort> beleg = this.getAll();
+        for (BelegSoort b : beleg) {
+            result.put(b.getName(), b.getActualStock());
+        }
+        return result;
+    }
+
 
     /*public void readFile() {
         File file = new File("src/bestanden/beleg.txt");

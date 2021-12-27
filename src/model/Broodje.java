@@ -19,6 +19,10 @@ public class Broodje {
         this("",0.0,0,0);
     }
 
+    public void aanpassenVoorraad (int i) {
+        this.actualStock += i;
+    }
+
     public void setActualStock(int actualStock) {
         if (actualStock < 0) {
             throw new IllegalArgumentException("The actual stock cannot be less than 0.");

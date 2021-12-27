@@ -1,5 +1,6 @@
 package view.order.panes;
 
+import controller.BestelViewController;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -7,10 +8,16 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import model.BelegSoort;
+import model.Bestellijn;
 import model.Broodje;
 
+import java.util.List;
+
 public class OrderBroodjes extends GridPane {
-    public OrderBroodjes() {
+    public BestelViewController controller;
+
+    public OrderBroodjes(BestelViewController controller) {
+        this.controller = controller;
         this.setPadding(new Insets(10, 0, 10, 20));
         this.setHgap(30); //horizontal gap in pixels => that's what you are asking for
         this.setVgap(10); //vertical gap in pixels
@@ -25,9 +32,6 @@ public class OrderBroodjes extends GridPane {
         buttonAnnuleren.setBackground(new Background(new BackgroundFill(Color.RED, new CornerRadii(10), Insets.EMPTY)));
         buttonAnnuleren.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10), BorderWidths.DEFAULT)));
         this.add(buttonAnnuleren, 0 , 3);
-
-
-
     }
     private void setLijninLijst(GridPane pane){
         pane.setPadding(new Insets(10));
@@ -56,5 +60,11 @@ public class OrderBroodjes extends GridPane {
         button.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(10), Insets.EMPTY)));
         button.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10), BorderWidths.DEFAULT)));
         return button;
+    }
+
+    public void update() {
+    }
+
+    public void updateBestellijnen(List<Bestellijn> lijstBestellijnen) {
     }
 }

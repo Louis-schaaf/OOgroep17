@@ -1,5 +1,6 @@
 package view.order.panes;
 
+import controller.BestelViewController;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -14,9 +15,11 @@ import java.lang.reflect.Field;
 import java.util.Map;
 
 public class OrderOptions extends GridPane {
+    public BestelViewController controller;
     //TODO
     //Check Observer Style methode toepassen! (Story 3.3)
-    public OrderOptions(){
+    public OrderOptions(BestelViewController controller){
+        this.controller = controller;
         this.setPadding(new Insets(10,0,10,20));
         this.setHgap(30); //horizontal gap in pixels => that's what you are asking for
         this.setVgap(10); //vertical gap in pixels
@@ -37,6 +40,8 @@ public class OrderOptions extends GridPane {
             belegIndex++;
         }
         this.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, new CornerRadii(10), Insets.EMPTY)));
+        this.updateStatusBroodjesKnoppen(controller.getVoorraadBroodjes());
+        this.updateStatusBelegKnoppen(controller.getVoorraadBeleg());
     }
     private Button fixButtonColorBorder(String buttonName, boolean gray, boolean border){
         Button button = new Button(buttonName);
@@ -49,5 +54,34 @@ public class OrderOptions extends GridPane {
             button.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10), BorderWidths.DEFAULT)));
         }
         return button;
+    }
+
+    public void updateStatusBroodjesKnoppen(Map<String, Integer> voorraadBroodjes) {
+        Button[] buttons = this.getManagedChildren().toArray(new Button[0]);
+        for (Button b : buttons) {
+            if (voorraadBroodjes.containsKey(b.getText())) {
+                int i = voorraadBroodjes.get(b.getText());
+                if (i < 1) {
+                    b.setDisable(true);
+                }
+            }
+        }
+    }
+
+    public void updateStatusBelegKnoppen(Map<String, Integer> voorraadBeleg) {
+        Button[] buttons = this.getManagedChildren().toArray(new Button[0]);
+        for (Button b : buttons) {
+            if (voorraadBeleg.containsKey(b.getText())) {
+                int i = voorraadBeleg.get(b.getText());
+                if (i < 1) {
+                    b.setDisable(true);
+                }
+            }
+        }
+    }
+
+    public void update() {
+        this.updateStatusBelegKnoppen(controller.getVoorraadBeleg());
+        this.updateStatusBroodjesKnoppen(controller.getVoorraadBroodjes());
     }
 }
