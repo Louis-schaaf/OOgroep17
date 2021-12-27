@@ -30,6 +30,7 @@ public class OrderAfsluitingBestelling extends GridPane {
         this.disableAll();
     }
 
+    // Alle nodes van deze gridpane worden gedisabled
     public void disableAll() {
         List<Node> nodes = this.getManagedChildren();
         for (Node n : nodes) {

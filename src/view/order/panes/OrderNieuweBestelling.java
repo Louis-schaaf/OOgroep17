@@ -39,12 +39,16 @@ public class OrderNieuweBestelling extends GridPane {
         this.setHgap(60);
     }
 
+    // Zet een choicebox op en zet deze als standaardwaarde op disabled.
     private Node setUpChoiceBox() {
         choiceBox.getItems().addAll("Goedkoopste broodje gratis", "Louis", "Jarne", "Jasper");
         choiceBox.setDisable(true);
         return choiceBox;
     }
 
+    // Zet een orderButton van "Nieuwe Bestelling"
+    // Wanneer deze wordt ingedrukt wordt er een nieuwe bestelling aangemaakt.
+    // De knop wort daarna teruggegeven.
     private Button setUpOrderButton() {
         buttonNieuweBestelling.setText("Nieuwe bestelling");
         buttonNieuweBestelling.setOnAction(event -> {
@@ -56,10 +60,13 @@ public class OrderNieuweBestelling extends GridPane {
                 e.printStackTrace();
             }
         });
-        buttonNieuweBestelling.setDisable(false);
         return buttonNieuweBestelling;
     }
 
+    // De states worden met elkaar vergeleken.
+    // Wanneer de state van de bestelling niet meer InWacht staat
+    // moet de bestelknop gedisabled worden
+    // en de choiceBox worden geanabled.
     public void update(Bestelling bestelling) {
         System.out.println(bestelling.getState());
         System.out.println(bestelling.getInWacht());

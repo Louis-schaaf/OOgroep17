@@ -50,6 +50,10 @@ public class OrderOptions extends GridPane {
         this.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, new CornerRadii(10), Insets.EMPTY)));
     }
 
+    // Geeft een knop terug:
+    // a) buttonName: De naam van de knop
+    // b) gray: Indien true wordt de achtergrond van de knop grijs en anders geel
+    // c) border: Indien true wordt er een zwarte border getoond rond de knop.
     private Button fixButtonColorBorder(String buttonName, boolean gray, boolean border){
         Button button = new Button(buttonName);
         if (gray == true){
@@ -65,6 +69,9 @@ public class OrderOptions extends GridPane {
         return button;
     }
 
+    //Zet alle knoppen van deze pane in een array
+    //Indien de voorraad van de broodjes de tekst van de knop contains
+    //Dan kijkt die als de voorraad kleiner is dan 0; als dit is dan wordt de knop uitgezet.
     public void updateStatusBroodjesKnoppen(Map<String, Integer> voorraadBroodjes) {
         Button[] buttons = this.getManagedChildren().toArray(new Button[0]);
         for (Button b : buttons) {
@@ -77,6 +84,9 @@ public class OrderOptions extends GridPane {
         }
     }
 
+    //Zet alle knoppen van deze pane in een array
+    //Indien de voorraad van de beleg de tekst van de knop contains
+    //Dan kijkt die als de voorraad kleiner is dan 0; als dit is dan wordt de knop uitgezet.
     public void updateStatusBelegKnoppen(Map<String, Integer> voorraadBeleg) {
         Button[] buttons = this.getManagedChildren().toArray(new Button[0]);
         for (Button b : buttons) {
@@ -89,6 +99,7 @@ public class OrderOptions extends GridPane {
         }
     }
 
+    // Zet alle nodes uit van deze gridpane.
     public void disableAll() {
         List<Node> nodes = this.getManagedChildren();
         for (Node n : nodes) {

@@ -29,12 +29,16 @@ public class OrderBroodjes extends GridPane {
         setLijninLijst(lijnInLijst);
         this.add(broodjes,0,1,1,2);
         this.add(lijnInLijst, 1,1);
-        Button buttonAnnuleren = new Button("Annuleer Bestelling");
-        buttonAnnuleren.setBackground(new Background(new BackgroundFill(Color.RED, new CornerRadii(10), Insets.EMPTY)));
-        buttonAnnuleren.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10), BorderWidths.DEFAULT)));
-        this.add(buttonAnnuleren, 0 , 3);
+        this.add(annuleerKnop(), 0 , 3);
         this.disableAll();
     }
+
+    // Maak een Gridpane voor LijninLijst
+    // Hiervoor maken we een tekst "Selecteer lijn in lijst:"
+    // Daarna voegen we nieuwe knoppen toe:
+    //  a) Voeg hetzelfde broodje toe
+    //  b) Verwijder broodje
+    // Maak de achtergrond van de LijninLijst Blauwachtig
     private void setLijninLijst(GridPane pane){
         pane.setPadding(new Insets(10));
         pane.add(new Text("Selecteer lijn in Lijst:"), 0,0);
@@ -45,6 +49,13 @@ public class OrderBroodjes extends GridPane {
         pane.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, new CornerRadii(10), Insets.EMPTY)));
 
     }
+
+    // Maak een Gridpane voor Broodjes
+    // Hiervoor maken we een Table met 2 kolommen:
+    //  a) Broodje
+    //  b) Beleg
+    // In de onderstaande tabel zou de naam van het broodje komen te staan
+    // En in de andere tabel komen alle belegsoorten van het bijhorende broodje.
     private void setBroodjes(GridPane broodjes) {
         TableView<Broodje> table = new TableView<>();
         broodjes.setPadding(new Insets(5, 5, 5, 5));
@@ -58,17 +69,30 @@ public class OrderBroodjes extends GridPane {
         broodjes.add(table, 0, 1);
     }
 
+    // Geef een knop in en pas deze aan en deze wordt daarna teruggegeven
+    // Maak de achtegrond van de knop lichtgrijs
+    // Maak de border van de knop zwart
     private Button fixButtonColorBorder(Button button){
         button.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(10), Insets.EMPTY)));
         button.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10), BorderWidths.DEFAULT)));
         return button;
     }
 
+    // Alle nodes van deze Gridpane worden gedisabled.
     public void disableAll() {
         List<Node> nodes = this.getManagedChildren();
         for (Node n : nodes) {
             n.setDisable(true);
         }
+    }
+
+    // Maak een annuleerKnop aan met "Annuleer Bestelling"
+    // Deze krijgt een rode achtergrond met een zwarte border.
+    public Button annuleerKnop(){
+        Button buttonAnnuleren = new Button("Annuleer Bestelling");
+        buttonAnnuleren.setBackground(new Background(new BackgroundFill(Color.RED, new CornerRadii(10), Insets.EMPTY)));
+        buttonAnnuleren.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10), BorderWidths.DEFAULT)));
+        return buttonAnnuleren;
     }
 
     public void update(Bestelling bestelling) {
