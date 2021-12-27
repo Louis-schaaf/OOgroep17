@@ -9,12 +9,10 @@ public class Afgesloten extends BestellingState{
         this.bestelling = bestelling;
     }
 
-    @Override
     public void betalen () {
         bestelling.setState(bestelling.getBetaald());
     }
 
-    @Override
     public void annuleren() {
         bestelling.setState(bestelling.getGeannuleerd());
     }

@@ -58,7 +58,7 @@ public class BestelFacade implements Subject {
 
     public Bestelling startNieuweBestelling() {
         this.resetBestelling();
-        //TODO state op inBestelling zetten
+        bestelling.setState(bestelling.getInBereiding());
         return this.bestelling;
     }
 
@@ -74,7 +74,7 @@ public class BestelFacade implements Subject {
 
     @Override
     public void notifyObservers() throws IOException, BiffException {
-        for (Observer observer: observers) {
+        for (Observer observer : observers) {
             observer.update();
         }
     }

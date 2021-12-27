@@ -14,6 +14,7 @@ import model.bestelling.Bestelling;
 import model.database.loadSaveStrategies.LoadSaveStrategyFactory;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,11 +22,14 @@ public class OrderOptions extends GridPane {
     public BestelViewController controller;
     //TODO
     //Check Observer Style methode toepassen! (Story 3.3)
+
+    ArrayList<Button> buttons = new ArrayList<>();
     public OrderOptions(BestelViewController controller){
         this.controller = controller;
         this.setPadding(new Insets(10,0,10,20));
         this.setHgap(30); //horizontal gap in pixels => that's what you are asking for
         this.setVgap(10); //vertical gap in pixels
+
         //Map<String, Broodje> broodjes = LoadSaveStrategyFactory.createLoadSaveStrategy("EXCELBROODJES").load();
         //Map<String, BelegSoort> beleg = LoadSaveStrategyFactory.createLoadSaveStrategy("EXCELBELEG").load();
         Map<String, Broodje> broodjes = LoadSaveStrategyFactory.createLoadSaveStrategy("TEKSTBROODJES").load();
@@ -33,6 +37,7 @@ public class OrderOptions extends GridPane {
 
         int broodjesIndex = 0;
         int belegIndex = 0;
+
         for (Map.Entry<String, Broodje> entry : broodjes.entrySet()) {;
             this.add(fixButtonColorBorder(entry.getKey(), true, true),broodjesIndex, 0);
             broodjesIndex++;
@@ -43,8 +48,8 @@ public class OrderOptions extends GridPane {
             belegIndex++;
         }
         this.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, new CornerRadii(10), Insets.EMPTY)));
-        this.disableAll();
     }
+
     private Button fixButtonColorBorder(String buttonName, boolean gray, boolean border){
         Button button = new Button(buttonName);
         if (gray == true){
@@ -55,6 +60,8 @@ public class OrderOptions extends GridPane {
         if (border == true){
             button.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10), BorderWidths.DEFAULT)));
         }
+        buttons.add(button);
+        button.setDisable(true);
         return button;
     }
 
@@ -88,7 +95,6 @@ public class OrderOptions extends GridPane {
             n.setDisable(true);
         }
     }
-
     public void update(Bestelling bestelling) {
         //TODO De nodes op deze pagina's per state van bestelling apart aanspreken en updaten. Dit lijkt me het makkelijkst
         // te doen door de Nodes als instantievariabelen van deze klasse te maken. Voor de moment worden alle nodes die niet
