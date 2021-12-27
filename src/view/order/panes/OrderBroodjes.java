@@ -68,7 +68,6 @@ public class OrderBroodjes extends GridPane {
         TableColumn<Bestellijn, String> firstNameColumn = new TableColumn<>("Broodje");
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("naamBroodje"));
         table.getColumns().addAll(firstNameColumn);
-        firstNameColumn.setCellFactory(new PropertyValueFactory<Bestellijn, String>("naamBroodje"));
         broodjes.add(table, 0, 1);
     }
 
