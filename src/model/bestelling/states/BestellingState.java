@@ -1,12 +1,16 @@
 package model.bestelling.states;
 
+import model.bestelling.Bestelling;
+
 public abstract class BestellingState {
-    public void starten() {}
-    public void afronden() {}
-    public void betalen() {}
-    public void verzenden() {}
-    public void bereiden(){}
-    public void afwerken(){}
-    public void annuleren(){}
-    public void wachten(){}
+    protected Bestelling bestelling;
+
+    public abstract void starten();
+    public abstract void afronden();
+    public abstract void betalen();
+    public abstract void verzenden();
+    public abstract void bereiden();
+    public abstract void afwerken();
+    public abstract void annuleren();
+    public abstract void wachten();
 }

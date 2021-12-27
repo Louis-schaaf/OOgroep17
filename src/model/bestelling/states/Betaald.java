@@ -9,7 +9,43 @@ public class Betaald extends BestellingState {
         this.bestelling = bestelling;
     }
 
+    @Override
+    public void starten() {
+
+    }
+
+    @Override
+    public void afronden() {
+
+    }
+
+    @Override
+    public void betalen() {
+
+    }
+
+    @Override
     public void verzenden() {
-        bestelling.setState(bestelling.getInKeuken());
+
+    }
+
+    @Override
+    public void bereiden() {
+
+    }
+
+    @Override
+    public void afwerken() {
+
+    }
+
+    @Override
+    public void annuleren() {
+
+    }
+
+    @Override
+    public void wachten() {
+
     }
 }

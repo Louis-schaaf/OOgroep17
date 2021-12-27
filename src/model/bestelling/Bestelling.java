@@ -24,14 +24,7 @@ public class Bestelling {
     public BestellingState state;
 
     public Bestelling() {
-        this.afgesloten = new Afgesloten(this);
-        this.betaald = new Betaald(this);
-        this.inBereiding = new InBereiding(this);
-        this.inBestelling = new InBestelling(this);
-        this.inKeuken = new InKeuken(this);
-        this.inWacht = new InWacht(this);
-        this.bestellijnen = new ArrayList<>();
-        this.state = this.inWacht;
+        this.state = new InWacht(this);
     }
 
     public List<Bestellijn> getBestellijnen() {
@@ -46,36 +39,8 @@ public class Bestelling {
         this.bestellijnen.get(bestelLijn).addNaamBeleg(beleg);
     }
 
-    public void setState(BestellingState state) {
+    public void changeState(BestellingState state) {
         this.state = state;
-    }
-
-    public BestellingState getInWacht() {
-        return this.inWacht;
-    }
-
-    public BestellingState getAfgesloten() {
-        return this.afgesloten;
-    }
-
-    public BestellingState getBetaald() {
-        return this.betaald;
-    }
-
-    public BestellingState getInBereiding() {
-        return this.inBereiding;
-    }
-
-    public BestellingState getInBestelling() {
-        return this.inBestelling;
-    }
-
-    public BestellingState getInKeuken() {
-        return this.inKeuken;
-    }
-
-    public BestellingState getState() {
-        return this.state;
     }
 
     public void starten () {

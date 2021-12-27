@@ -9,7 +9,43 @@ public class InBereiding extends BestellingState {
         this.bestelling = bestelling;
     }
 
+    @Override
+    public void starten() {
+
+    }
+
+    @Override
+    public void afronden() {
+
+    }
+
+    @Override
+    public void betalen() {
+
+    }
+
+    @Override
+    public void verzenden() {
+
+    }
+
+    @Override
+    public void bereiden() {
+
+    }
+
+    @Override
     public void afwerken() {
-        bestelling.setState(bestelling.getInWacht());
+
+    }
+
+    @Override
+    public void annuleren() {
+
+    }
+
+    @Override
+    public void wachten() {
+
     }
 }
