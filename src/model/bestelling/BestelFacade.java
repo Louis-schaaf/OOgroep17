@@ -5,8 +5,6 @@ import model.BelegSoort;
 import model.Broodje;
 import model.Observer;
 import model.Subject;
-import model.bestelling.Bestellijn;
-import model.bestelling.Bestelling;
 import model.bestelling.states.BestellingState;
 import model.database.BelegDatabase;
 import model.database.BroodjesDatabase;
@@ -65,6 +63,21 @@ public class BestelFacade implements Subject {
         BelegSoort beleg = this.belegDatabase.getBeleg(naamBeleg);
         this.bestelling.voegBelegToe(beleg, bestelLijn);
         notifyObservers();
+    }
+
+    public void voegIdentiekeBestellijnToe(int bestelLijn) throws BiffException, IOException {
+        Bestellijn bestellijn = this.bestelling.getBestellijn(bestelLijn);
+        Broodje broodje = this.broodjesDatabase.getBroodje(bestellijn.getNaamBroodje());
+        int index = this.bestelling.voegBestellijnToe(broodje);
+        for (String s : bestellijn.getNamenBeleg()) {
+            BelegSoort beleg = this.belegDatabase.getBeleg(s);
+            this.bestelling.voegBelegToe(beleg, index);
+        }
+        notifyObservers();
+    }
+
+    public void verwijderBestellijn(int bestellijn) {
+
     }
 
     @Override

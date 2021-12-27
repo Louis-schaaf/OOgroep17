@@ -31,8 +31,9 @@ public class Bestelling {
         return bestellijnen;
     }
 
-    public void voegBestellijnToe (Broodje broodje) {
+    public int voegBestellijnToe (Broodje broodje) {
         this.bestellijnen.add(new Bestellijn(broodje));
+        return this.bestellijnen.size() - 1;
     }
 
     public void voegBelegToe(BelegSoort beleg, int bestelLijn) {
@@ -41,6 +42,14 @@ public class Bestelling {
 
     public void changeState(BestellingState state) {
         this.state = state;
+    }
+
+    public BestellingState getState() {
+        return state;
+    }
+
+    public Bestellijn getBestellijn(int i) {
+        return this.bestellijnen.get(i);
     }
 
     public void starten () {
