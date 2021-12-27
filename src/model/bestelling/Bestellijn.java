@@ -33,7 +33,5 @@ public class Bestellijn {
         this.namenBeleg.add(naamBeleg.getName());
         naamBeleg.aanpassenVoorraad(-1);
     }
-
-
 }
 

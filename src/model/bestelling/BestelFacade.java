@@ -73,15 +73,27 @@ public class BestelFacade implements Subject {
     }
 
     public void verwijderBestellijn(int bestellijn) throws BiffException, IOException {
-        Bestellijn bestellijnTeVerwijderen = this.bestelling.getBestellijn(bestellijn);
-        Broodje broodje = this.broodjesDatabase.getBroodje(bestellijnTeVerwijderen.getNaamBroodje());
-        int index = this.bestelling.voegBestellijnToe(broodje);
-
+        Bestellijn bestellijn1 = this.bestelling.verwijderBestellijn(bestellijn);
+        Broodje broodje = this.broodjesDatabase.getBroodje(bestellijn1.getNaamBroodje());
+        broodje.aanpassenVoorraad(1);
+        for (String s : bestellijn1.getNamenBeleg()) {
+            BelegSoort beleg = this.belegDatabase.getBeleg(s);
+            beleg.aanpassenVoorraad(1);
+        }
         notifyObservers();
     }
 
-    public void annuleerBestelling() {
+    public void annuleerBestelling() throws BiffException, IOException {
+        for (Bestellijn l : this.getLijstBestellijnen()) {
+            Broodje broodje = this.broodjesDatabase.getBroodje(l.getNaamBroodje());
+            broodje.aanpassenVoorraad(1);
+            for (String s : l.getNamenBeleg()) {
+                BelegSoort beleg = this.belegDatabase.getBeleg(s);
+                beleg.aanpassenVoorraad(1);
+            }
+        }
         this.bestelling.resetBestelling();
+        notifyObservers();
     }
 
     @Override
