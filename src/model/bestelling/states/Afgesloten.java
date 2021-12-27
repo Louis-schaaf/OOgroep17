@@ -5,7 +5,7 @@ import model.bestelling.Bestelling;
 public class Afgesloten extends BestellingState{
 
     public Afgesloten(Bestelling bestelling) {
-        this.bestelling = bestelling;
+        super(bestelling);
     }
 
 

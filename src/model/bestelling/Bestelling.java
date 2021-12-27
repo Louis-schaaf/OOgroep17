@@ -12,13 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bestelling {
-    private BestellingState afgesloten;
-    private BestellingState betaald;
-    private BestellingState inBereiding;
-    private BestellingState inBestelling;
-    private BestellingState inKeuken;
-    private BestellingState inWacht;
-
 
     public List<Bestellijn> bestellijnen;
     public BestellingState state;
@@ -30,6 +23,12 @@ public class Bestelling {
     public List<Bestellijn> getBestellijnen() {
         return bestellijnen;
     }
+
+    public BestellingState getState() {
+        return state;
+    }
+
+
 
     public void voegBestellijnToe (Broodje broodje) {
         this.bestellijnen.add(new Bestellijn(broodje));
@@ -76,7 +75,7 @@ public class Bestelling {
     }
 
     public void resetBestelling() {
-        this.state = inWacht;
+        changeState(new InWacht(this));
         this.bestellijnen.clear();
     }
 }

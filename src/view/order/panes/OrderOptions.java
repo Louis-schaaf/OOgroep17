@@ -78,7 +78,7 @@ public class OrderOptions extends GridPane {
             if (voorraadBroodjes.containsKey(b.getText())) {
                 int i = voorraadBroodjes.get(b.getText());
                 if (i < 1) {
-                    b.setDisable(true);
+                    b.setVisible(false);
                 }
             }
         }
@@ -93,7 +93,7 @@ public class OrderOptions extends GridPane {
             if (voorraadBeleg.containsKey(b.getText())) {
                 int i = voorraadBeleg.get(b.getText());
                 if (i < 1) {
-                    b.setDisable(true);
+                    b.setVisible(false);
                 }
             }
         }
@@ -103,12 +103,19 @@ public class OrderOptions extends GridPane {
     public void disableAll() {
         List<Node> nodes = this.getManagedChildren();
         for (Node n : nodes) {
-            n.setDisable(true);
+            n.setVisible(false);
+        }
+    }
+
+    public void enableAll() {
+        List<Node> nodes = this.getManagedChildren();
+        for (Node n : nodes) {
+            n.setDisable(false);
         }
     }
     public void update(Bestelling bestelling) {
-        //TODO De nodes op deze pagina's per state van bestelling apart aanspreken en updaten. Dit lijkt me het makkelijkst
-        // te doen door de Nodes als instantievariabelen van deze klasse te maken. Voor de moment worden alle nodes die niet
-        // nodig zijn gedisabled met de disableAll() hierboven.
+        if (bestelling.getState().getClass().getName().contains("InBestelling")){
+            enableAll();
+        }
     }
 }
