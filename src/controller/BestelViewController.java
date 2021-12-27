@@ -54,9 +54,23 @@ public class BestelViewController implements Observer {
         this.orderView.updateStatusBroodjesKnoppen(this.getVoorraadBroodjes());
     }
 
-    public void voegBelegToe(String naamBeleg, int bestelLijn) throws BiffException, IOException {
-        this.bestelFacade.voegBelegToe(naamBeleg, bestelLijn);
+    public void voegBelegToe (String naamBeleg, int bestellijn) throws BiffException, IOException {
+        this.bestelFacade.voegBelegToe(naamBeleg, bestellijn);
         this.orderView.updateBestellijnen(this.bestelFacade.getLijstBestellijnen());
+        this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
+    }
+
+    public void voegIdentiekeBestellijnToe (int bestellijn) throws BiffException, IOException {
+        this.bestelFacade.voegIdentiekeBestellijnToe(bestellijn);
+        this.orderView.updateBestellijnen(this.bestelFacade.getLijstBestellijnen());
+        this.orderView.updateStatusBroodjesKnoppen(this.getVoorraadBroodjes());
+        this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
+    }
+
+    public void verwijderBestellijn (int bestellijn) throws BiffException, IOException {
+        this.bestelFacade.verwijderBestellijn(bestellijn);
+        this.orderView.updateBestellijnen(this.bestelFacade.getLijstBestellijnen());
+        this.orderView.updateStatusBroodjesKnoppen(this.getVoorraadBroodjes());
         this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
     }
 
