@@ -48,7 +48,6 @@ public class OrderNieuweBestelling extends GridPane {
         buttonNieuweBestelling.setOnAction(event -> {
             try {
                     this.controller.startNieuweBestelling();
-                    this.volgnummer++;
             } catch (BiffException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -81,6 +80,7 @@ public class OrderNieuweBestelling extends GridPane {
         }
         if (bestelling.getState().getClass().getName().contains("InBestelling")) {
             buttonNieuweBestelling.setDisable(true);
+            this.updateVolgnummer();
             volgnummerText.setVisible(true);
             choiceBox.setDisable(false);
         }
@@ -91,6 +91,7 @@ public class OrderNieuweBestelling extends GridPane {
         if (bestelling.getState().getClass().getName().contains("Betaald")) {
             buttonNieuweBestelling.setDisable(true);
             choiceBox.setDisable(true);
+            this.volgnummer++;
         }
     }
     public String getChoiceBox(){

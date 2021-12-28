@@ -221,5 +221,6 @@ public class OrderBroodjes extends GridPane {
         table.setVisible(false);
         table.setVisible(true);
         this.updateAantalBroodjes();
+        this.selectedBestellijn = null;
     }
 }
