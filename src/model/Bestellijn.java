@@ -26,7 +26,19 @@ public class Bestellijn {
         return this.naamBroodje;
     }
 
-    public List<String> getNamenBeleg() {
+    public String getNamenBeleg() {
+        String result = "";
+        for (String beleg : this.namenBeleg) {
+            if (this.namenBeleg.get(this.namenBeleg.size()-1).equals(beleg)) {
+                result+=beleg;
+            } else {
+                result+=beleg+", ";
+            }
+        }
+        return result;
+    }
+
+    public List<String> getNamenBelegLijst() {
         return this.namenBeleg;
     }
 

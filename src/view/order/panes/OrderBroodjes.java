@@ -1,8 +1,12 @@
 package view.order.panes;
 
 import controller.BestelViewController;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -10,9 +14,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import model.BelegSoort;
 import model.Bestellijn;
 import model.Bestelling;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderBroodjes extends GridPane {
@@ -59,6 +65,7 @@ public class OrderBroodjes extends GridPane {
     // In de onderstaande tabel zou de naam van het broodje komen te staan
     // En in de andere tabel komen alle belegsoorten van het bijhorende broodje.
     private void setBroodjes(GridPane broodjes) {
+
         broodjes.setPadding(new Insets(5, 5, 5, 5));
         broodjes.setVgap(5);
         broodjes.setHgap(5);
@@ -66,9 +73,11 @@ public class OrderBroodjes extends GridPane {
         ObservableList<Bestellijn> observableList = FXCollections.observableList(controller.getLijstBestellijnen());
         table.setItems(observableList);
         TableColumn<Bestellijn, String> firstNameColumn = new TableColumn<>("Broodje");
+        TableColumn<Bestellijn, String> secondNameColumn = new TableColumn<>("Beleg");
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<Bestellijn, String>("NaamBroodje"));
+        secondNameColumn.setCellValueFactory(new PropertyValueFactory<Bestellijn, String>("NamenBeleg"));
         //firstNameColumn.setCellValueFactory(celldata -> new SimpleStringProperty(celldata.getValue().getNaamBroodje()));
-        table.getColumns().add(firstNameColumn);
+        table.getColumns().addAll(firstNameColumn, secondNameColumn);
 
         //firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("naamBroodje"));
         System.out.println(table.getColumns());
@@ -114,6 +123,10 @@ public class OrderBroodjes extends GridPane {
         table.getColumns().get(0).setVisible(true);*/
         //TODO: er worden 2 vensters aangemaakt
         ObservableList<Bestellijn> bestellijnObservableList = FXCollections.observableList(controller.getLijstBestellijnen());
+        Bestellijn bestellijn = new Bestellijn("test");
+        bestellijn.addNaamBeleg(new BelegSoort("testbeleg",2.0,2,2));
+        bestellijn.addNaamBeleg(new BelegSoort("hesp",2.0,2,2));
+        bestellijnObservableList.add(bestellijn);
         table.setItems(bestellijnObservableList);
         table.getColumns().get(0).setVisible(false);
         table.getColumns().get(0).setVisible(true);
