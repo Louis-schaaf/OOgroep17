@@ -5,6 +5,8 @@ import model.Bestelling;
 
 import java.util.ArrayList;
 
+import static jdk.nashorn.internal.objects.NativeMath.round;
+
 public class GeenKortingStrategy implements KortingStrategy{
 
     @Override
@@ -13,6 +15,9 @@ public class GeenKortingStrategy implements KortingStrategy{
         for (Double bedragBroodje : bedragPerBroodje){
             bedrag += bedragBroodje;
         }
+        bedrag = bedrag * 100;
+        bedrag = Math.round(bedrag);
+        bedrag = bedrag / 100;
         return bedrag;
     }
 }

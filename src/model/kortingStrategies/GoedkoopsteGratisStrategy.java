@@ -16,6 +16,10 @@ public class GoedkoopsteGratisStrategy implements KortingStrategy{
                 goedkoopste = bedragBroodje;
             }
         }
-        return bedrag - goedkoopste;
+        bedrag = bedrag - goedkoopste;
+        bedrag = bedrag * 100;
+        bedrag = Math.round(bedrag);
+        bedrag = bedrag / 100;
+        return bedrag;
     }
 }

@@ -12,6 +12,9 @@ public class TienProcentKortingStrategy implements KortingStrategy{
         for (Double bedragBroodje : bedragPerBroodje){
             bedrag += bedragBroodje * 0.9;
         }
+        bedrag = bedrag * 100;
+        bedrag = Math.round(bedrag);
+        bedrag = bedrag / 100;
         return bedrag;
     }
 }
