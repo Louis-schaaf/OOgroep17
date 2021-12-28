@@ -30,6 +30,9 @@ public class OrderBroodjes extends GridPane {
     TableView<Bestellijn> table;
     Text aantalBroodjesTekst;
     int aantalBroodjes = 1;
+    Button identiek;
+    Button verwijder;
+    Button annuleer;
     Bestellijn selectedBestellijn;
 
     public OrderBroodjes(BestelViewController controller) {
@@ -74,6 +77,18 @@ public class OrderBroodjes extends GridPane {
 
     }
 
+    private Button setUpVerwijderKnop() {
+        this.verwijder = new Button("Verwijder broodje");
+        this.verwijder.setDisable(true);
+        return this.verwijder;
+    }
+
+    private Button setUpIdentiekeKnop() {
+        this.identiek = new Button("Voeg hetzelfde broodje toe");
+        this.identiek.setDisable(true);
+        return this.identiek;
+    }
+
     // Maak een Gridpane voor Broodjes
     // Hiervoor maken we een Table met 2 kolommen:
     //  a) Broodje
@@ -103,6 +118,7 @@ public class OrderBroodjes extends GridPane {
         table.getColumns().addAll(firstNameColumn, secondNameColumn);
 
         //firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("naamBroodje"));
+        System.out.println(table.getColumns());
         broodjes.add(table, 0, 1);
     }
 

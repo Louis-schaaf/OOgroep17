@@ -70,6 +70,9 @@ public class BestelViewController implements Observer {
         this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
     }
 
+    public void annuleerBestelling() throws BiffException, IOException {
+    }
+
     @Override
     public void update() {
         orderView.update(this.getBestelling());
