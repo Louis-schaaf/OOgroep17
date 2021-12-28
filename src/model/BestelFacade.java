@@ -4,6 +4,11 @@ import jxl.read.biff.BiffException;
 import model.bestelStates.BestellingState;
 import model.database.BelegDatabase;
 import model.database.BroodjesDatabase;
+import model.database.loadSaveStrategies.LoadSaveStrategy;
+import model.database.loadSaveStrategies.LoadSaveStrategyEnum;
+import model.database.loadSaveStrategies.LoadSaveStrategyFactory;
+import model.kortingStrategies.KortingStrategy;
+import model.kortingStrategies.KortingStrategyFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -95,16 +100,19 @@ public class BestelFacade implements Subject {
     }
 
     public double updateBedrag(String korting) {
-        double bedrag = 0;
+        ArrayList<Double> bedragPerBroodje = new ArrayList<>();
         for (Bestellijn b : this.getLijstBestellijnen()) {
+            double bedrag = 0;
             Broodje broodje = this.broodjesDatabase.getBroodje(b.getNaamBroodje());
             bedrag += broodje.getSalePrice();
             for (String s : b.getNamenBelegLijst()) {
                 BelegSoort beleg = this.belegDatabase.getBeleg(s);
                 bedrag += beleg.getSalePrice();
             }
+            bedragPerBroodje.add(bedrag);
         }
-        return bedrag;
+        KortingStrategy kortingStrategy = KortingStrategyFactory.createKortingStrategy(korting);
+        return kortingStrategy.berekenPrijs(bedragPerBroodje);
     }
 
     @Override

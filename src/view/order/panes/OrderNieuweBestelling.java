@@ -34,7 +34,8 @@ public class OrderNieuweBestelling extends GridPane {
 
     // Zet een choicebox op en zet deze als standaardwaarde op disabled.
     private Node setUpChoiceBox() {
-        choiceBox.getItems().addAll("Goedkoopste broodje gratis", "Geen korting", "10% op alles");
+        choiceBox.getItems().addAll("GOEDKOOPSTEGRATIS", "GEENKORTING", "TIENPROCENT");
+        choiceBox.setValue("GEENKORTING");
         choiceBox.setDisable(true);
         return choiceBox;
     }
