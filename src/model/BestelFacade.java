@@ -75,6 +75,32 @@ public class BestelFacade implements Subject {
         notifyObservers("TOEVOEGEN_BELEG");
     }
 
+    public void betaalBestelling() throws BiffException, IOException{
+        for (Bestellijn b : this.getLijstBestellijnen()) {
+            Broodje broodje = this.broodjesDatabase.getBroodje(b.getNaamBroodje());
+            broodje.aanpassenVerkochtAantal(1);
+            for (String s : b.getNamenBelegLijst()) {
+                BelegSoort beleg = this.belegDatabase.getBeleg(s);
+                beleg.aanpassenVerkochtAantal(1);
+            }
+        }
+        this.bestelling.betalen();
+        notifyObservers("BETAAL_BESTELLING");
+    }
+
+    public double updateBedrag() {
+        double bedrag = 0;
+        for (Bestellijn b : this.getLijstBestellijnen()) {
+            Broodje broodje = this.broodjesDatabase.getBroodje(b.getNaamBroodje());
+            bedrag += broodje.getSalePrice();
+            for (String s : b.getNamenBelegLijst()) {
+                BelegSoort beleg = this.belegDatabase.getBeleg(s);
+                bedrag += beleg.getSalePrice();
+            }
+        }
+        return bedrag;
+    }
+
     @Override
     public void addObserver(Observer observer, String event) {
         if (observers.containsKey(event)){
@@ -96,17 +122,4 @@ public class BestelFacade implements Subject {
                 observer.update();
             }
         }
-
-    public double updateBedrag() {
-        double bedrag = 0;
-        for (Bestellijn b : this.getLijstBestellijnen()) {
-            Broodje broodje = this.broodjesDatabase.getBroodje(b.getNaamBroodje());
-            bedrag += broodje.getSalePrice();
-            for (String s : b.getNamenBelegLijst()) {
-                BelegSoort beleg = this.belegDatabase.getBeleg(s);
-                bedrag += beleg.getSalePrice();
-            }
-        }
-        return bedrag;
-    }
 }

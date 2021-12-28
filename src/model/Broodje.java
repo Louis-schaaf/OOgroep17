@@ -24,6 +24,11 @@ public class Broodje {
         this.actualStock += i;
     }
 
+    // De voorraad van het broodje wordt aangepast met de ingegeven waarden.
+    public void aanpassenVerkochtAantal (int i) {
+        this.soldAmount += i;
+    }
+
     // De voorraad van het broodje wordt geset.
     public void setActualStock(int actualStock) {
         if (actualStock < 0) {
