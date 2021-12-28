@@ -3,6 +3,8 @@ package view.order.panes;
 import controller.BestelViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -10,10 +12,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import jxl.read.biff.BiffException;
 import model.BelegSoort;
 import model.Bestellijn;
 import model.Bestelling;
 
+import java.io.IOException;
 import java.util.List;
 
 public class OrderBroodjes extends GridPane {
@@ -45,6 +49,7 @@ public class OrderBroodjes extends GridPane {
     }
 
     private void updateAantalBroodjes() {
+        this.aantalBroodjes = table.getItems().size();
         String tekst = "Aantal broodjes: " + this.aantalBroodjes;
         this.aantalBroodjesTekst.setText(tekst);
     }
@@ -122,6 +127,31 @@ public class OrderBroodjes extends GridPane {
         // te doen door de Nodes als instantievariabelen van deze klasse te maken. Voor de moment worden alle nodes die niet
         // nodig zijn gedisabled met de disableAll() hierboven.
     }
+    /*public void voegBelegToe(){
+        table.setRowFactory(tv -> {
+            OrderOptions orderOptions = new OrderOptions(controller);
+            TableRow<Bestellijn> row = new TableRow<>();
+            row.setOnMouseClicked(event ->{
+                for (Button button : orderOptions.getBelegBroodjes()){
+                    button.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            Bestellijn bestellijn = row.getItem();
+                            try {
+                                controller.voegBelegToe(button.getText(),row.getIndex());
+                            } catch (BiffException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            updateBestellijnen();
+                        }
+                    });
+                }
+            });
+            return row;
+        });
+    }*/
 
     public void updateBestellijnen() {
         /*table.getItems().clear();
@@ -146,6 +176,5 @@ public class OrderBroodjes extends GridPane {
         table.setVisible(false);
         table.setVisible(true);
         this.updateAantalBroodjes();
-        this.aantalBroodjes++;
     }
 }
