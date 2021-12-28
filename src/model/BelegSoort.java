@@ -33,6 +33,10 @@ public class BelegSoort {
         this.actualStock += i;
     }
 
+    public void aanpassenVerkochtAantal (int i) {
+        this.soldAmount += i;
+    }
+
     private void setSoldAmount(int soldAmount) {
         if (soldAmount < 0) {
             throw new IllegalArgumentException("The sold amount cannot be less than 0.");

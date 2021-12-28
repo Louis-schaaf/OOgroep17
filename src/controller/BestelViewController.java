@@ -6,6 +6,7 @@ import model.Bestellijn;
 import model.Bestelling;
 import model.Observer;
 import model.bestelStates.BestellingState;
+import view.admin.AdminView;
 import view.order.OrderView;
 
 import java.io.IOException;
@@ -21,11 +22,11 @@ public class BestelViewController implements Observer {
         this.bestelFacade.addObserver(this, "TOEVOEGEN_BROODJE");
         this.bestelFacade.addObserver(this, "NIEUWE_BESTELLING");
         this.bestelFacade.addObserver(this, "TOEVOEGEN_BELEG");
-        this.bestelFacade.addObserver(this, "TOEVOEGEN_BESTELLIJN");
         this.bestelFacade.addObserver(this, "AFSLUITEN_BESTELLING");
         this.bestelFacade.addObserver(this, "ANNULEER_BESTELLING");
         this.bestelFacade.addObserver(this, "IDENTIEKE_BESTELLIJN");
         this.bestelFacade.addObserver(this, "VERWIJDER_BROODJE");
+        this.bestelFacade.addObserver(this, "BETAAL_BESTELLING");
     }
 
     public void setBestelFacade(BestelFacade bestelFacade) {
@@ -59,6 +60,7 @@ public class BestelViewController implements Observer {
         this.bestelFacade.startNieuweBestelling();
     }
     public void afsluitenBestelling() throws BiffException, IOException {
+        String korting = orderView.getKorting();
         this.bestelFacade.afsluitenBestelling();
         this.orderView.updateBedrag(this.bestelFacade.updateBedrag());
     }
@@ -87,9 +89,20 @@ public class BestelViewController implements Observer {
     }
 
     public void verwijderBestellijn(Bestellijn selectedBestellijn) throws BiffException, IOException{
+        if (getLijstBestellijnen().contains(selectedBestellijn)) {
+            getLijstBestellijnen().remove(selectedBestellijn);
+            this.orderView.updateBestellijnen();
+        }
     }
 
-    public void voegIdentiekeBestellijnToe(Bestellijn selectedBestellijn) throws BiffException, IOException{
+    public void voegIdentiekeBestellijnToe(Bestellijn selectedBestellijn) throws BiffException, IOException {
+        getLijstBestellijnen().add(selectedBestellijn);
+        this.orderView.updateBestellijnen();
+
+    }
+
+    public void betaalBestelling() throws BiffException, IOException{
+        this.bestelFacade.betaalBestelling();
     }
 
     @Override

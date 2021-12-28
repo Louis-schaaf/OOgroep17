@@ -7,7 +7,8 @@ public enum BestellingEvents {
     IDENTIEKE_BESTELLIJN("IdentiekBroodjeToevoegen", "model.bestelling.bestelFacade.voegIdentiekBroodjeToe"),
     VERWIJDER_BROODJE("BroodjeVerwijderen", "model.bestelling.bestelFacade.verwijderBestellijn"),
     AFSLUITEN_BESTELLING("AfsluitenBestelling", "model.bestelling.bestelFacade.afsluitenBestelling"),
-    ANNULEER_BESTELLING("AnnuleerBestelling", "model.bestelling.bestelFacade.annuleerBestelling");
+    ANNULEER_BESTELLING("AnnuleerBestelling", "model.bestelling.bestelFacade.annuleerBestelling"),
+    BETAAL_BESTELLING("BetaalBestelling", "model.bestelling.bestelFacade.betaalBestelling");
 
     private final String omschrijving;
     private final String methodeNaam;

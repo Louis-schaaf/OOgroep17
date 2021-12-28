@@ -1,6 +1,7 @@
 package view.admin.panes;
 
 
+import controller.admin.OverzichtController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -10,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import model.BelegSoort;
+import model.Bestellijn;
 import model.Broodje;
 import model.database.BelegDatabase;
 import model.database.BroodjesDatabase;
@@ -19,6 +21,7 @@ import java.util.List;
 
 
 public class SandwichOverviewPane extends GridPane{
+	public OverzichtController controller;
 	private TableView<Broodje> table = new TableView<>();
 	BroodjesDatabase broodjes = new BroodjesDatabase();
 	List<Broodje> list = new ArrayList<>(broodjes.getBroodjes().values());
@@ -28,12 +31,13 @@ public class SandwichOverviewPane extends GridPane{
 	BelegDatabase beleg = new BelegDatabase();
 	List<BelegSoort> list2 = new ArrayList<>(beleg.getBelegDB().values());
 	ObservableList<BelegSoort> belegObservableList =  FXCollections.observableList(list2);
-	
-	
-	public SandwichOverviewPane() {
+
+	public SandwichOverviewPane(OverzichtController controller) {
+		this.controller = controller;
+		controller.setPane(this);
 		this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
-        this.setHgap(5);        
+        this.setHgap(5);
 		this.add(new Label("Broodjes:"), 0, 0, 1, 1);
 		table.setItems(broodjeObservableList); //Als inlezen werkt, moeten we observers vervangen door broodjeObservableList
 		TableColumn<Broodje, String> firstNameColumn = new TableColumn<Broodje, String>("Name");
@@ -59,5 +63,12 @@ public class SandwichOverviewPane extends GridPane{
 		fourthNameColumn1.setCellValueFactory(new PropertyValueFactory<BelegSoort, Integer>("soldAmount"));
 		belegTableView.getColumns().addAll(firstNameColumn1,secondNameColumn1,thirdNameColumn1,fourthNameColumn1);
 		this.add(belegTableView, 1, 1);
+	}
+
+	public void updateTable() {
+
+	}
+
+	public void update() {
 	}
 }

@@ -52,7 +52,7 @@ public class OrderAfsluitingBestelling extends GridPane {
         return afsluitKnop1;
     }
     private Text setUpBedragTekst() {
-        this.bedragTekst = new Text("Te betalen: €...");
+        this.bedragTekst = new Text("Te betalen: €0.0");
         this.bedragTekst.setVisible(true);
         return this.bedragTekst;
     }
@@ -65,13 +65,13 @@ public class OrderAfsluitingBestelling extends GridPane {
     private Button setUpBetaalKnop() {
         this.betaalKnop = new Button("Betaal");
         this.betaalKnop.setOnAction(e -> {
-                /*try {
-                    controller.betaalBestelling(); //TODO
+                try {
+                    controller.betaalBestelling();
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 } catch (BiffException biffException) {
                     biffException.printStackTrace();
-                }*/
+                }
         });
         this.betaalKnop.setDisable(true);
         return this.betaalKnop;
@@ -97,6 +97,7 @@ public class OrderAfsluitingBestelling extends GridPane {
             this.afsluitKnop1.setDisable(true);
             this.betaalKnop.setDisable(true);
             this.keukenKnop.setDisable(true);
+            this.updateBedrag(0);
         }
         if (bestelling.getState().getClass().getName().contains("InBestelling")) {
             this.afsluitKnop1.setDisable(false);
