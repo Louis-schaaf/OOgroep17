@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import jxl.read.biff.BiffException;
+import model.Bestellijn;
 import model.Bestelling;
 
 import java.io.IOException;
@@ -18,38 +19,37 @@ import java.util.List;
 
 public class OrderAfsluitingBestelling extends GridPane {
     public BestelViewController controller;
-    Button afsluitKnop;
+    Button afsluitKnop1;
     Button betaalKnop;
     Button keukenKnop;
     Text bedragTekst;
     double bedrag = 0;
 
     public OrderAfsluitingBestelling(BestelViewController controller){
-        afsluitKnop = new Button();
+        afsluitKnop1 = new Button();
         this.controller = controller;
         this.setPadding(new Insets(10,0,10,20));
         this.setHgap(30); //horizontal gap in pixels => that's what you are asking for
         this.setVgap(10); //vertical gap in pixels
-        this.add(this.setUpAfsluitKnop(),0, 0);
+        this.setBackground(new Background(new BackgroundFill(Color.CADETBLUE, new CornerRadii(10), Insets.EMPTY)));
+        this.add(this.setAfsluitKnop(),0, 0);
         this.add(this.setUpBedragTekst(), 1,0);
         this.add(this.setUpBetaalKnop(), 3,0);
         this.add(this.setUpKeukenKnop(), 4,0);
-        this.setBackground(new Background(new BackgroundFill(Color.CADETBLUE, new CornerRadii(10), Insets.EMPTY)));
     }
 
-    private Button setUpAfsluitKnop() {
-        afsluitKnop.setText("Afsluiten Bestelling");
-        afsluitKnop.setOnAction(event -> {
-                try {
-                    this.controller.afsluitenBestelling(); //TODO
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                } catch (BiffException biffException) {
-                    biffException.printStackTrace();
-                }
+    private Button setAfsluitKnop() {
+        afsluitKnop1.setText("Afsluiten Bestelling");
+        afsluitKnop1.setOnAction(event -> {
+            try {
+                this.controller.afsluitenBestelling();
+            } catch (BiffException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
-        this.afsluitKnop.setDisable(true);
-        return this.afsluitKnop;
+        return afsluitKnop1;
     }
     private Text setUpBedragTekst() {
         this.bedragTekst = new Text("Te betalen: €...");
@@ -62,9 +62,12 @@ public class OrderAfsluitingBestelling extends GridPane {
         this.bedragTekst.setText(tekst);
     }
 
+    private double fixBedrag(){
+            return controller.bestelFacade.fixBedrag();
+    }
     private Button setUpBetaalKnop() {
         this.betaalKnop = new Button("Betaal");
-        this.afsluitKnop.setOnAction(e -> {
+        this.betaalKnop.setOnAction(e -> {
                 /*try {
                     controller.betaalBestelling(); //TODO
                 } catch (IOException ioException) {
@@ -79,7 +82,7 @@ public class OrderAfsluitingBestelling extends GridPane {
 
     private Button setUpKeukenKnop() {
         this.keukenKnop = new Button("Naar Keuken");
-        this.afsluitKnop.setOnAction(e -> {
+        this.keukenKnop.setOnAction(e -> {
                 /*try {
                     controller.stuurBestellingNaarKeuken(); //TODO
                 } catch (IOException ioException) {
@@ -94,19 +97,20 @@ public class OrderAfsluitingBestelling extends GridPane {
 
     public void update(Bestelling bestelling) {
         if (bestelling.getState().getClass().getName().contains("InWacht")) {
-            this.afsluitKnop.setDisable(true);
+            this.afsluitKnop1.setDisable(true);
             this.betaalKnop.setDisable(true);
             this.keukenKnop.setDisable(true);
         }
         if (bestelling.getState().getClass().getName().contains("InBestelling")) {
-            this.afsluitKnop.setDisable(false);
+            this.afsluitKnop1.setDisable(false);
         }
         if (bestelling.getState().getClass().getName().contains("Afgesloten")) {
             this.betaalKnop.setDisable(false);
+            this.afsluitKnop1.setDisable(true);
             this.updateBedrag();
         }
         if (bestelling.getState().getClass().getName().contains("Betaald")) {
-            this.afsluitKnop.setDisable(true);
+            this.afsluitKnop1.setDisable(true);
             this.betaalKnop.setDisable(true);
             this.keukenKnop.setDisable(false);
         }

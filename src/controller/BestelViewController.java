@@ -21,7 +21,11 @@ public class BestelViewController implements Observer {
         this.bestelFacade.addObserver(this, "TOEVOEGEN_BROODJE");
         this.bestelFacade.addObserver(this, "NIEUWE_BESTELLING");
         this.bestelFacade.addObserver(this, "TOEVOEGEN_BELEG");
+        this.bestelFacade.addObserver(this, "TOEVOEGEN_BESTELLIJN");
+        this.bestelFacade.addObserver(this, "AFSLUITEN_BESTELLING");
         this.bestelFacade.addObserver(this, "ANNULEER_BESTELLING");
+        this.bestelFacade.addObserver(this, "IDENTIEKE_BESTELLIJN");
+        this.bestelFacade.addObserver(this, "VERWIJDER_BROODJE");
     }
 
     public void setBestelFacade(BestelFacade bestelFacade) {
@@ -71,25 +75,14 @@ public class BestelViewController implements Observer {
     public void voegBelegToe(String naamBeleg, int bestelLijn) throws BiffException, IOException {
         this.bestelFacade.voegBelegToe(naamBeleg, bestelLijn);
         this.orderView.updateBestellijnen();
-        this.orderView.updateStatusBroodjesKnoppen(this.getVoorraadBroodjes());
         this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
     }
 
     public void annuleerBestelling() throws BiffException, IOException {
-        this.bestelFacade.annuleerBestelling();
-        this.orderView.updateBestellijnen();
-        this.orderView.updateStatusBroodjesKnoppen(this.getVoorraadBroodjes());
-        this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
     }
 
     @Override
     public void update() {
         orderView.update(this.getBestelling());
-    }
-
-    public void verwijderBestellijn(Bestellijn selectedBestellijn) throws BiffException, IOException{
-    }
-
-    public void voegIdentiekeBestellijnToe(Bestellijn selectedBestellijn) throws BiffException, IOException{
     }
 }

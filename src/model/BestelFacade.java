@@ -96,4 +96,8 @@ public class BestelFacade implements Subject {
                 observer.update();
             }
         }
+
+    public double fixBedrag() {
+
+    }
 }
