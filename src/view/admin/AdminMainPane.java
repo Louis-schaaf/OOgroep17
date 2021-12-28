@@ -1,6 +1,7 @@
 package view.admin;
 
 
+import controller.admin.OverzichtController;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
@@ -12,7 +13,7 @@ public class AdminMainPane extends BorderPane {
 	public AdminMainPane(){		
 	    TabPane tabPane = new TabPane(); 	    
         //Tab spelVerloopTab = new Tab("Spelverloop");
-        SandwichOverviewPane sandwichOverviewPane = new SandwichOverviewPane();
+        SandwichOverviewPane sandwichOverviewPane = new SandwichOverviewPane(new OverzichtController());
         SettingsPane settingsPane = new SettingsPane();
         StatisticsPane statisticsPane = new StatisticsPane();
         Tab broodjesTab = new Tab("Broodjes/Beleg",sandwichOverviewPane);
