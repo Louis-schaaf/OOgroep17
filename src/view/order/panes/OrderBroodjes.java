@@ -1,8 +1,12 @@
 package view.order.panes;
 
 import controller.BestelViewController;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -61,13 +65,20 @@ public class OrderBroodjes extends GridPane {
     // In de onderstaande tabel zou de naam van het broodje komen te staan
     // En in de andere tabel komen alle belegsoorten van het bijhorende broodje.
     private void setBroodjes(GridPane broodjes) {
+
         broodjes.setPadding(new Insets(5, 5, 5, 5));
         broodjes.setVgap(5);
         broodjes.setHgap(5);
         table = new TableView<>();
+        ObservableList<Bestellijn> observableList = FXCollections.observableList(controller.getLijstBestellijnen());
+        table.setItems(observableList);
         TableColumn<Bestellijn, String> firstNameColumn = new TableColumn<>("Broodje");
-        firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("naamBroodje"));
-        table.getColumns().addAll(firstNameColumn);
+        firstNameColumn.setCellValueFactory(new PropertyValueFactory<Bestellijn, String>("NaamBroodje"));
+        //firstNameColumn.setCellValueFactory(celldata -> new SimpleStringProperty(celldata.getValue().getNaamBroodje()));
+        table.getColumns().add(firstNameColumn);
+
+        //firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("naamBroodje"));
+        System.out.println(table.getColumns());
         broodjes.add(table, 0, 1);
     }
 
@@ -103,14 +114,22 @@ public class OrderBroodjes extends GridPane {
         // nodig zijn gedisabled met de disableAll() hierboven.
     }
 
-    public void updateBestellijnen(List<Bestellijn> lijstBestellijnen) {
-        table.getItems().clear();
-        ObservableList<Bestellijn> bestellijnObservableList = FXCollections.observableList(lijstBestellijnen);
-        table.getItems().addAll(bestellijnObservableList);
+    public void updateBestellijnen() {
+        /*table.getItems().clear();
+        table.refresh();
+        table.getColumns().get(0).setVisible(false);
+        table.getColumns().get(0).setVisible(true);*/
+        //TODO: er worden 2 vensters aangemaakt
+        ObservableList<Bestellijn> bestellijnObservableList = FXCollections.observableList(controller.getLijstBestellijnen());
+        table.setItems(bestellijnObservableList);
+        table.getColumns().get(0).setVisible(false);
+        table.getColumns().get(0).setVisible(true);
         for (int i = 0; i < table.getItems().size(); i++) {
             System.out.println(table.getItems().get(i).naamBroodje);
         }
         table.refresh();
+        broodjes.getChildren().remove(table);
+        setBroodjes(broodjes);
         table.setVisible(false);
         table.setVisible(true);
     }
