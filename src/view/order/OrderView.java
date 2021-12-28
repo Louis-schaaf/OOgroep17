@@ -1,7 +1,9 @@
 package view.order;
 
 import controller.BestelViewController;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -12,10 +14,13 @@ import view.order.panes.OrderBroodjes;
 import view.order.panes.OrderNieuweBestelling;
 import view.order.panes.OrderOptions;
 
+import javax.xml.soap.Text;
+import java.awt.*;
 import java.util.Map;
 
 public class OrderView {
 	private Stage stage = new Stage();
+	private Stage popup;
 	private OrderAfsluitingBestelling orderAfsluitingBestelling;
 	private OrderNieuweBestelling orderNieuweBestelling;
 	private OrderOptions orderOptions;
@@ -36,8 +41,26 @@ public class OrderView {
 		stage.setScene(scene);
 		root.getChildren().addAll(orderNieuweBestelling,orderOptions,orderBroodjes,orderAfsluitingBestelling);
 		stage.show();
+		this.setUpPopup();
+		this.toonError();
 		controller.setOrderView(this);
 	}
+
+	public void setUpPopup() {
+		popup = new Stage();
+		popup.setTitle("Error");
+		VBox comp = new VBox();
+		Label label = new Label("U heeft geen broodje gekozen.");
+		comp.getChildren().add(label);
+		Scene stageScene = new Scene(comp, 300, 300);
+		popup.setScene(stageScene);
+		popup.hide();
+	}
+
+	public void toonError() {
+		this.popup.show();
+	}
+
 	public Bestellijn getSelected() {
 		return orderBroodjes.getSelectedBestellijn();
 	}

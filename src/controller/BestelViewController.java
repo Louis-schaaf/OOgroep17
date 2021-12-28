@@ -52,6 +52,7 @@ public class BestelViewController implements Observer {
     public Bestelling getBestelling() {
         return this.bestelFacade.getBestelling();
     }
+
     public Bestellijn getBestellijn() {
         return this.orderView.getSelected();
     }
@@ -76,9 +77,13 @@ public class BestelViewController implements Observer {
     }
 
     public void voegBelegToe(String naamBeleg, int bestelLijn) throws BiffException, IOException {
-        this.bestelFacade.voegBelegToe(naamBeleg, bestelLijn);
-        this.orderView.updateBestellijnen();
-        this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
+        if (bestelLijn > -1) {
+            this.bestelFacade.voegBelegToe(naamBeleg, bestelLijn);
+            this.orderView.updateBestellijnen();
+            this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
+        } else {
+            this.orderView.toonError();
+        }
     }
 
     public void annuleerBestelling() throws BiffException, IOException {
@@ -88,17 +93,24 @@ public class BestelViewController implements Observer {
         this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
     }
 
-    public void verwijderBestellijn(Bestellijn selectedBestellijn) throws BiffException, IOException{
-        if (getLijstBestellijnen().contains(selectedBestellijn)) {
-            getLijstBestellijnen().remove(selectedBestellijn);
+    public void verwijderBestellijn(Bestellijn selectedBestellijn) throws BiffException, IOException {
+        if (selectedBestellijn == null) {
+            this.orderView.toonError();
+        } else {
+            this.bestelFacade.verwijderBestellijn(selectedBestellijn);
             this.orderView.updateBestellijnen();
+            this.orderView.updateStatusBroodjesKnoppen(this.getVoorraadBroodjes());
+            this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
         }
     }
 
     public void voegIdentiekeBestellijnToe(Bestellijn selectedBestellijn) throws BiffException, IOException {
-        getLijstBestellijnen().add(selectedBestellijn);
-        this.orderView.updateBestellijnen();
-
+        if (selectedBestellijn == null) {
+            this.orderView.toonError();
+        } else {
+            getLijstBestellijnen().add(selectedBestellijn);
+            this.orderView.updateBestellijnen();
+        }
     }
 
     public void betaalBestelling() throws BiffException, IOException{

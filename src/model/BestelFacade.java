@@ -75,6 +75,12 @@ public class BestelFacade implements Subject {
         notifyObservers("TOEVOEGEN_BELEG");
     }
 
+    public void verwijderBestellijn(Bestellijn selectedBestellijn) {
+        if (getLijstBestellijnen().contains(selectedBestellijn)) {
+            getLijstBestellijnen().remove(selectedBestellijn);
+        }
+    }
+
     public void betaalBestelling() throws BiffException, IOException{
         for (Bestellijn b : this.getLijstBestellijnen()) {
             Broodje broodje = this.broodjesDatabase.getBroodje(b.getNaamBroodje());

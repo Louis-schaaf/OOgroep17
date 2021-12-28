@@ -18,6 +18,7 @@ import model.BelegSoort;
 import model.Bestellijn;
 import model.Bestelling;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -33,7 +34,7 @@ public class OrderBroodjes extends GridPane {
     Button identiek;
     Button verwijder;
     Button annuleer;
-    Bestellijn selectedBestellijn;
+    Bestellijn selectedBestellijn = null;
 
     public OrderBroodjes(BestelViewController controller) {
         this.controller = controller;
@@ -83,6 +84,7 @@ public class OrderBroodjes extends GridPane {
         this.verwijder.setOnAction(e -> {
             try {
                 controller.verwijderBestellijn(getSelectedBestellijn());
+                this.selectedBestellijn = null;
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             } catch (BiffException biffException) {
@@ -98,6 +100,7 @@ public class OrderBroodjes extends GridPane {
         this.identiek.setOnAction(e -> {
             try {
                 controller.voegIdentiekeBestellijnToe(getSelectedBestellijn());
+                this.selectedBestellijn = null;
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             } catch (BiffException biffException) {
@@ -157,6 +160,7 @@ public class OrderBroodjes extends GridPane {
         this.annuleer.setOnAction(e -> {
             try {
                 controller.annuleerBestelling();
+                this.selectedBestellijn = null;
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             } catch (BiffException biffException) {
