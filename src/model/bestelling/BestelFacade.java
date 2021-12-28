@@ -12,6 +12,7 @@ import model.database.BelegDatabase;
 import model.database.BroodjesDatabase;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -52,19 +53,19 @@ public class BestelFacade implements Subject {
 
     public void startNieuweBestelling() throws BiffException, IOException {
         this.bestelling.starten();
-        notifyObservers();
+        notifyObservers("NIEUWE_BESTELLING");
     }
 
     public void voegBestellijnToe(String naamBroodje) throws BiffException, IOException {
         Broodje broodje = this.broodjesDatabase.getBroodje(naamBroodje);
         this.bestelling.voegBestellijnToe(broodje);
-        notifyObservers();
+        notifyObservers("TOEVOEGEN_BROODJE");
     }
 
     public void voegBelegToe(String naamBeleg, int bestelLijn) throws BiffException, IOException {
         BelegSoort beleg = this.belegDatabase.getBeleg(naamBeleg);
         this.bestelling.voegBelegToe(beleg, bestelLijn);
-        notifyObservers();
+        notifyObservers("TOEVOEGEN_BELEG");
     }
 
     @Override
