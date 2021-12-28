@@ -42,7 +42,6 @@ public class OrderView {
 		root.getChildren().addAll(orderNieuweBestelling,orderOptions,orderBroodjes,orderAfsluitingBestelling);
 		stage.show();
 		this.setUpPopup();
-		this.toonError();
 		controller.setOrderView(this);
 	}
 
