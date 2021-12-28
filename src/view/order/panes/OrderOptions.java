@@ -105,7 +105,7 @@ public class OrderOptions extends GridPane {
         buttonsBeleg.add(button);
         button.setOnAction(e -> {
                 try {
-                    controller.voegBelegToe(buttonName, 0);
+                    controller.voegBelegToe(buttonName, controller.getLijstBestellijnen().size()-1);
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 } catch (BiffException biffException) {

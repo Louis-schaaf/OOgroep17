@@ -127,31 +127,6 @@ public class OrderBroodjes extends GridPane {
         // te doen door de Nodes als instantievariabelen van deze klasse te maken. Voor de moment worden alle nodes die niet
         // nodig zijn gedisabled met de disableAll() hierboven.
     }
-    /*public void voegBelegToe(){
-        table.setRowFactory(tv -> {
-            OrderOptions orderOptions = new OrderOptions(controller);
-            TableRow<Bestellijn> row = new TableRow<>();
-            row.setOnMouseClicked(event ->{
-                for (Button button : orderOptions.getBelegBroodjes()){
-                    button.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            Bestellijn bestellijn = row.getItem();
-                            try {
-                                controller.voegBelegToe(button.getText(),row.getIndex());
-                            } catch (BiffException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            updateBestellijnen();
-                        }
-                    });
-                }
-            });
-            return row;
-        });
-    }*/
 
     public void updateBestellijnen() {
         /*table.getItems().clear();
