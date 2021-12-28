@@ -14,18 +14,54 @@ import model.Bestelling;
 import java.util.List;
 
 public class OrderAfsluitingBestelling extends GridPane {
+    Button afsluitKnop;
+    Button betaalKnop;
+    Button keukenKnop;
+    Text bedragTekst;
+    double bedrag = 0;
 
 
     public OrderAfsluitingBestelling(){
         this.setPadding(new Insets(10,0,10,20));
         this.setHgap(30); //horizontal gap in pixels => that's what you are asking for
         this.setVgap(10); //vertical gap in pixels
-        this.add(new Button("Afsluiten Bestelling"),0, 0);
-        this.add(new Text("Te betalen"), 1,0);
-        this.add(new Button("Betaal"), 3,0);
-        this.add(new Button("Naar Keuken"), 4,0);
+        this.add(this.setUpAfsluitKnop(),0, 0);
+        this.add(this.setUpBedragTekst(), 1,0);
+        this.add(this.setUpBetaalKnop(), 3,0);
+        this.add(this.setUpKeukenKnop(), 4,0);
         this.setBackground(new Background(new BackgroundFill(Color.CADETBLUE, new CornerRadii(10), Insets.EMPTY)));
     }
+
+    private Button setUpAfsluitKnop() {
+        this.afsluitKnop = new Button("Afsluiten Bestelling");
+        this.afsluitKnop.setDisable(true);
+        return this.afsluitKnop;
+    }
+
+    private Text setUpBedragTekst() {
+        this.bedragTekst = new Text("Te betalen: ");
+        this.bedragTekst.setVisible(false);
+        return this.bedragTekst;
+    }
+
+    private void updateBedrag() {
+        String tekst = "Te betalen: " + this.bedrag;
+        this.bedragTekst.setText(tekst);
+    }
+
+    private Button setUpBetaalKnop() {
+        this.betaalKnop = new Button("Betaal");
+        this.betaalKnop.setDisable(true);
+        return this.betaalKnop;
+    }
+
+    private Button setUpKeukenKnop() {
+        this.keukenKnop = new Button("Naar Keuken");
+        this.keukenKnop.setDisable(true);
+        return this.keukenKnop;
+    }
+
+
 
     // Alle nodes van deze gridpane worden gedisabled
     public void disableAll() {

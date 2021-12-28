@@ -61,13 +61,13 @@ public class OrderNieuweBestelling extends GridPane {
     }
 
     private Text setUpVolgnummer() {
-        volgnummerText = new Text("Volgnummer: ");
+        volgnummerText = new Text("Volgnummer: 1");
         volgnummerText.setVisible(false);
         return volgnummerText;
     }
 
     private void updateVolgnummer() {
-        String tekst = this.volgnummerText.getText() + this.volgnummer;
+        String tekst = "Volgnummer: " + this.volgnummer;
         this.volgnummerText.setText(tekst);
     }
 
@@ -78,7 +78,6 @@ public class OrderNieuweBestelling extends GridPane {
     public void update(Bestelling bestelling) {
         if (bestelling.getState().getClass().getName().contains("InBestelling")) {
             buttonNieuweBestelling.setDisable(true);
-            this.updateVolgnummer();
             volgnummerText.setVisible(true);
             choiceBox.setDisable(false);
         }

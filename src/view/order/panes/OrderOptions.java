@@ -65,6 +65,7 @@ public class OrderOptions extends GridPane {
         if (border == true){
             button.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10), BorderWidths.DEFAULT)));
         }
+        button.setDisable(true);
         buttonsBroodjes.add(button);
         button.setOnAction(e -> {
             if (bestelling.getState().getClass().getName().contains("InBestelling")) {
@@ -92,6 +93,7 @@ public class OrderOptions extends GridPane {
         if (border == true){
             button.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10), BorderWidths.DEFAULT)));
         }
+        button.setDisable(true);
         buttonsBeleg.add(button);
         button.setOnAction(e -> {
             if (bestelling.getState().getClass().getName().contains("InBestelling")) {
@@ -139,8 +141,8 @@ public class OrderOptions extends GridPane {
     }
 
     public void drukBroodjesKnop(){
-
     }
+
     // Zet alle nodes uit van deze gridpane.
     public void disableAll() {
         List<Node> nodes = this.getManagedChildren();
