@@ -15,7 +15,7 @@ public class AdminView {
 		stage.setX(680);
 		stage.setY(20);
 		Group root = new Group();
-		Scene scene = new Scene(root, 650, 400);
+		Scene scene = new Scene(root, 1000, 400);
 		BorderPane borderPane = new AdminMainPane();
 		borderPane.prefHeightProperty().bind(scene.heightProperty());
 		borderPane.prefWidthProperty().bind(scene.widthProperty());

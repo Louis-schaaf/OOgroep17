@@ -18,23 +18,27 @@ import model.database.BroodjesDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public class SandwichOverviewPane extends GridPane{
 	public OverzichtController controller;
 	private TableView<Broodje> table = new TableView<>();
-	BroodjesDatabase broodjes = new BroodjesDatabase();
-	List<Broodje> list = new ArrayList<>(broodjes.getBroodjes().values());
-	ObservableList<Broodje> broodjeObservableList =  FXCollections.observableList(list);
+	List<Broodje> list;
+	ObservableList<Broodje> broodjeObservableList;
 
 	private TableView<BelegSoort> belegTableView = new TableView<>();
-	BelegDatabase beleg = new BelegDatabase();
-	List<BelegSoort> list2 = new ArrayList<>(beleg.getBelegDB().values());
-	ObservableList<BelegSoort> belegObservableList =  FXCollections.observableList(list2);
+	List<BelegSoort> list2;
+	ObservableList<BelegSoort> belegObservableList;
 
 	public SandwichOverviewPane(OverzichtController controller) {
 		this.controller = controller;
 		controller.setPane(this);
+		list = new ArrayList<>(controller.getBroodjes().values());
+		broodjeObservableList = FXCollections.observableList(list);
+		list2 = new ArrayList<>(controller.getBeleg().values());
+		belegObservableList = FXCollections.observableList(list2);
+
 		this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);
@@ -65,10 +69,11 @@ public class SandwichOverviewPane extends GridPane{
 		this.add(belegTableView, 1, 1);
 	}
 
-	public void updateTable() {
-
-	}
-
-	public void update() {
+	public void update(Map<String, Broodje> broodjes,Map<String, BelegSoort> beleg) {
+		list = new ArrayList<>(broodjes.values());
+		broodjeObservableList = FXCollections.observableList(list);
+		list2 = new ArrayList<>(beleg.values());
+		belegObservableList = FXCollections.observableList(list2);
+		//TODO Tabelwaarden updaten
 	}
 }

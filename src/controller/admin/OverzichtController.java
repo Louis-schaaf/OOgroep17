@@ -1,10 +1,14 @@
 package controller.admin;
 
+import model.BelegSoort;
 import model.BestelFacade;
+import model.Broodje;
 import model.Observer;
 import view.admin.AdminView;
 import view.admin.panes.SandwichOverviewPane;
 import view.order.OrderView;
+
+import java.util.Map;
 
 public class OverzichtController implements Observer {
     public BestelFacade bestelFacade;
@@ -23,8 +27,16 @@ public class OverzichtController implements Observer {
         this.pane = pane;
     }
 
+    public Map<String, Broodje> getBroodjes() {
+        return this.bestelFacade.getBroodjes();
+    }
+
+    public Map<String, BelegSoort> getBeleg() {
+        return this.bestelFacade.getBeleg();
+    }
+
     @Override
     public void update() {
-        pane.update();
+        pane.update(this.getBroodjes(), this.getBeleg());
     }
 }

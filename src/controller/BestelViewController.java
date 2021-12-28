@@ -37,6 +37,11 @@ public class BestelViewController implements Observer {
         this.orderView = orderView;
     }
 
+    @Override
+    public void update() {
+        orderView.update(this.getBestelling());
+    }
+
     public Map<String, Integer> getVoorraadBroodjes() {
         return this.bestelFacade.getVoorraadBroodjes();
     }
@@ -115,10 +120,5 @@ public class BestelViewController implements Observer {
 
     public void betaalBestelling() throws BiffException, IOException{
         this.bestelFacade.betaalBestelling();
-    }
-
-    @Override
-    public void update() {
-        orderView.update(this.getBestelling());
     }
 }

@@ -2,11 +2,12 @@ package controller.admin;
 
 import model.BestelFacade;
 import model.Observer;
+import view.admin.panes.SettingsPane;
 import view.admin.panes.StatisticsPane;
 
 public class InstellingenController implements Observer {
     public BestelFacade bestelFacade;
-    public StatisticsPane pane;
+    public SettingsPane pane;
 
     public InstellingenController() {
         setBestelFacade(new BestelFacade());

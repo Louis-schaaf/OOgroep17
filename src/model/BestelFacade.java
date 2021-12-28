@@ -42,6 +42,22 @@ public class BestelFacade implements Subject {
         return this.belegDatabase.getVoorraadlijstBeleg();
     }
 
+    public Map<String, Integer> getVerkochteBroodjes() {
+        return this.broodjesDatabase.getVerkochteBroodjes();
+    }
+
+    public Map<String, Integer> getVerkochtBeleg() {
+        return this.belegDatabase.getVerkochtBeleg();
+    }
+
+    public Map<String, Broodje> getBroodjes() {
+        return this.broodjesDatabase.getBroodjes();
+    }
+
+    public Map<String, BelegSoort> getBeleg() {
+        return this.belegDatabase.getBelegDB();
+    }
+
     public Bestelling getBestelling() {
         return this.bestelling;
     }

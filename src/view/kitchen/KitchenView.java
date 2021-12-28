@@ -15,7 +15,7 @@ public class KitchenView {
 		stage.setX(680);
 		stage.setY(470);
 		Group root = new Group();
-		Scene scene = new Scene(root, 650, 200);			
+		Scene scene = new Scene(root, 1000, 200);
 		stage.setScene(scene);
 		stage.sizeToScene();			
 		stage.show();		
