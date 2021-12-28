@@ -70,9 +70,9 @@ public class OrderBroodjes extends GridPane {
         pane.setPadding(new Insets(10));
         pane.add(new Text("Selecteer lijn in Lijst:"), 0, 0);
         pane.setVgap(30); //vertical gap in pixels
-        pane.add(fixButtonColorBorder(new Button("Voeg hetzelfde broodje toe")), 0, 1);
+        pane.add(fixButtonColorBorder(setUpIdentiekeKnop()), 0, 1);
         pane.setVgap(10);
-        pane.add(fixButtonColorBorder(new Button("Verwijder broodje")), 0, 2);
+        pane.add(fixButtonColorBorder(setUpVerwijderKnop()), 0, 2);
         pane.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, new CornerRadii(10), Insets.EMPTY)));
 
     }
@@ -131,27 +131,39 @@ public class OrderBroodjes extends GridPane {
         return button;
     }
 
-    // Alle nodes van deze Gridpane worden gedisabled.
-    public void disableAll() {
-        List<Node> nodes = this.getManagedChildren();
-        for (Node n : nodes) {
-            n.setDisable(true);
-        }
-    }
-
     // Maak een annuleerKnop aan met "Annuleer Bestelling"
     // Deze krijgt een rode achtergrond met een zwarte border.
     public Button annuleerKnop() {
-        Button buttonAnnuleren = new Button("Annuleer Bestelling");
-        buttonAnnuleren.setBackground(new Background(new BackgroundFill(Color.RED, new CornerRadii(10), Insets.EMPTY)));
-        buttonAnnuleren.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10), BorderWidths.DEFAULT)));
-        return buttonAnnuleren;
+        this.annuleer = new Button("Annuleer Bestelling");
+        this.annuleer.setDisable(true);
+        this.annuleer.setBackground(new Background(new BackgroundFill(Color.RED, new CornerRadii(10), Insets.EMPTY)));
+        this.annuleer.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10), BorderWidths.DEFAULT)));
+        return this.annuleer;
     }
 
     public void update(Bestelling bestelling) {
-        //TODO De nodes op deze pagina's per state van bestelling apart aanspreken en updaten. Dit lijkt me het makkelijkst
-        // te doen door de Nodes als instantievariabelen van deze klasse te maken. Voor de moment worden alle nodes die niet
-        // nodig zijn gedisabled met de disableAll() hierboven.
+        if (bestelling.getState().getClass().getName().contains("InWacht")) {
+            this.annuleer.setDisable(true);
+            this.verwijder.setDisable(true);
+            this.identiek.setDisable(true);
+        }
+        if (bestelling.getState().getClass().getName().contains("InBestelling")) {
+            this.annuleer.setDisable(false);
+            this.verwijder.setDisable(false);
+            this.identiek.setDisable(false);
+
+        }
+        if (bestelling.getState().getClass().getName().contains("Afgesloten")) {
+            this.annuleer.setDisable(false);
+            this.verwijder.setDisable(true);
+            this.identiek.setDisable(true);
+
+        }
+        if (bestelling.getState().getClass().getName().contains("Betaald")) {
+            this.annuleer.setDisable(true);
+            this.verwijder.setDisable(true);
+            this.identiek.setDisable(true);
+        }
     }
 
     public Bestellijn getSelectedBestellijn() {
@@ -178,9 +190,5 @@ public class OrderBroodjes extends GridPane {
         table.setVisible(false);
         table.setVisible(true);
         this.updateAantalBroodjes();
-    }
-
-    public void deleteBestellijn() {
-
     }
 }

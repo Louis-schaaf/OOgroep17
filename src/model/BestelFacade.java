@@ -41,8 +41,17 @@ public class BestelFacade implements Subject {
         return this.bestelling;
     }
 
-    public void annuleerBestelling() {
+    public void annuleerBestelling() throws BiffException, IOException {
+        for (Bestellijn b : this.getLijstBestellijnen()) {
+            Broodje broodje = this.broodjesDatabase.getBroodje(b.getNaamBroodje());
+            broodje.aanpassenVoorraad(1);
+            for (String s : b.getNamenBelegLijst()) {
+                BelegSoort beleg = this.belegDatabase.getBeleg(s);
+                beleg.aanpassenVoorraad(1);
+            }
+        }
         this.bestelling.resetBestelling();
+        notifyObservers("ANNULEER_BESTELLING");
     }
 
     public void startNieuweBestelling() throws BiffException, IOException {

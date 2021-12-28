@@ -34,6 +34,11 @@ public class Bestelling {
         this.bestellijnen.get(bestelLijn).addNaamBeleg(beleg);
     }
 
+    public void resetBestelling() {
+        changeState(new InWacht(this));
+        this.bestellijnen.clear();
+    }
+
     public void changeState(BestellingState state) {
         this.state = state;
     }
@@ -68,10 +73,5 @@ public class Bestelling {
 
     public void wachten () {
         this.state.wachten();
-    }
-
-    public void resetBestelling() {
-        changeState(new InWacht(this));
-        this.bestellijnen.clear();
     }
 }
