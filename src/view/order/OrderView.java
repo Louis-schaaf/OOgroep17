@@ -47,8 +47,8 @@ public class OrderView {
 		this.orderAfsluitingBestelling.update(bestelling);
 	}
 
-	public void updateBestellijnen(List<Bestellijn> lijstBestellijnen) {
-		this.orderBroodjes.updateBestellijnen(lijstBestellijnen);
+	public void updateBestellijnen() {
+		this.orderBroodjes.updateBestellijnen();
 	}
 
 	public void updateStatusBroodjesKnoppen(Map<String, Integer> voorraadBroodjes) {

@@ -2,12 +2,14 @@ package controller;
 
 import jxl.read.biff.BiffException;
 import model.bestelling.BestelFacade;
+import model.bestelling.Bestellijn;
 import model.bestelling.Bestelling;
 import model.Observer;
 import model.bestelling.states.BestellingState;
 import view.order.OrderView;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 public class BestelViewController implements Observer {
@@ -48,37 +50,18 @@ public class BestelViewController implements Observer {
     public void startNieuweBestelling() throws BiffException, IOException {
         this.bestelFacade.startNieuweBestelling();
     }
-
+    public List<Bestellijn> getLijstBestellijnen() {
+        return this.bestelFacade.getLijstBestellijnen();
+    }
     public void voegBestellijnToe (String naamBroodje) throws BiffException, IOException {
         this.bestelFacade.voegBestellijnToe(naamBroodje);
-        this.orderView.updateBestellijnen(this.bestelFacade.getLijstBestellijnen());
+        this.orderView.updateBestellijnen();
         this.orderView.updateStatusBroodjesKnoppen(this.getVoorraadBroodjes());
     }
 
-    public void voegBelegToe (String naamBeleg, int bestellijn) throws BiffException, IOException {
-        this.bestelFacade.voegBelegToe(naamBeleg, bestellijn);
-        this.orderView.updateBestellijnen(this.bestelFacade.getLijstBestellijnen());
-        this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
-    }
-
-    public void voegIdentiekeBestellijnToe (int bestellijn) throws BiffException, IOException {
-        this.bestelFacade.voegIdentiekeBestellijnToe(bestellijn);
-        this.orderView.updateBestellijnen(this.bestelFacade.getLijstBestellijnen());
-        this.orderView.updateStatusBroodjesKnoppen(this.getVoorraadBroodjes());
-        this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
-    }
-
-    public void verwijderBestellijn (int bestellijn) throws BiffException, IOException {
-        this.bestelFacade.verwijderBestellijn(bestellijn);
-        this.orderView.updateBestellijnen(this.bestelFacade.getLijstBestellijnen());
-        this.orderView.updateStatusBroodjesKnoppen(this.getVoorraadBroodjes());
-        this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
-    }
-
-    public void annuleerBestelling () throws BiffException, IOException {
-        this.bestelFacade.annuleerBestelling();
-        this.orderView.updateBestellijnen(this.bestelFacade.getLijstBestellijnen());
-        this.orderView.updateStatusBroodjesKnoppen(this.getVoorraadBroodjes());
+    public void voegBelegToe(String naamBeleg, int bestelLijn) throws BiffException, IOException {
+        this.bestelFacade.voegBelegToe(naamBeleg, bestelLijn);
+        this.orderView.updateBestellijnen();
         this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
     }
 
