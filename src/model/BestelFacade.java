@@ -98,14 +98,15 @@ public class BestelFacade implements Subject {
         }
 
     public double updateBedrag() {
+        double bedrag = 0;
         for (Bestellijn b : this.getLijstBestellijnen()) {
             Broodje broodje = this.broodjesDatabase.getBroodje(b.getNaamBroodje());
+            bedrag += broodje.getSalePrice();
             for (String s : b.getNamenBelegLijst()) {
                 BelegSoort beleg = this.belegDatabase.getBeleg(s);
-                beleg.aanpassenVoorraad(1);
+                bedrag += beleg.getSalePrice();
             }
         }
-        this.bestelling.resetBestelling();
-        return 0.0;
+        return bedrag;
     }
 }
