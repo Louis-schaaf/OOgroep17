@@ -74,7 +74,7 @@ public class OrderNieuweBestelling extends GridPane {
     // en de choiceBox worden geanabled.
     public void update(Bestelling bestelling) {
         if (bestelling.getState().getClass().getName().contains("InWacht")) {
-            buttonNieuweBestelling.setDisable(true);
+            buttonNieuweBestelling.setDisable(false);
             volgnummerText.setVisible(false);
             choiceBox.setDisable(true);
         }
