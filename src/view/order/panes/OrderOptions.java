@@ -8,6 +8,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import jxl.read.biff.BiffException;
 import model.BelegSoort;
+import model.Bestellijn;
 import model.Broodje;
 import model.Bestelling;
 import model.database.loadSaveStrategies.LoadSaveStrategyFactory;
@@ -105,7 +106,7 @@ public class OrderOptions extends GridPane {
         buttonsBeleg.add(button);
         button.setOnAction(e -> {
                 try {
-                    controller.voegBelegToe(buttonName, controller.getLijstBestellijnen().size()-1);
+                    controller.voegBelegToe(buttonName, controller.getLijstBestellijnen().indexOf(controller.getBestellijn()));
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 } catch (BiffException biffException) {
@@ -115,6 +116,10 @@ public class OrderOptions extends GridPane {
         this.add(button,belegIndex, 1);
         belegIndex++;
         return button;
+    }
+
+    public int getSelectedIndex(Bestellijn bestellijn) {
+        return controller.getLijstBestellijnen().indexOf(bestellijn);
     }
 
     //Zet alle knoppen van deze pane in een array

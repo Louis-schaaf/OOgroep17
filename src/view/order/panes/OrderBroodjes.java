@@ -1,5 +1,6 @@
 package view.order.panes;
 
+import com.sun.rowset.internal.Row;
 import controller.BestelViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +20,7 @@ import model.Bestelling;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class OrderBroodjes extends GridPane {
     public BestelViewController controller;
@@ -28,6 +30,7 @@ public class OrderBroodjes extends GridPane {
     TableView<Bestellijn> table;
     Text aantalBroodjesTekst;
     int aantalBroodjes = 1;
+    Bestellijn selectedBestellijn;
 
     public OrderBroodjes(BestelViewController controller) {
         this.controller = controller;
@@ -82,6 +85,14 @@ public class OrderBroodjes extends GridPane {
         broodjes.setVgap(5);
         broodjes.setHgap(5);
         table = new TableView<>();
+        table.setRowFactory(tv -> {
+            TableRow<Bestellijn> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                Bestellijn bestellijn = row.getItem();
+                selectedBestellijn = bestellijn;
+            });
+            return row;
+        });
         ObservableList<Bestellijn> observableList = FXCollections.observableList(controller.getLijstBestellijnen());
         table.setItems(observableList);
         TableColumn<Bestellijn, String> firstNameColumn = new TableColumn<>("Broodje");
@@ -92,7 +103,6 @@ public class OrderBroodjes extends GridPane {
         table.getColumns().addAll(firstNameColumn, secondNameColumn);
 
         //firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("naamBroodje"));
-        System.out.println(table.getColumns());
         broodjes.add(table, 0, 1);
     }
 
@@ -128,6 +138,10 @@ public class OrderBroodjes extends GridPane {
         // nodig zijn gedisabled met de disableAll() hierboven.
     }
 
+    public Bestellijn getSelectedBestellijn() {
+        return selectedBestellijn;
+    }
+
     public void updateBestellijnen() {
         /*table.getItems().clear();
         table.refresh();
@@ -150,5 +164,9 @@ public class OrderBroodjes extends GridPane {
         table.setVisible(false);
         table.setVisible(true);
         this.updateAantalBroodjes();
+    }
+
+    public void deleteBestellijn() {
+
     }
 }

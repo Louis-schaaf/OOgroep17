@@ -46,6 +46,9 @@ public class BestelViewController implements Observer {
     public Bestelling getBestelling() {
         return this.bestelFacade.getBestelling();
     }
+    public Bestellijn getBestellijn() {
+        return this.orderView.getSelected();
+    }
 
     public void startNieuweBestelling() throws BiffException, IOException {
         this.bestelFacade.startNieuweBestelling();

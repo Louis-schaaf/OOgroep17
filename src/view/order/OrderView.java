@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Bestellijn;
 import model.Bestelling;
 import view.order.panes.OrderAfsluitingBestelling;
 import view.order.panes.OrderBroodjes;
@@ -36,6 +37,9 @@ public class OrderView {
 		root.getChildren().addAll(orderNieuweBestelling,orderOptions,orderBroodjes,orderAfsluitingBestelling);
 		stage.show();
 		controller.setOrderView(this);
+	}
+	public Bestellijn getSelected() {
+		return orderBroodjes.getSelectedBestellijn();
 	}
 
 	public void update(Bestelling bestelling) {
