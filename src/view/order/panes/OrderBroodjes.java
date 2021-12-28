@@ -105,14 +105,6 @@ public class OrderBroodjes extends GridPane {
         return button;
     }
 
-    // Alle nodes van deze Gridpane worden gedisabled.
-    public void disableAll() {
-        List<Node> nodes = this.getManagedChildren();
-        for (Node n : nodes) {
-            n.setDisable(true);
-        }
-    }
-
     // Maak een annuleerKnop aan met "Annuleer Bestelling"
     // Deze krijgt een rode achtergrond met een zwarte border.
     public Button annuleerKnop() {
