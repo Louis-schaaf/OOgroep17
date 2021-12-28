@@ -1,12 +1,8 @@
 package view.order.panes;
 
 import controller.BestelViewController;
-import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -14,11 +10,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import model.bestelling.Bestellijn;
-import model.Broodje;
-import model.bestelling.Bestelling;
+import model.Bestellijn;
+import model.Bestelling;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class OrderBroodjes extends GridPane {

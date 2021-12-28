@@ -16,7 +16,6 @@ public class BroodjesExcelLoadSaveStrategy extends ExcelLoadSaveTemplate impleme
     File file = new File("src/bestanden/broodjes.xls");
 
      public BroodjesExcelLoadSaveStrategy() {
-
      }
 
      public Map getData(File file){

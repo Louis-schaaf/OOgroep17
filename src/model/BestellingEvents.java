@@ -1,4 +1,4 @@
-package model.bestelling;
+package model;
 
 public enum BestellingEvents {
     NIEUWE_BESTELLING("NieuweBestelling", "model.bestelling.bestelFacade.startNieuweBestelling"),

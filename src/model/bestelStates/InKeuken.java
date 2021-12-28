@@ -1,12 +1,13 @@
-package model.bestelling.states;
+package model.bestelStates;
 
-import model.bestelling.Bestelling;
+import model.Bestelling;
 
-public class InBestelling extends BestellingState{
+public class InKeuken extends BestellingState {
 
-    public InBestelling(Bestelling bestelling) {
+    public InKeuken(Bestelling bestelling) {
         super(bestelling);
     }
+
 
     @Override
     public void starten() {

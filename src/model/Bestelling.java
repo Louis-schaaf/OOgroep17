@@ -1,13 +1,8 @@
-package model.bestelling;
+package model;
 
-import jxl.read.biff.BiffException;
-import model.BelegSoort;
-import model.Broodje;
-import model.Observer;
-import model.Subject;
-import model.bestelling.states.*;
+import model.bestelStates.BestellingState;
+import model.bestelStates.InWacht;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

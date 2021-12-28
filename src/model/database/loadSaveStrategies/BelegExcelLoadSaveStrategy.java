@@ -17,7 +17,6 @@ public class BelegExcelLoadSaveStrategy extends ExcelLoadSaveTemplate implements
     File file = new File("src/bestanden/beleg.xls");
 
     public BelegExcelLoadSaveStrategy() {
-
     }
 
     public Map getData(File file){
@@ -38,7 +37,6 @@ public class BelegExcelLoadSaveStrategy extends ExcelLoadSaveTemplate implements
 
     @Override
     public Map load() {
-
         return getData(file);
     }
 

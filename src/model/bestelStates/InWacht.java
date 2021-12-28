@@ -1,16 +1,17 @@
-package model.bestelling.states;
+package model.bestelStates;
 
-import model.bestelling.Bestelling;
+import model.Bestelling;
 
-public class Betaald extends BestellingState {
+public class InWacht extends BestellingState{
 
-    public Betaald(Bestelling bestelling) {
+    public InWacht(Bestelling bestelling) {
         super(bestelling);
     }
 
     @Override
     public void starten() {
-
+        bestelling.changeState(new InBestelling(bestelling));
+        System.out.println("starten...");
     }
 
     @Override

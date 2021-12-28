@@ -1,10 +1,10 @@
-package model.bestelling.states;
+package model.bestelStates;
 
-import model.bestelling.Bestelling;
+import model.Bestelling;
 
-public class InKeuken extends BestellingState {
+public class Afgesloten extends BestellingState{
 
-    public InKeuken(Bestelling bestelling) {
+    public Afgesloten(Bestelling bestelling) {
         super(bestelling);
     }
 
@@ -41,7 +41,8 @@ public class InKeuken extends BestellingState {
 
     @Override
     public void annuleren() {
-
+        bestelling.changeState(new Afgesloten(bestelling));
+        System.out.println("annuleren...");
     }
 
     @Override

@@ -1,22 +1,14 @@
 package view.order.panes;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import controller.BestelViewController;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import jxl.read.biff.BiffException;
-import model.bestelling.Bestelling;
-import model.bestelling.states.InWacht;
+import model.Bestelling;
 
 import java.io.IOException;
 

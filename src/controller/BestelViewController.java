@@ -1,11 +1,11 @@
 package controller;
 
 import jxl.read.biff.BiffException;
-import model.bestelling.BestelFacade;
-import model.bestelling.Bestellijn;
-import model.bestelling.Bestelling;
+import model.BestelFacade;
+import model.Bestellijn;
+import model.Bestelling;
 import model.Observer;
-import model.bestelling.states.BestellingState;
+import model.bestelStates.BestellingState;
 import view.order.OrderView;
 
 import java.io.IOException;
@@ -50,9 +50,11 @@ public class BestelViewController implements Observer {
     public void startNieuweBestelling() throws BiffException, IOException {
         this.bestelFacade.startNieuweBestelling();
     }
+
     public List<Bestellijn> getLijstBestellijnen() {
         return this.bestelFacade.getLijstBestellijnen();
     }
+
     public void voegBestellijnToe (String naamBroodje) throws BiffException, IOException {
         this.bestelFacade.voegBestellijnToe(naamBroodje);
         this.orderView.updateBestellijnen();

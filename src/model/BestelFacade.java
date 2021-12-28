@@ -1,13 +1,7 @@
-package model.bestelling;
+package model;
 
 import jxl.read.biff.BiffException;
-import model.BelegSoort;
-import model.Broodje;
-import model.Observer;
-import model.Subject;
-import model.bestelling.Bestellijn;
-import model.bestelling.Bestelling;
-import model.bestelling.states.BestellingState;
+import model.bestelStates.BestellingState;
 import model.database.BelegDatabase;
 import model.database.BroodjesDatabase;
 
@@ -79,8 +73,8 @@ public class BestelFacade implements Subject {
     }
 
     @Override
-    public void removeObserver(Observer observer) {
-        observers.remove(observer);
+    public void removeObserver(Observer observer, String event) {
+        observers.remove(observer, event);
     }
 
     @Override

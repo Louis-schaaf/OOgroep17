@@ -1,6 +1,6 @@
-package model.bestelling.states;
+package model.bestelStates;
 
-import model.bestelling.Bestelling;
+import model.Bestelling;
 
 public class InBereiding extends BestellingState {
 

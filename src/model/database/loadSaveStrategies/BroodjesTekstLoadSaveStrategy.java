@@ -33,6 +33,5 @@ public class BroodjesTekstLoadSaveStrategy extends TekstLoadSaveTemplate impleme
 
     @Override
     public void save(List list) {
-
     }
 }

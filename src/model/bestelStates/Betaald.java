@@ -1,13 +1,12 @@
-package model.bestelling.states;
+package model.bestelStates;
 
-import model.bestelling.Bestelling;
+import model.Bestelling;
 
-public class Afgesloten extends BestellingState{
+public class Betaald extends BestellingState {
 
-    public Afgesloten(Bestelling bestelling) {
+    public Betaald(Bestelling bestelling) {
         super(bestelling);
     }
-
 
     @Override
     public void starten() {
@@ -41,8 +40,7 @@ public class Afgesloten extends BestellingState{
 
     @Override
     public void annuleren() {
-        bestelling.changeState(new Afgesloten(bestelling));
-        System.out.println("annuleren...");
+
     }
 
     @Override

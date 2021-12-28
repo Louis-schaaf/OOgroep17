@@ -5,14 +5,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import model.bestelling.Bestellijn;
-import model.bestelling.Bestelling;
+import model.Bestelling;
 import view.order.panes.OrderAfsluitingBestelling;
 import view.order.panes.OrderBroodjes;
 import view.order.panes.OrderNieuweBestelling;
 import view.order.panes.OrderOptions;
 
-import java.util.List;
 import java.util.Map;
 
 public class OrderView {

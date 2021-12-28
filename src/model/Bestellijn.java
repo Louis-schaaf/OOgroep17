@@ -1,4 +1,4 @@
-package model.bestelling;
+package model;
 
 import javafx.beans.value.ObservableValue;
 import model.BelegSoort;
