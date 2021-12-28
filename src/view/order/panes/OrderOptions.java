@@ -159,6 +159,11 @@ public class OrderOptions extends GridPane {
     }
 
     public void update(Bestelling bestelling) {
+        if (bestelling.getState().getClass().getName().contains("InBestelling")) {
+            for (Button b : this.buttonsBroodjes) {
+                b.setDisable(false);
+            }
+        }
 
     }
 }
