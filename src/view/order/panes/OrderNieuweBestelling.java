@@ -90,7 +90,6 @@ public class OrderNieuweBestelling extends GridPane {
         if (bestelling.getState().getClass().getName().contains("Betaald")) {
             buttonNieuweBestelling.setDisable(true);
             choiceBox.setDisable(true);
-
         }
     }
-    }
+}

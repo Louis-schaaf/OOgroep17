@@ -80,12 +80,30 @@ public class OrderBroodjes extends GridPane {
     private Button setUpVerwijderKnop() {
         this.verwijder = new Button("Verwijder broodje");
         this.verwijder.setDisable(true);
+        this.verwijder.setOnAction(e -> {
+            try {
+                controller.verwijderBestellijn(getSelectedBestellijn());
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            } catch (BiffException biffException) {
+                biffException.printStackTrace();
+            }
+        });
         return this.verwijder;
     }
 
     private Button setUpIdentiekeKnop() {
         this.identiek = new Button("Voeg hetzelfde broodje toe");
         this.identiek.setDisable(true);
+        this.identiek.setOnAction(e -> {
+            try {
+                controller.voegIdentiekeBestellijnToe(getSelectedBestellijn());
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            } catch (BiffException biffException) {
+                biffException.printStackTrace();
+            }
+        });
         return this.identiek;
     }
 
@@ -136,6 +154,15 @@ public class OrderBroodjes extends GridPane {
     public Button annuleerKnop() {
         this.annuleer = new Button("Annuleer Bestelling");
         this.annuleer.setDisable(true);
+        this.annuleer.setOnAction(e -> {
+            try {
+                controller.annuleerBestelling();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            } catch (BiffException biffException) {
+                biffException.printStackTrace();
+            }
+        });
         this.annuleer.setBackground(new Background(new BackgroundFill(Color.RED, new CornerRadii(10), Insets.EMPTY)));
         this.annuleer.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10), BorderWidths.DEFAULT)));
         return this.annuleer;

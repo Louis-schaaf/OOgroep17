@@ -86,4 +86,10 @@ public class BestelViewController implements Observer {
     public void update() {
         orderView.update(this.getBestelling());
     }
+
+    public void verwijderBestellijn(Bestellijn selectedBestellijn) throws BiffException, IOException{
+    }
+
+    public void voegIdentiekeBestellijnToe(Bestellijn selectedBestellijn) throws BiffException, IOException{
+    }
 }
