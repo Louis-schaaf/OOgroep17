@@ -88,7 +88,7 @@ public class BestelFacade implements Subject {
         notifyObservers("BETAAL_BESTELLING");
     }
 
-    public double updateBedrag() {
+    public double updateBedrag(String korting) {
         double bedrag = 0;
         for (Bestellijn b : this.getLijstBestellijnen()) {
             Broodje broodje = this.broodjesDatabase.getBroodje(b.getNaamBroodje());

@@ -62,7 +62,7 @@ public class BestelViewController implements Observer {
     public void afsluitenBestelling() throws BiffException, IOException {
         String korting = orderView.getKorting();
         this.bestelFacade.afsluitenBestelling();
-        this.orderView.updateBedrag(this.bestelFacade.updateBedrag());
+        this.orderView.updateBedrag(this.bestelFacade.updateBedrag(korting));
     }
 
     public List<Bestellijn> getLijstBestellijnen() {
