@@ -36,6 +36,7 @@ public class OrderView {
 		stage.setScene(scene);
 		root.getChildren().addAll(orderNieuweBestelling,orderOptions,orderBroodjes,orderAfsluitingBestelling);
 		stage.show();
+		controller.setOrderView(this);
 	}
 
 	public void update(Bestelling bestelling) {

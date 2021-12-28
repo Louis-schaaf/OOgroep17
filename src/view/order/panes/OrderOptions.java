@@ -38,8 +38,10 @@ public class OrderOptions extends GridPane {
 
 
         this.setHgap(10);
-        for (Map.Entry<String, Broodje> entry : broodjes.entrySet()) {;
-            BroodjesKnoppen(controller.getBestelling(),entry.getKey(), true, true);
+        for (Map.Entry<String, Broodje> entry : broodjes.entrySet()) {
+            if (entry.getValue().getActualStock() > 0) {
+                BroodjesKnoppen(controller.getBestelling(), entry.getKey(), true, true);
+            }
         }
         this.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, new CornerRadii(10), Insets.EMPTY)));
     }
@@ -122,6 +124,7 @@ public class OrderOptions extends GridPane {
             n.setDisable(false);
         }
     }
+
     public void update(Bestelling bestelling) {
 
     }

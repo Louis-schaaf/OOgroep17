@@ -59,7 +59,6 @@ public class OrderBroodjes extends GridPane {
     // In de onderstaande tabel zou de naam van het broodje komen te staan
     // En in de andere tabel komen alle belegsoorten van het bijhorende broodje.
     private void setBroodjes(GridPane broodjes) {
-
         broodjes.setPadding(new Insets(5, 5, 5, 5));
         broodjes.setVgap(5);
         broodjes.setHgap(5);
