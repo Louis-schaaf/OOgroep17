@@ -16,5 +16,4 @@ public abstract class BestellingState {
     public abstract void bereiden();
     public abstract void afwerken();
     public abstract void annuleren();
-    public abstract void wachten();
 }

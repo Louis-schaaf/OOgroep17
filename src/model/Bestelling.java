@@ -35,7 +35,7 @@ public class Bestelling {
     }
 
     public void resetBestelling() {
-        changeState(new InWacht(this));
+        this.state.annuleren();
         this.bestellijnen.clear();
     }
 
@@ -69,9 +69,5 @@ public class Bestelling {
 
     public void annuleren () {
         this.state.annuleren();
-    }
-
-    public void wachten () {
-        this.state.wachten();
     }
 }
