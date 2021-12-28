@@ -40,6 +40,7 @@ public class OrderAfsluitingBestelling extends GridPane {
 
     private Button setAfsluitKnop() {
         afsluitKnop1.setText("Afsluiten Bestelling");
+        afsluitKnop1.setDisable(true);
         afsluitKnop1.setOnAction(event -> {
             try {
                 this.controller.afsluitenBestelling();
