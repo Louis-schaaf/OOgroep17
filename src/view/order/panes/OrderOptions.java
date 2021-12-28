@@ -20,36 +20,34 @@ import java.util.Map;
 
 public class OrderOptions extends GridPane {
     public BestelViewController controller;
+    ArrayList<Button> buttonsBroodjes = new ArrayList<>();
+    ArrayList<Button> buttonsBeleg = new ArrayList<>();
     int broodjesIndex = 0;
     int belegIndex = 0;
     //TODO
     //Check Observer Style methode toepassen! (Story 3.3)
 
-    ArrayList<Button> buttonsBroodjes = new ArrayList<>();
-    ArrayList<Button> buttonsBeleg = new ArrayList<>();
     public OrderOptions(BestelViewController controller){
         this.controller = controller;
         this.setPadding(new Insets(10,0,10,20));
         this.setHgap(30); //horizontal gap in pixels => that's what you are asking for
         this.setVgap(10); //vertical gap in pixels
 
-        Map<String, Broodje> broodjes = LoadSaveStrategyFactory.createLoadSaveStrategy("EXCELBROODJES").load();
-        Map<String, BelegSoort> beleg = LoadSaveStrategyFactory.createLoadSaveStrategy("EXCELBELEG").load();
-        //Map<String, Broodje> broodjes = LoadSaveStrategyFactory.createLoadSaveStrategy("TEKSTBROODJES").load();
-        //Map<String, BelegSoort> beleg = LoadSaveStrategyFactory.createLoadSaveStrategy("TEKSTBELEG").load();
-
         this.setHgap(10);
+        this.setUpBroodjesKnoppen();
+        this.setUpBelegKnoppen();
+        this.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, new CornerRadii(10), Insets.EMPTY)));
+    }
+
+    private void setUpBroodjesKnoppen() {
+        Map<String, Broodje> broodjes = LoadSaveStrategyFactory.createLoadSaveStrategy("EXCELBROODJES").load();
+        //Map<String, Broodje> broodjes = LoadSaveStrategyFactory.createLoadSaveStrategy("TEKSTBROODJES").load();
+
         for (Map.Entry<String, Broodje> entry : broodjes.entrySet()) {
             if (entry.getValue().getActualStock() > 0) {
                 BroodjesKnoppen(controller.getBestelling(), entry.getKey(), true, true);
             }
         }
-        for (Map.Entry<String, BelegSoort> entry : beleg.entrySet()) {
-            if (entry.getValue().getActualStock() > 0) {
-                BelegKnoppen(controller.getBestelling(), entry.getKey(), false, true);
-            }
-        }
-        this.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, new CornerRadii(10), Insets.EMPTY)));
     }
 
     // Geeft een knop terug:
@@ -69,7 +67,6 @@ public class OrderOptions extends GridPane {
         button.setDisable(true);
         buttonsBroodjes.add(button);
         button.setOnAction(e -> {
-            if (bestelling.getState().getClass().getName().contains("InBestelling")) {
                 try {
                     controller.voegBestellijnToe(buttonName);
                 } catch (IOException ioException) {
@@ -77,11 +74,21 @@ public class OrderOptions extends GridPane {
                 } catch (BiffException biffException) {
                     biffException.printStackTrace();
                 }
-            }
         });
         this.add(button,broodjesIndex, 0);
         broodjesIndex++;
         return button;
+    }
+
+    private void setUpBelegKnoppen() {
+        Map<String, BelegSoort> beleg = LoadSaveStrategyFactory.createLoadSaveStrategy("EXCELBELEG").load();
+        //Map<String, BelegSoort> beleg = LoadSaveStrategyFactory.createLoadSaveStrategy("TEKSTBELEG").load();
+
+        for (Map.Entry<String, BelegSoort> entry : beleg.entrySet()) {
+            if (entry.getValue().getActualStock() > 0) {
+                BelegKnoppen(controller.getBestelling(), entry.getKey(), false, true);
+            }
+        }
     }
 
     private Button BelegKnoppen(Bestelling bestelling, String buttonName, boolean gray, boolean border){
@@ -97,7 +104,6 @@ public class OrderOptions extends GridPane {
         button.setDisable(true);
         buttonsBeleg.add(button);
         button.setOnAction(e -> {
-            if (bestelling.getState().getClass().getName().contains("InBestelling")) {
                 try {
                     controller.voegBelegToe(buttonName, 0);
                 } catch (IOException ioException) {
@@ -105,7 +111,6 @@ public class OrderOptions extends GridPane {
                 } catch (BiffException biffException) {
                     biffException.printStackTrace();
                 }
-            }
         });
         this.add(button,belegIndex, 1);
         belegIndex++;
@@ -141,25 +146,15 @@ public class OrderOptions extends GridPane {
         }
     }
 
-    public void drukBroodjesKnop(){
-    }
-
-    // Zet alle nodes uit van deze gridpane.
-    public void disableAll() {
-        List<Node> nodes = this.getManagedChildren();
-        for (Node n : nodes) {
-            n.setVisible(false);
-        }
-    }
-
-    public void enableAll() {
-        List<Node> nodes = this.getManagedChildren();
-        for (Node n : nodes) {
-            n.setDisable(false);
-        }
-    }
-
     public void update(Bestelling bestelling) {
+        if (bestelling.getState().getClass().getName().contains("InWacht")) {
+            for (Button b : this.buttonsBroodjes) {
+                b.setDisable(true);
+            }
+            for (Button b : this.buttonsBeleg){
+                b.setDisable(true);
+            }
+        }
         if (bestelling.getState().getClass().getName().contains("InBestelling")) {
             for (Button b : this.buttonsBroodjes) {
                 b.setDisable(false);
@@ -168,6 +163,21 @@ public class OrderOptions extends GridPane {
                 b.setDisable(false);
             }
         }
-
+        if (bestelling.getState().getClass().getName().contains("Afgesloten")) {
+            for (Button b : this.buttonsBroodjes) {
+                b.setDisable(true);
+            }
+            for (Button b : this.buttonsBeleg){
+                b.setDisable(true);
+            }
+        }
+        if (bestelling.getState().getClass().getName().contains("Betaald")) {
+            for (Button b : this.buttonsBroodjes) {
+                b.setDisable(true);
+            }
+            for (Button b : this.buttonsBeleg){
+                b.setDisable(true);
+            }
+        }
     }
 }

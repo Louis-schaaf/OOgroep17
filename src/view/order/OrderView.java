@@ -19,7 +19,6 @@ public class OrderView {
 	private OrderNieuweBestelling orderNieuweBestelling;
 	private OrderOptions orderOptions;
 	private OrderBroodjes orderBroodjes;
-
 		
 	public OrderView(BestelViewController controller){
 		VBox root = new VBox();
