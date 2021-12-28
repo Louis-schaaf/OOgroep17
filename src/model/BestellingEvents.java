@@ -6,6 +6,7 @@ public enum BestellingEvents {
     TOEVOEGEN_BELEG("BelegToevoegen", "model.bestelling.bestelFacade.voegBelegToe"),
     IDENTIEKE_BESTELLIJN("IdentiekBroodjeToevoegen", "model.bestelling.bestelFacade.voegIdentiekBroodjeToe"),
     VERWIJDER_BROODJE("BroodjeVerwijderen", "model.bestelling.bestelFacade.verwijderBestellijn"),
+    AFSLUITEN_BESTELLING("AfsluitenBestelling", "model.bestelling.bestelFacade.afsluitenBestelling"),
     ANNULEER_BESTELLING("AnnuleerBestelling", "model.bestelling.bestelFacade.annuleerBestelling");
 
     private final String omschrijving;

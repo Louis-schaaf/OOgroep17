@@ -16,7 +16,6 @@ public class InBereiding extends BestellingState {
 
     @Override
     public void afronden() {
-
     }
 
     @Override

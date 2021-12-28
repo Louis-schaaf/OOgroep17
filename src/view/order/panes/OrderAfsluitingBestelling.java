@@ -25,6 +25,7 @@ public class OrderAfsluitingBestelling extends GridPane {
     double bedrag = 0;
 
     public OrderAfsluitingBestelling(BestelViewController controller){
+        afsluitKnop = new Button();
         this.controller = controller;
         this.setPadding(new Insets(10,0,10,20));
         this.setHgap(30); //horizontal gap in pixels => that's what you are asking for
@@ -37,20 +38,19 @@ public class OrderAfsluitingBestelling extends GridPane {
     }
 
     private Button setUpAfsluitKnop() {
-        this.afsluitKnop = new Button("Afsluiten Bestelling");
-        this.afsluitKnop.setOnAction(e -> {
-                /*try {
-                    controller.sluitBestellingAf(); //TODO
+        afsluitKnop.setText("Afsluiten Bestelling");
+        afsluitKnop.setOnAction(event -> {
+                try {
+                    this.controller.afsluitenBestelling(); //TODO
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 } catch (BiffException biffException) {
                     biffException.printStackTrace();
-                }*/
+                }
         });
         this.afsluitKnop.setDisable(true);
         return this.afsluitKnop;
     }
-
     private Text setUpBedragTekst() {
         this.bedragTekst = new Text("Te betalen: €...");
         this.bedragTekst.setVisible(true);

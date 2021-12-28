@@ -49,6 +49,10 @@ public class BestelFacade implements Subject {
         this.bestelling.starten();
         notifyObservers("NIEUWE_BESTELLING");
     }
+    public void afsluitenBestelling() throws BiffException, IOException{
+        this.bestelling.afronden();
+        notifyObservers("AFSLUITEN_BESTELLING");
+    }
 
     public void voegBestellijnToe(String naamBroodje) throws BiffException, IOException {
         Broodje broodje = this.broodjesDatabase.getBroodje(naamBroodje);
@@ -83,4 +87,4 @@ public class BestelFacade implements Subject {
                 observer.update();
             }
         }
-    }
+}

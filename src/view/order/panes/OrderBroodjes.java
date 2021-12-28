@@ -164,6 +164,7 @@ public class OrderBroodjes extends GridPane {
         table.getColumns().get(0).setVisible(false);
         table.getColumns().get(0).setVisible(true);*/
         ObservableList<Bestellijn> bestellijnObservableList = FXCollections.observableList(controller.getLijstBestellijnen());
+
         /*Bestellijn bestellijn = new Bestellijn("test");
         bestellijn.addNaamBeleg(new BelegSoort("testbeleg",2.0,2,2));
         bestellijn.addNaamBeleg(new BelegSoort("hesp",2.0,2,2));
@@ -171,9 +172,6 @@ public class OrderBroodjes extends GridPane {
         table.setItems(bestellijnObservableList);
         table.getColumns().get(0).setVisible(false);
         table.getColumns().get(0).setVisible(true);
-        for (int i = 0; i < table.getItems().size(); i++) {
-            System.out.println(table.getItems().get(i).naamBroodje);
-        }
         table.refresh();
         broodjes.getChildren().remove(table);
         setBroodjes(broodjes);

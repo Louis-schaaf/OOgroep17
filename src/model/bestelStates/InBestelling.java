@@ -15,7 +15,8 @@ public class InBestelling extends BestellingState{
 
     @Override
     public void afronden() {
-
+        bestelling.changeState(new Afgesloten(bestelling));
+        System.out.println("afsluiten...");
     }
 
     @Override
