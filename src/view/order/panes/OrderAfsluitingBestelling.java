@@ -57,14 +57,11 @@ public class OrderAfsluitingBestelling extends GridPane {
         return this.bedragTekst;
     }
 
-    private void updateBedrag() {
-        String tekst = "Te betalen: €" + this.bedrag;
+    public void updateBedrag(double bedrag) {
+        String tekst = "Te betalen: €" + bedrag;
         this.bedragTekst.setText(tekst);
     }
 
-    private double fixBedrag(){
-            return controller.bestelFacade.fixBedrag();
-    }
     private Button setUpBetaalKnop() {
         this.betaalKnop = new Button("Betaal");
         this.betaalKnop.setOnAction(e -> {
@@ -107,7 +104,6 @@ public class OrderAfsluitingBestelling extends GridPane {
         if (bestelling.getState().getClass().getName().contains("Afgesloten")) {
             this.betaalKnop.setDisable(false);
             this.afsluitKnop1.setDisable(true);
-            this.updateBedrag();
         }
         if (bestelling.getState().getClass().getName().contains("Betaald")) {
             this.afsluitKnop1.setDisable(true);

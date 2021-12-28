@@ -60,4 +60,8 @@ public class OrderView {
 	public void updateStatusBelegKnoppen(Map<String, Integer> voorraadBeleg) {
 		this.orderOptions.updateStatusBelegKnoppen(voorraadBeleg);
 	}
+
+	public void updateBedrag(double bedrag) {
+		this.orderAfsluitingBestelling.updateBedrag(bedrag);
+	}
 }

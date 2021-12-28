@@ -60,6 +60,7 @@ public class BestelViewController implements Observer {
     }
     public void afsluitenBestelling() throws BiffException, IOException {
         this.bestelFacade.afsluitenBestelling();
+        this.orderView.updateBedrag(this.bestelFacade.updateBedrag());
     }
 
     public List<Bestellijn> getLijstBestellijnen() {
