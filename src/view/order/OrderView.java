@@ -23,7 +23,7 @@ public class OrderView {
 		
 	public OrderView(BestelViewController controller){
 		VBox root = new VBox();
-		orderAfsluitingBestelling = new OrderAfsluitingBestelling();
+		orderAfsluitingBestelling = new OrderAfsluitingBestelling(controller);
 		orderOptions = new OrderOptions(controller);
 		orderBroodjes = new OrderBroodjes(controller);
 		orderNieuweBestelling = new OrderNieuweBestelling(controller);
