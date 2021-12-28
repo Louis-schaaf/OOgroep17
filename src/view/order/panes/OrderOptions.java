@@ -19,7 +19,8 @@ import java.util.Map;
 
 public class OrderOptions extends GridPane {
     public BestelViewController controller;
-    int broodjesIndex = 1;
+    int broodjesIndex = 0;
+    int belegIndex = 0;
     //TODO
     //Check Observer Style methode toepassen! (Story 3.3)
 
@@ -44,7 +45,7 @@ public class OrderOptions extends GridPane {
         }
         for (Map.Entry<String, BelegSoort> entry : beleg.entrySet()) {
             if (entry.getValue().getActualStock() > 0) {
-                BelegKnoppen(controller.getBestelling(), entry.getKey(), true, true);
+                BelegKnoppen(controller.getBestelling(), entry.getKey(), false, true);
             }
         }
         this.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, new CornerRadii(10), Insets.EMPTY)));
@@ -103,8 +104,8 @@ public class OrderOptions extends GridPane {
                 }
             }
         });
-        this.add(button,broodjesIndex, 0);
-        broodjesIndex++;
+        this.add(button,belegIndex, 1);
+        belegIndex++;
         return button;
     }
 
