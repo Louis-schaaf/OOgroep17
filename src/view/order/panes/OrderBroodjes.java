@@ -158,7 +158,6 @@ public class OrderBroodjes extends GridPane {
         table.refresh();
         table.getColumns().get(0).setVisible(false);
         table.getColumns().get(0).setVisible(true);*/
-        //TODO: er worden 2 vensters aangemaakt
         ObservableList<Bestellijn> bestellijnObservableList = FXCollections.observableList(controller.getLijstBestellijnen());
         /*Bestellijn bestellijn = new Bestellijn("test");
         bestellijn.addNaamBeleg(new BelegSoort("testbeleg",2.0,2,2));

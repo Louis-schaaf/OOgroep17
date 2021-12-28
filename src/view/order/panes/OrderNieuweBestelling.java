@@ -19,7 +19,6 @@ public class OrderNieuweBestelling extends GridPane {
     Text volgnummerText;
     int volgnummer = 1;
 
-
     public OrderNieuweBestelling(BestelViewController controller){
         choiceBox = new ChoiceBox<>();
         buttonNieuweBestelling = new Button();
@@ -47,10 +46,8 @@ public class OrderNieuweBestelling extends GridPane {
         buttonNieuweBestelling.setText("Nieuwe bestelling");
         buttonNieuweBestelling.setOnAction(event -> {
             try {
-                if (this.controller.getBestelling().getState().getClass().getName().contains("InWacht")){
                     this.controller.startNieuweBestelling();
                     this.volgnummer++;
-                }
             } catch (BiffException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -76,10 +73,24 @@ public class OrderNieuweBestelling extends GridPane {
     // moet de bestelknop gedisabled worden
     // en de choiceBox worden geanabled.
     public void update(Bestelling bestelling) {
+        if (bestelling.getState().getClass().getName().contains("InWacht")) {
+            buttonNieuweBestelling.setDisable(true);
+            volgnummerText.setVisible(false);
+            choiceBox.setDisable(true);
+        }
         if (bestelling.getState().getClass().getName().contains("InBestelling")) {
             buttonNieuweBestelling.setDisable(true);
             volgnummerText.setVisible(true);
             choiceBox.setDisable(false);
+        }
+        if (bestelling.getState().getClass().getName().contains("Afgesloten")) {
+            buttonNieuweBestelling.setDisable(true);
+            choiceBox.setDisable(true);
+        }
+        if (bestelling.getState().getClass().getName().contains("Betaald")) {
+            buttonNieuweBestelling.setDisable(true);
+            choiceBox.setDisable(true);
+
         }
     }
     }

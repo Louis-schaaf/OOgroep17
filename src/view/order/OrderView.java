@@ -19,11 +19,10 @@ public class OrderView {
 	private OrderNieuweBestelling orderNieuweBestelling;
 	private OrderOptions orderOptions;
 	private OrderBroodjes orderBroodjes;
-
 		
 	public OrderView(BestelViewController controller){
 		VBox root = new VBox();
-		orderAfsluitingBestelling = new OrderAfsluitingBestelling();
+		orderAfsluitingBestelling = new OrderAfsluitingBestelling(controller);
 		orderOptions = new OrderOptions(controller);
 		orderBroodjes = new OrderBroodjes(controller);
 		orderNieuweBestelling = new OrderNieuweBestelling(controller);

@@ -1,5 +1,6 @@
 package view.order.panes;
 
+import controller.BestelViewController;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -9,19 +10,22 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import jxl.read.biff.BiffException;
 import model.Bestelling;
 
+import java.io.IOException;
 import java.util.List;
 
 public class OrderAfsluitingBestelling extends GridPane {
+    public BestelViewController controller;
     Button afsluitKnop;
     Button betaalKnop;
     Button keukenKnop;
     Text bedragTekst;
     double bedrag = 0;
 
-
-    public OrderAfsluitingBestelling(){
+    public OrderAfsluitingBestelling(BestelViewController controller){
+        this.controller = controller;
         this.setPadding(new Insets(10,0,10,20));
         this.setHgap(30); //horizontal gap in pixels => that's what you are asking for
         this.setVgap(10); //vertical gap in pixels
@@ -34,83 +38,77 @@ public class OrderAfsluitingBestelling extends GridPane {
 
     private Button setUpAfsluitKnop() {
         this.afsluitKnop = new Button("Afsluiten Bestelling");
+        this.afsluitKnop.setOnAction(e -> {
+                /*try {
+                    controller.sluitBestellingAf(); //TODO
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                } catch (BiffException biffException) {
+                    biffException.printStackTrace();
+                }*/
+        });
         this.afsluitKnop.setDisable(true);
         return this.afsluitKnop;
     }
 
     private Text setUpBedragTekst() {
-        this.bedragTekst = new Text("Te betalen: ");
-        this.bedragTekst.setVisible(false);
+        this.bedragTekst = new Text("Te betalen: €...");
+        this.bedragTekst.setVisible(true);
         return this.bedragTekst;
     }
 
     private void updateBedrag() {
-        String tekst = "Te betalen: " + this.bedrag;
+        String tekst = "Te betalen: €" + this.bedrag;
         this.bedragTekst.setText(tekst);
     }
 
     private Button setUpBetaalKnop() {
         this.betaalKnop = new Button("Betaal");
+        this.afsluitKnop.setOnAction(e -> {
+                /*try {
+                    controller.betaalBestelling(); //TODO
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                } catch (BiffException biffException) {
+                    biffException.printStackTrace();
+                }*/
+        });
         this.betaalKnop.setDisable(true);
         return this.betaalKnop;
     }
 
     private Button setUpKeukenKnop() {
         this.keukenKnop = new Button("Naar Keuken");
+        this.afsluitKnop.setOnAction(e -> {
+                /*try {
+                    controller.stuurBestellingNaarKeuken(); //TODO
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                } catch (BiffException biffException) {
+                    biffException.printStackTrace();
+                }*/
+        });
         this.keukenKnop.setDisable(true);
         return this.keukenKnop;
     }
 
-
-
-    // Alle nodes van deze gridpane worden gedisabled
-    public void disableAll() {
-        List<Node> nodes = this.getManagedChildren();
-        for (Node n : nodes) {
-            n.setDisable(true);
-        }
-    }
     public void update(Bestelling bestelling) {
+        if (bestelling.getState().getClass().getName().contains("InWacht")) {
+            this.afsluitKnop.setDisable(true);
+            this.betaalKnop.setDisable(true);
+            this.keukenKnop.setDisable(true);
+        }
         if (bestelling.getState().getClass().getName().contains("InBestelling")) {
+            this.afsluitKnop.setDisable(false);
+        }
+        if (bestelling.getState().getClass().getName().contains("Afgesloten")) {
+            this.betaalKnop.setDisable(false);
+            this.updateBedrag();
+        }
+        if (bestelling.getState().getClass().getName().contains("Betaald")) {
+            this.afsluitKnop.setDisable(true);
+            this.betaalKnop.setDisable(true);
+            this.keukenKnop.setDisable(false);
         }
     }
-
-    /*private Button setUpStartGameButton() {
-        // Creating a Button
-        button = new Button();
-        // Setting text to the button
-        button.setText("Start gokspel");
-
-        // Setting events of the button
-        button.setOnAction(e -> {
-            Speler speler = this.getPlayerByName();
-            Boolean isValidSaldo = this.checkSaldoInput();
-
-            // Check if player and saldo are valid
-            if (speler == null || !isValidSaldo)
-                return;
-
-            int saldo = Integer.parseInt(inputWager.getText());
-
-            // Check if the player has enough money
-            if (!speler.checkSaldo(saldo))
-                return;
-
-            try {
-                controller.start(speler, saldo);
-                button.setDisable(true);
-                inputPlayerName.setDisable(true);
-                inputWager.setDisable(true);
-            } catch (IOException | BiffException ex) {
-                ex.printStackTrace();
-            }
-        });
-
-        return button;
-    }
-
-    /**
-     * Gets the player by name
-     * @return returns Speler if found
-     */
 }
