@@ -13,6 +13,7 @@ import model.Bestelling;
 import model.database.loadSaveStrategies.LoadSaveStrategyFactory;
 
 import java.io.IOException;
+import java.nio.BufferUnderflowException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -161,6 +162,9 @@ public class OrderOptions extends GridPane {
     public void update(Bestelling bestelling) {
         if (bestelling.getState().getClass().getName().contains("InBestelling")) {
             for (Button b : this.buttonsBroodjes) {
+                b.setDisable(false);
+            }
+            for (Button b : this.buttonsBeleg){
                 b.setDisable(false);
             }
         }
