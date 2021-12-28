@@ -64,4 +64,7 @@ public class OrderView {
 	public void updateBedrag(double bedrag) {
 		this.orderAfsluitingBestelling.updateBedrag(bedrag);
 	}
+	public String getKorting(){
+		return this.orderNieuweBestelling.getChoiceBox();
+	}
 }

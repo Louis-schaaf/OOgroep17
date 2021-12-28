@@ -92,4 +92,7 @@ public class OrderNieuweBestelling extends GridPane {
             choiceBox.setDisable(true);
         }
     }
+    public String getChoiceBox(){
+        return this.choiceBox.getValue().toString();
+    }
 }
