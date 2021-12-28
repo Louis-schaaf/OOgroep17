@@ -16,6 +16,8 @@ public class OrderNieuweBestelling extends GridPane {
     public BestelViewController controller;
     ChoiceBox choiceBox;
     Button buttonNieuweBestelling;
+    Text volgnummerText;
+    int volgnummer = 1;
 
 
     public OrderNieuweBestelling(BestelViewController controller){
@@ -26,14 +28,14 @@ public class OrderNieuweBestelling extends GridPane {
         this.setHgap(30); //horizontal gap in pixels => that's what you are asking for
         this.setVgap(10); //vertical gap in pixels
         this.add(this.setUpOrderButton(),0, 0);
-        this.add(new Text("Volgnummer: 1"), 1,0);
+        this.add(this.setUpVolgnummer(), 1,0);
         this.add(this.setUpChoiceBox(),3,0);
         this.setHgap(60);
     }
 
     // Zet een choicebox op en zet deze als standaardwaarde op disabled.
     private Node setUpChoiceBox() {
-        choiceBox.getItems().addAll("Goedkoopste broodje gratis", "Louis", "Jarne", "Jasper");
+        choiceBox.getItems().addAll("Goedkoopste broodje gratis", "Geen korting", "10% op alles");
         choiceBox.setDisable(true);
         return choiceBox;
     }
@@ -47,8 +49,7 @@ public class OrderNieuweBestelling extends GridPane {
             try {
                 if (this.controller.getBestelling().getState().getClass().getName().contains("InWacht")){
                     this.controller.startNieuweBestelling();
-                    buttonNieuweBestelling.setDisable(true);
-                    choiceBox.setDisable(false);
+                    this.volgnummer++;
                 }
             } catch (BiffException e) {
                 e.printStackTrace();
@@ -59,11 +60,27 @@ public class OrderNieuweBestelling extends GridPane {
         return buttonNieuweBestelling;
     }
 
+    private Text setUpVolgnummer() {
+        volgnummerText = new Text("Volgnummer: ");
+        volgnummerText.setVisible(false);
+        return volgnummerText;
+    }
+
+    private void updateVolgnummer() {
+        String tekst = this.volgnummerText.getText() + this.volgnummer;
+        this.volgnummerText.setText(tekst);
+    }
+
     // De states worden met elkaar vergeleken.
     // Wanneer de state van de bestelling niet meer InWacht staat
     // moet de bestelknop gedisabled worden
     // en de choiceBox worden geanabled.
     public void update(Bestelling bestelling) {
-
+        if (bestelling.getState().getClass().getName().contains("InBestelling")) {
+            buttonNieuweBestelling.setDisable(true);
+            this.updateVolgnummer();
+            volgnummerText.setVisible(true);
+            choiceBox.setDisable(false);
         }
+    }
     }

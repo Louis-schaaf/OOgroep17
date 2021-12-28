@@ -1,12 +1,8 @@
 package view.order.panes;
 
 import controller.BestelViewController;
-import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -18,7 +14,6 @@ import model.BelegSoort;
 import model.Bestellijn;
 import model.Bestelling;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class OrderBroodjes extends GridPane {
@@ -27,18 +22,31 @@ public class OrderBroodjes extends GridPane {
     GridPane lijnInLijst = new GridPane();
     public List<Bestellijn> lijstBestellijnen;
     TableView<Bestellijn> table;
+    Text aantalBroodjesTekst;
+    int aantalBroodjes = 1;
 
     public OrderBroodjes(BestelViewController controller) {
         this.controller = controller;
         this.setPadding(new Insets(10, 0, 10, 20));
         this.setHgap(30); //horizontal gap in pixels => that's what you are asking for
         this.setVgap(10); //vertical gap in pixels
-        this.add(new Text("Aantal Broodjes: "), 0, 0);
+        this.add(this.setUpAantalBroodjes(), 0, 0);
         setBroodjes(broodjes);
         setLijninLijst(lijnInLijst);
         this.add(broodjes, 0, 1, 1, 2);
         this.add(lijnInLijst, 1, 1);
         this.add(annuleerKnop(), 0, 3);
+    }
+
+    private Text setUpAantalBroodjes() {
+        aantalBroodjesTekst = new Text("Aantal broodjes: 0");
+        aantalBroodjesTekst.setVisible(true);
+        return aantalBroodjesTekst;
+    }
+
+    private void updateAantalBroodjes() {
+        String tekst = "Aantal broodjes: " + this.aantalBroodjes;
+        this.aantalBroodjesTekst.setText(tekst);
     }
 
     // Maak een Gridpane voor LijninLijst
@@ -65,7 +73,6 @@ public class OrderBroodjes extends GridPane {
     // In de onderstaande tabel zou de naam van het broodje komen te staan
     // En in de andere tabel komen alle belegsoorten van het bijhorende broodje.
     private void setBroodjes(GridPane broodjes) {
-
         broodjes.setPadding(new Insets(5, 5, 5, 5));
         broodjes.setVgap(5);
         broodjes.setHgap(5);
@@ -138,5 +145,7 @@ public class OrderBroodjes extends GridPane {
         setBroodjes(broodjes);
         table.setVisible(false);
         table.setVisible(true);
+        this.updateAantalBroodjes();
+        this.aantalBroodjes++;
     }
 }

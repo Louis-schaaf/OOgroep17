@@ -19,12 +19,12 @@ import java.util.Map;
 
 public class OrderOptions extends GridPane {
     public BestelViewController controller;
-    int broodjesIndex = 0;
-    int belegIndex = 0;
+    int broodjesIndex = 1;
     //TODO
     //Check Observer Style methode toepassen! (Story 3.3)
 
-    ArrayList<Button> buttons = new ArrayList<>();
+    ArrayList<Button> buttonsBroodjes = new ArrayList<>();
+    ArrayList<Button> buttonsBeleg = new ArrayList<>();
     public OrderOptions(BestelViewController controller){
         this.controller = controller;
         this.setPadding(new Insets(10,0,10,20));
@@ -36,11 +36,15 @@ public class OrderOptions extends GridPane {
         //Map<String, Broodje> broodjes = LoadSaveStrategyFactory.createLoadSaveStrategy("TEKSTBROODJES").load();
         //Map<String, BelegSoort> beleg = LoadSaveStrategyFactory.createLoadSaveStrategy("TEKSTBELEG").load();
 
-
         this.setHgap(10);
         for (Map.Entry<String, Broodje> entry : broodjes.entrySet()) {
             if (entry.getValue().getActualStock() > 0) {
                 BroodjesKnoppen(controller.getBestelling(), entry.getKey(), true, true);
+            }
+        }
+        for (Map.Entry<String, BelegSoort> entry : beleg.entrySet()) {
+            if (entry.getValue().getActualStock() > 0) {
+                BelegKnoppen(controller.getBestelling(), entry.getKey(), true, true);
             }
         }
         this.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, new CornerRadii(10), Insets.EMPTY)));
@@ -60,7 +64,7 @@ public class OrderOptions extends GridPane {
         if (border == true){
             button.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10), BorderWidths.DEFAULT)));
         }
-        buttons.add(button);
+        buttonsBroodjes.add(button);
         button.setOnAction(e -> {
             if (bestelling.getState().getClass().getName().contains("InBestelling")) {
                 try {
@@ -77,16 +81,42 @@ public class OrderOptions extends GridPane {
         return button;
     }
 
+    private Button BelegKnoppen(Bestelling bestelling, String buttonName, boolean gray, boolean border){
+        Button button = new Button(buttonName);
+        if (gray == true){
+            button.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(10), Insets.EMPTY)));
+        }else{
+            button.setBackground(new Background(new BackgroundFill(Color.YELLOW, new CornerRadii(10), Insets.EMPTY)));
+        }
+        if (border == true){
+            button.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10), BorderWidths.DEFAULT)));
+        }
+        buttonsBeleg.add(button);
+        button.setOnAction(e -> {
+            if (bestelling.getState().getClass().getName().contains("InBestelling")) {
+                try {
+                    controller.voegBelegToe(buttonName, 1);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                } catch (BiffException biffException) {
+                    biffException.printStackTrace();
+                }
+            }
+        });
+        this.add(button,broodjesIndex, 0);
+        broodjesIndex++;
+        return button;
+    }
+
     //Zet alle knoppen van deze pane in een array
     //Indien de voorraad van de broodjes de tekst van de knop contains
     //Dan kijkt die als de voorraad kleiner is dan 0; als dit is dan wordt de knop uitgezet.
     public void updateStatusBroodjesKnoppen(Map<String, Integer> voorraadBroodjes) {
-        Button[] buttons = this.getManagedChildren().toArray(new Button[0]);
-        for (Button b : buttons) {
+        for (Button b : this.buttonsBroodjes) {
             if (voorraadBroodjes.containsKey(b.getText())) {
                 int i = voorraadBroodjes.get(b.getText());
                 if (i < 1) {
-                    b.setVisible(false);
+                    b.setDisable(true);
                 }
             }
         }
