@@ -20,6 +20,7 @@ public class BestelViewController implements Observer {
         setBestelFacade(new BestelFacade());
         this.bestelFacade.addObserver(this, "TOEVOEGEN_BROODJE");
         this.bestelFacade.addObserver(this, "NIEUWE_BESTELLING");
+        this.bestelFacade.addObserver(this, "TOEVOEGEN_BELEG");
     }
 
     public void setBestelFacade(BestelFacade bestelFacade) {

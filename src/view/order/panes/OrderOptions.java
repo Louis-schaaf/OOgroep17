@@ -98,7 +98,7 @@ public class OrderOptions extends GridPane {
         button.setOnAction(e -> {
             if (bestelling.getState().getClass().getName().contains("InBestelling")) {
                 try {
-                    controller.voegBelegToe(buttonName, 1);
+                    controller.voegBelegToe(buttonName, 0);
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 } catch (BiffException biffException) {
