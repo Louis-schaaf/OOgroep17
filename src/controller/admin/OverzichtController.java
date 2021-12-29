@@ -14,8 +14,8 @@ public class OverzichtController implements Observer {
     public BestelFacade bestelFacade;
     public SandwichOverviewPane pane;
 
-    public OverzichtController() {
-        setBestelFacade(new BestelFacade());
+    public OverzichtController(BestelFacade bestelFacade) {
+        setBestelFacade(bestelFacade);
         this.bestelFacade.addObserver(this, "ZEND_NAAR_KEUKEN");
     }
 

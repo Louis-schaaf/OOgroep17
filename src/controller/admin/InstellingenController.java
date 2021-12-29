@@ -13,8 +13,8 @@ public class InstellingenController implements Observer {
     public BestelFacade bestelFacade;
     public SettingsPane settingsPane;
 
-    public InstellingenController() {
-        setBestelFacade(new BestelFacade());
+    public InstellingenController(BestelFacade bestelFacade) {
+        setBestelFacade(bestelFacade);
         this.bestelFacade.addObserver(this, "BETAAL_BESTELLING");
     }
 

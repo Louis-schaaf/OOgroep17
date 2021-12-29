@@ -120,6 +120,7 @@ public class BestelFacade implements Subject {
 
     public void zendBestellingNaarKeuken() throws BiffException, IOException {
         this.bestelling.verzenden();
+        System.out.println(this.getBroodjes().values());
         notifyObservers("ZEND_NAAR_KEUKEN");
     }
 

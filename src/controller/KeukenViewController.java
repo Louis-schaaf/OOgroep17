@@ -13,8 +13,8 @@ public class KeukenViewController implements Observer {
     public BestelFacade bestelFacade;
     public KitchenView kitchenView;
 
-    public KeukenViewController() {
-        setBestelFacade(new BestelFacade());
+    public KeukenViewController(BestelFacade bestelFacade) {
+        setBestelFacade(bestelFacade);
         this.bestelFacade.addObserver(this, "ZEND_NAAR_KEUKEN");
     }
 
@@ -28,6 +28,10 @@ public class KeukenViewController implements Observer {
 
     public List<Bestelling> getBetaaldeBestellingen () {
         return this.bestelFacade.getBetaaldeBestellingen();
+    }
+
+    public Bestelling getBestelling() {
+        return this.bestelFacade.getBestelling();
     }
 
     @Override
