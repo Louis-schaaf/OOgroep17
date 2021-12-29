@@ -1,6 +1,7 @@
 package model.database;
 
 import model.Broodje;
+import model.Instellingen;
 import model.database.loadSaveStrategies.BroodjesExcelLoadSaveStrategy;
 import model.database.loadSaveStrategies.LoadSaveStrategy;
 import model.database.loadSaveStrategies.LoadSaveStrategyFactory;
@@ -13,7 +14,7 @@ public class BroodjesDatabase {
 
     public BroodjesDatabase() {
         broodjes = new TreeMap<>();
-        setStrategy(LoadSaveStrategyFactory.createLoadSaveStrategy("EXCELBROODJES"));
+        setStrategy(LoadSaveStrategyFactory.createLoadSaveStrategy(Instellingen.getLoad() + "BROODJES"));
         this.load();
     }
 

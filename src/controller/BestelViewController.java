@@ -1,10 +1,7 @@
 package controller;
 
 import jxl.read.biff.BiffException;
-import model.BestelFacade;
-import model.Bestellijn;
-import model.Bestelling;
-import model.Observer;
+import model.*;
 import model.bestelStates.BestellingState;
 import view.admin.AdminView;
 import view.order.OrderView;
@@ -17,8 +14,8 @@ public class BestelViewController implements Observer {
     public BestelFacade bestelFacade;
     public OrderView orderView;
 
-    public BestelViewController() {
-        setBestelFacade(new BestelFacade());
+    public BestelViewController(BestelFacade bestelFacade) {
+        setBestelFacade(bestelFacade);
         //TODO: (LOUIS) waarom luistert die naar alles? Omdat die bij elk van deze events moet updaten.
         this.bestelFacade.addObserver(this, "TOEVOEGEN_BROODJE");
         this.bestelFacade.addObserver(this, "NIEUWE_BESTELLING");
@@ -28,7 +25,7 @@ public class BestelViewController implements Observer {
         this.bestelFacade.addObserver(this, "IDENTIEKE_BESTELLIJN");
         this.bestelFacade.addObserver(this, "VERWIJDER_BROODJE");
         this.bestelFacade.addObserver(this, "BETAAL_BESTELLING");
-        this.bestelFacade.addObserver(this, "ZendNaarKeuken");
+        this.bestelFacade.addObserver(this, "ZEND_NAAR_KEUKEN");
     }
 
     public void addObserver(Observer observer, String event) {this.bestelFacade.addObserver(observer, event);}
@@ -42,8 +39,16 @@ public class BestelViewController implements Observer {
     }
 
     @Override
-    public void update(String event) {
+    public void update() {
         orderView.update(this.getBestelling());
+    }
+
+    public Map<String, Broodje> getBroodjesDB() {
+        return this.bestelFacade.getBroodjes();
+    }
+
+    public Map<String, BelegSoort> getBelegDB() {
+        return this.bestelFacade.getBeleg();
     }
 
     public Map<String, Integer> getVoorraadBroodjes() {
@@ -90,6 +95,7 @@ public class BestelViewController implements Observer {
             this.bestelFacade.voegBelegToe(naamBeleg, bestelLijn);
             this.orderView.updateBestellijnen();
             this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
+            this.orderView.updateStatusBroodjesKnoppen(this.getVoorraadBroodjes());
         } else {
             this.orderView.toonError();
         }
@@ -117,8 +123,15 @@ public class BestelViewController implements Observer {
         if (selectedBestellijn == null) {
             this.orderView.toonError();
         } else {
-            getLijstBestellijnen().add(selectedBestellijn);
-            this.orderView.updateBestellijnen();
+            if (this.bestelFacade.voegIdentiekBestellijnToe(selectedBestellijn)){
+                Bestellijn nieuw = selectedBestellijn;
+                voegBestellijnToe(nieuw.getNaamBroodje());
+                for (String beleg : selectedBestellijn.getNamenBelegLijst()){
+                    voegBelegToe(beleg, getLijstBestellijnen().size()-1);
+                }
+            } else {
+                this.orderView.toonError();
+            }
         }
     }
 

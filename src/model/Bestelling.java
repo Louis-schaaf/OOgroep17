@@ -16,6 +16,10 @@ public class Bestelling {
         this.state = new InWacht(this);
     }
 
+    public int getIndex (Bestellijn bestellijn) {
+        return this.bestellijnen.indexOf(bestellijn);
+    }
+
     public void setVolgnummer(int volgnummer) {
         this.volgnummer = volgnummer;
     }
@@ -88,5 +92,19 @@ public class Bestelling {
 
     public void annuleren () {
         this.state.annuleren();
+    }
+
+    public Bestellijn verwijderBestellijn(Bestellijn selectedBestellijn) {
+        return this.bestellijnen.remove(this.getIndex(selectedBestellijn));
+    }
+
+    public void setBestellijnen(Bestelling bestelling, List<Bestellijn> bestellijns) {
+        for (Bestellijn bestellijn: bestellijns){
+            bestelling.voegBestellijnToe(bestellijn);
+        }
+    }
+
+    public void voegBestellijnToe (Bestellijn bestellijn) {
+        this.bestellijnen.add(bestellijn);
     }
 }

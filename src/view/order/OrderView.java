@@ -49,14 +49,12 @@ public class OrderView {
 		popup = new Stage();
 		popup.setTitle("Error");
 		VBox comp = new VBox();
-		Label label = new Label("U heeft geen broodje gekozen.");
+		Label label = new Label("U heeft geen broodje gekozen of de voorraad is leeg.");
 		comp.getChildren().add(label);
-		Scene stageScene = new Scene(comp, 300, 300);
+		Scene stageScene = new Scene(comp, 360, 30);
 		popup.setScene(stageScene);
 		popup.hide();
 	}
-
-
 
 	public void toonError() {
 		this.popup.show();

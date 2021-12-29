@@ -41,16 +41,14 @@ public class KitchenView {
 		controller.setKitchenView(this);
 	}
 
-	public void setBestelViewController(BestelViewController bestelViewController) {
-		this.bestelViewController = bestelViewController;
-	}
-
-	public void updateCounter() {
-		kitchenKnoppen.updateCounter();
-		kitchenKnoppen.updateBestellingsInfo();
-	}
-
-	public ArrayList<Bestelling> getWachtrij() {
+	public List<Bestelling> getWachtrij() {
 		return wachtrij;
 	}
+
+    public void update() {
+		this.getWachtrij().addAll(this.controller.getBetaaldeBestellingen());
+		kitchenKnoppen.updateCounter();
+		kitchenKnoppen.updateBestellingsInfo();
+		//TODO hierin moet de update staan
+    }
 }

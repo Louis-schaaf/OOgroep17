@@ -4,9 +4,6 @@ import jxl.read.biff.BiffException;
 import model.bestelStates.BestellingState;
 import model.database.BelegDatabase;
 import model.database.BroodjesDatabase;
-import model.database.loadSaveStrategies.LoadSaveStrategy;
-import model.database.loadSaveStrategies.LoadSaveStrategyEnum;
-import model.database.loadSaveStrategies.LoadSaveStrategyFactory;
 import model.kortingStrategies.KortingStrategy;
 import model.kortingStrategies.KortingStrategyFactory;
 
@@ -99,8 +96,12 @@ public class BestelFacade implements Subject {
     }
 
     public void verwijderBestellijn(Bestellijn selectedBestellijn) {
-        if (getLijstBestellijnen().contains(selectedBestellijn)) {
-            getLijstBestellijnen().remove(selectedBestellijn);
+        Bestellijn b = this.bestelling.verwijderBestellijn(selectedBestellijn);
+        Broodje broodje = this.broodjesDatabase.getBroodje(b.getNaamBroodje());
+        broodje.aanpassenVoorraad(1);
+        for (String s : b.getNamenBelegLijst()) {
+            BelegSoort beleg = this.belegDatabase.getBeleg(s);
+            beleg.aanpassenVoorraad(1);
         }
     }
 
@@ -114,12 +115,16 @@ public class BestelFacade implements Subject {
             }
         }
         this.bestelling.betalen();
+        Bestelling bestelling = new Bestelling();
+        List<Bestellijn> bestellijns = this.bestelling.getBestellijnen();
+        bestelling.setBestellijnen(bestelling, bestellijns);
+        this.betaaldeBestellingen.add(bestelling);
         notifyObservers("BETAAL_BESTELLING");
     }
 
     public void zendBestellingNaarKeuken() throws BiffException, IOException {
         this.bestelling.verzenden();
-        notifyObservers("ZendNaarKeuken");
+        notifyObservers("ZEND_NAAR_KEUKEN");
     }
 
     public List<Bestelling> getBetaaldeBestellingen() {
@@ -160,7 +165,26 @@ public class BestelFacade implements Subject {
     @Override
     public void notifyObservers(String event) throws IOException, BiffException {
         for (Observer observer : observers.get(event)) {
-                observer.update(event);
+                observer.update();
             }
         }
+
+    public boolean voegIdentiekBestellijnToe(Bestellijn selectedBestellijn) {
+        boolean mogelijk = true;
+        Broodje broodje = this.broodjesDatabase.getBroodje(selectedBestellijn.getNaamBroodje());
+        if (broodje.getActualStock() < 1){
+            mogelijk = false;
+        }
+        for (String belegSoortString: selectedBestellijn.getNamenBelegLijst()){
+            BelegSoort belegSoort = this.belegDatabase.getBeleg(belegSoortString);
+            if (belegSoort.getActualStock() < 1){
+                mogelijk = false;
+            }
+        }
+        return mogelijk;
+    }
+
+    public void setProperties() {
+        Instellingen.write();
+    }
 }

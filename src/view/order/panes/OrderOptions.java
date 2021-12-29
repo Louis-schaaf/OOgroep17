@@ -41,8 +41,7 @@ public class OrderOptions extends GridPane {
     }
 
     private void setUpBroodjesKnoppen() {
-        Map<String, Broodje> broodjes = LoadSaveStrategyFactory.createLoadSaveStrategy("EXCELBROODJES").load();
-        //Map<String, Broodje> broodjes = LoadSaveStrategyFactory.createLoadSaveStrategy("TEKSTBROODJES").load();
+        Map<String, Broodje> broodjes = this.controller.getBroodjesDB();
 
         for (Map.Entry<String, Broodje> entry : broodjes.entrySet()) {
             if (entry.getValue().getActualStock() > 0) {
@@ -82,8 +81,7 @@ public class OrderOptions extends GridPane {
     }
 
     private void setUpBelegKnoppen() {
-        Map<String, BelegSoort> beleg = LoadSaveStrategyFactory.createLoadSaveStrategy("EXCELBELEG").load();
-        //Map<String, BelegSoort> beleg = LoadSaveStrategyFactory.createLoadSaveStrategy("TEKSTBELEG").load();
+        Map<String, BelegSoort> beleg = this.controller.getBelegDB();
 
         for (Map.Entry<String, BelegSoort> entry : beleg.entrySet()) {
             if (entry.getValue().getActualStock() > 0) {
@@ -124,13 +122,15 @@ public class OrderOptions extends GridPane {
 
     //Zet alle knoppen van deze pane in een array
     //Indien de voorraad van de broodjes de tekst van de knop contains
-    //Dan kijkt die als de voorraad kleiner is dan 0; als dit is dan wordt de knop uitgezet.
+    //Dan kijkt die als de voorraad kleiner is dan 1; als dit is dan wordt de knop uitgezet.
     public void updateStatusBroodjesKnoppen(Map<String, Integer> voorraadBroodjes) {
         for (Button b : this.buttonsBroodjes) {
             if (voorraadBroodjes.containsKey(b.getText())) {
                 int i = voorraadBroodjes.get(b.getText());
                 if (i < 1) {
                     b.setDisable(true);
+                }else{
+                    b.setDisable(false);
                 }
             }
         }
@@ -145,7 +145,9 @@ public class OrderOptions extends GridPane {
             if (voorraadBeleg.containsKey(b.getText())) {
                 int i = voorraadBeleg.get(b.getText());
                 if (i < 1) {
-                    b.setVisible(false);
+                    b.setDisable(true);
+                }else{
+                    b.setDisable(false);
                 }
             }
         }

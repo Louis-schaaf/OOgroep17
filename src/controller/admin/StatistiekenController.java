@@ -14,9 +14,9 @@ public class StatistiekenController implements Observer {
     public BestelFacade bestelFacade;
     public StatisticsPane statisticsPane;
 
-    public StatistiekenController() {
-        setBestelFacade(new BestelFacade());
-        this.bestelFacade.addObserver(this, "BETAAL_BESTELLING");
+    public StatistiekenController(BestelFacade bestelFacade) {
+        setBestelFacade(bestelFacade);
+        this.bestelFacade.addObserver(this, "ZEND_NAAR_KEUKEN");
     }
 
     private void setBestelFacade(BestelFacade bestelFacade) {
@@ -36,7 +36,7 @@ public class StatistiekenController implements Observer {
     }
 
     @Override
-    public void update(String event) throws IOException, BiffException {
+    public void update() throws IOException, BiffException {
         statisticsPane.update(this.getBroodjes(), this.getBeleg());
     }
 }
