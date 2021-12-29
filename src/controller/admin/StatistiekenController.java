@@ -27,14 +27,6 @@ public class StatistiekenController implements Observer {
         this.statisticsPane = statisticsPane;
     }
 
-    public Map<String, Integer> getVerkochteBroodjes() {
-        return this.bestelFacade.getVerkochteBroodjes();
-    }
-
-    public Map<String, Integer> getVerkochtBeleg() {
-        return this.bestelFacade.getVerkochtBeleg();
-    }
-
     public Map<String, Broodje> getBroodjes() {
         return this.bestelFacade.getBroodjes();
     }
@@ -45,6 +37,6 @@ public class StatistiekenController implements Observer {
 
     @Override
     public void update(String event) throws IOException, BiffException {
-        statisticsPane.update(this.getVerkochteBroodjes(), this.getVerkochtBeleg());
+        statisticsPane.update(this.getBroodjes(), this.getBeleg());
     }
 }

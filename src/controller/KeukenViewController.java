@@ -1,31 +1,39 @@
 package controller;
 
 import jxl.read.biff.BiffException;
+import model.BestelFacade;
+import model.Bestelling;
 import model.Observer;
 import view.kitchen.KitchenView;
 
 import java.io.IOException;
+import java.util.List;
 
 public class KeukenViewController implements Observer {
+    public BestelFacade bestelFacade;
     public KitchenView kitchenView;
 
     public KeukenViewController() {
+        setBestelFacade(new BestelFacade());
+    }
 
+    public void setBestelFacade(BestelFacade bestelFacade) {
+        this.bestelFacade = bestelFacade;
     }
 
     public void setKitchenView(KitchenView kitchenView) {
         this.kitchenView = kitchenView;
     }
 
-
+    public List<Bestelling> getBetaaldeBestellingen () {
+        return this.bestelFacade.getBetaaldeBestellingen();
+    }
 
     @Override
     public void update(String event) throws IOException, BiffException {
         if (event.equals("ZendNaarKeuken")) {
-            kitchenView.getWachtrij().add(kitchenView.getBestelViewController().getBestelling());
+            kitchenView.getWachtrij().add(this.bestelFacade.getBestelling());
             kitchenView.updateCounter();
         }
-
-
     }
 }

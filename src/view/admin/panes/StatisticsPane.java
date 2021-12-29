@@ -73,7 +73,21 @@ public class StatisticsPane extends GridPane {
         this.add(this.belegChart, 1, 1);
     }
 
-    public void update(Map<String, Integer> broodjes, Map<String, Integer> beleg) {
-        //TODO BarChart updaten
+    public void update(Map<String, Broodje> broodjes, Map<String, BelegSoort> beleg) {
+        XYChart.Series dataBroodjes = new XYChart.Series();
+        XYChart.Series dataBeleg = new XYChart.Series();
+        for (Broodje b : broodjes.values()) {
+            dataBroodjes.getData().add(new XYChart.Data(b.getName(), b.getSoldAmount()));
+        }
+        for (BelegSoort b : beleg.values()) {
+            dataBeleg.getData().add(new XYChart.Data(b.getName(), b.getSoldAmount()));
+        }
+        this.broodjesChart.getData().set(0, dataBroodjes);
+        this.belegChart.getData().set(0, dataBeleg);
+        this.broodjesChart.setVisible(false);
+        this.broodjesChart.setVisible(true);
+        this.belegChart.setVisible(false);
+        this.belegChart.setVisible(true);
+        //TODO update past niks aan
     }
 }

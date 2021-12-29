@@ -19,7 +19,7 @@ public class BestelViewController implements Observer {
 
     public BestelViewController() {
         setBestelFacade(new BestelFacade());
-        //TODO: (LOUIS) waarom luisterd die naar alles?
+        //TODO: (LOUIS) waarom luistert die naar alles? Omdat die bij elk van deze events moet updaten.
         this.bestelFacade.addObserver(this, "TOEVOEGEN_BROODJE");
         this.bestelFacade.addObserver(this, "NIEUWE_BESTELLING");
         this.bestelFacade.addObserver(this, "TOEVOEGEN_BELEG");
@@ -28,6 +28,7 @@ public class BestelViewController implements Observer {
         this.bestelFacade.addObserver(this, "IDENTIEKE_BESTELLIJN");
         this.bestelFacade.addObserver(this, "VERWIJDER_BROODJE");
         this.bestelFacade.addObserver(this, "BETAAL_BESTELLING");
+        this.bestelFacade.addObserver(this, "ZendNaarKeuken");
     }
 
     public void addObserver(Observer observer, String event) {this.bestelFacade.addObserver(observer, event);}
@@ -125,14 +126,7 @@ public class BestelViewController implements Observer {
         this.bestelFacade.betaalBestelling();
     }
 
-    public void stuurBestellingNaarKeuken() {
-        try {
-            bestelFacade.notifyObservers("ZendNaarKeuken");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (BiffException e) {
-            e.printStackTrace();
-        }
+    public void stuurBestellingNaarKeuken() throws BiffException, IOException {
+        this.bestelFacade.zendBestellingNaarKeuken();
     }
 }

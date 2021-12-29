@@ -19,11 +19,13 @@ public class BestelFacade implements Subject {
     public BroodjesDatabase broodjesDatabase;
     public BelegDatabase belegDatabase;
     public Bestelling bestelling;
+    public List<Bestelling> betaaldeBestellingen;
 
     public BestelFacade() {
         this.broodjesDatabase = new BroodjesDatabase();
         this.belegDatabase = new BelegDatabase();
         this.bestelling = new Bestelling();
+        this.betaaldeBestellingen = new ArrayList<>();
     }
 
     public BestellingState getBestellingState() {
@@ -113,6 +115,15 @@ public class BestelFacade implements Subject {
         }
         this.bestelling.betalen();
         notifyObservers("BETAAL_BESTELLING");
+    }
+
+    public void zendBestellingNaarKeuken() throws BiffException, IOException {
+        this.bestelling.verzenden();
+        notifyObservers("ZendNaarKeuken");
+    }
+
+    public List<Bestelling> getBetaaldeBestellingen() {
+        return this.betaaldeBestellingen;
     }
 
     public double updateBedrag(String korting) {

@@ -45,10 +45,6 @@ public class KitchenView {
 		this.bestelViewController = bestelViewController;
 	}
 
-	public BestelViewController getBestelViewController() {
-		return bestelViewController;
-	}
-
 	public void updateCounter() {
 		kitchenKnoppen.updateCounter();
 		kitchenKnoppen.updateBestellingsInfo();
