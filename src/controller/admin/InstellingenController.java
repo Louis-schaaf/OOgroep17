@@ -1,5 +1,6 @@
 package controller.admin;
 
+import jxl.read.biff.BiffException;
 import model.BelegSoort;
 import model.BestelFacade;
 import model.Broodje;
@@ -7,6 +8,7 @@ import model.Observer;
 import view.admin.panes.SettingsPane;
 import view.admin.panes.StatisticsPane;
 
+import java.io.IOException;
 import java.util.Map;
 
 public class InstellingenController implements Observer {
@@ -24,6 +26,10 @@ public class InstellingenController implements Observer {
 
     public void setSettingsPane(SettingsPane settingsPane) {
         this.settingsPane = settingsPane;
+    }
+
+    public void setProperties() {
+        this.bestelFacade.setProperties();
     }
 
     @Override
