@@ -96,8 +96,12 @@ public class BestelFacade implements Subject {
     }
 
     public void verwijderBestellijn(Bestellijn selectedBestellijn) {
-        if (getLijstBestellijnen().contains(selectedBestellijn)) {
-            getLijstBestellijnen().remove(selectedBestellijn);
+        Bestellijn b = this.bestelling.verwijderBestellijn(selectedBestellijn);
+        Broodje broodje = this.broodjesDatabase.getBroodje(b.getNaamBroodje());
+        broodje.aanpassenVoorraad(1);
+        for (String s : b.getNamenBelegLijst()) {
+            BelegSoort beleg = this.belegDatabase.getBeleg(s);
+            beleg.aanpassenVoorraad(1);
         }
     }
 

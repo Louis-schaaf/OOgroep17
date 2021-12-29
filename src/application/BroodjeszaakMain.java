@@ -5,16 +5,20 @@ import controller.BestelViewController;
 import controller.KeukenViewController;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import jxl.read.biff.BiffException;
+import model.Instellingen;
 import model.database.BroodjesDatabase;
 import model.database.loadSaveStrategies.BroodjesExcelLoadSaveStrategy;
 import view.admin.AdminView;
 import view.kitchen.KitchenView;
 import view.order.OrderView;
 
+import java.io.IOException;
+
 
 public class BroodjeszaakMain extends Application {
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) throws BiffException, IOException {
 		AdminView adminView = new AdminView();
 		BestelViewController controller = new BestelViewController();
 		OrderView orderView = new OrderView(controller);

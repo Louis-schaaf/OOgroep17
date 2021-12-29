@@ -124,7 +124,7 @@ public class OrderOptions extends GridPane {
 
     //Zet alle knoppen van deze pane in een array
     //Indien de voorraad van de broodjes de tekst van de knop contains
-    //Dan kijkt die als de voorraad kleiner is dan 0; als dit is dan wordt de knop uitgezet.
+    //Dan kijkt die als de voorraad kleiner is dan 1; als dit is dan wordt de knop uitgezet.
     public void updateStatusBroodjesKnoppen(Map<String, Integer> voorraadBroodjes) {
         for (Button b : this.buttonsBroodjes) {
             if (voorraadBroodjes.containsKey(b.getText())) {
@@ -145,7 +145,7 @@ public class OrderOptions extends GridPane {
             if (voorraadBeleg.containsKey(b.getText())) {
                 int i = voorraadBeleg.get(b.getText());
                 if (i < 1) {
-                    b.setVisible(false);
+                    b.setDisable(true);
                 }
             }
         }

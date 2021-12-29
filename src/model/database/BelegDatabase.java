@@ -2,6 +2,7 @@ package model.database;
 
 import model.BelegSoort;
 import model.Broodje;
+import model.Instellingen;
 import model.database.loadSaveStrategies.BelegTekstLoadSaveStrategy;
 import model.database.loadSaveStrategies.LoadSaveStrategy;
 import model.database.loadSaveStrategies.LoadSaveStrategyFactory;
@@ -17,7 +18,7 @@ public class BelegDatabase {
 
     public BelegDatabase() {
         belegDB = new TreeMap<>();
-        setStrategy(LoadSaveStrategyFactory.createLoadSaveStrategy("EXCELBELEG"));
+        setStrategy(LoadSaveStrategyFactory.createLoadSaveStrategy(Instellingen.getLoad().toUpperCase() + "BELEG"));
         this.load();
     }
 
