@@ -41,8 +41,7 @@ public class OrderOptions extends GridPane {
     }
 
     private void setUpBroodjesKnoppen() {
-        Map<String, Broodje> broodjes = LoadSaveStrategyFactory.createLoadSaveStrategy("EXCELBROODJES").load();
-        //Map<String, Broodje> broodjes = LoadSaveStrategyFactory.createLoadSaveStrategy("TEKSTBROODJES").load();
+        Map<String, Broodje> broodjes = this.controller.getBroodjesDB();
 
         for (Map.Entry<String, Broodje> entry : broodjes.entrySet()) {
             if (entry.getValue().getActualStock() > 0) {
@@ -82,8 +81,7 @@ public class OrderOptions extends GridPane {
     }
 
     private void setUpBelegKnoppen() {
-        Map<String, BelegSoort> beleg = LoadSaveStrategyFactory.createLoadSaveStrategy("EXCELBELEG").load();
-        //Map<String, BelegSoort> beleg = LoadSaveStrategyFactory.createLoadSaveStrategy("TEKSTBELEG").load();
+        Map<String, BelegSoort> beleg = this.controller.getBelegDB();
 
         for (Map.Entry<String, BelegSoort> entry : beleg.entrySet()) {
             if (entry.getValue().getActualStock() > 0) {

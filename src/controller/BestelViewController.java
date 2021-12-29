@@ -1,10 +1,7 @@
 package controller;
 
 import jxl.read.biff.BiffException;
-import model.BestelFacade;
-import model.Bestellijn;
-import model.Bestelling;
-import model.Observer;
+import model.*;
 import model.bestelStates.BestellingState;
 import view.admin.AdminView;
 import view.order.OrderView;
@@ -44,6 +41,14 @@ public class BestelViewController implements Observer {
     @Override
     public void update() {
         orderView.update(this.getBestelling());
+    }
+
+    public Map<String, Broodje> getBroodjesDB() {
+        return this.bestelFacade.getBroodjes();
+    }
+
+    public Map<String, BelegSoort> getBelegDB() {
+        return this.bestelFacade.getBeleg();
     }
 
     public Map<String, Integer> getVoorraadBroodjes() {

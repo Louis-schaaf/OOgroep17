@@ -31,7 +31,11 @@ public class Instellingen extends Properties {
     public static String getLoad() {
         String result = "";
         try {
-            result = createProperties().getProperty("load");
+            if (properties == null) {
+                result = createProperties().getProperty("load");
+            } else {
+                result = properties.getProperty("load");
+            }
         } catch (BiffException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -43,7 +47,11 @@ public class Instellingen extends Properties {
     public static String getKorting() {
         String result = "";
         try {
-            result = createProperties().getProperty("korting");
+            if (properties == null) {
+                result = createProperties().getProperty("korting");
+            } else {
+                result = properties.getProperty("korting");
+            }
         } catch (BiffException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -52,13 +60,46 @@ public class Instellingen extends Properties {
         return result;
     }
 
-    public static Properties getProperties() throws IOException, BiffException {
-        return createProperties();
+    public static void setLoad(String string) {
+        try {
+            if (properties == null) {
+                createProperties().setProperty("load", string);
+            } else {
+                properties.setProperty("load", string);
+            }
+        } catch (BiffException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void updateSettings() throws IOException, BiffException {
-        FileOutputStream outputStream = new FileOutputStream(file);
-        getProperties().storeToXML(outputStream, null);
-        outputStream.close();
+    public static void setKorting(String string) {
+        try {
+            if (properties == null) {
+                createProperties().setProperty("korting", string);
+            } else {
+                properties.setProperty("korting", string);
+            }
+        } catch (BiffException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void write() {
+        try {
+            if (properties == null) {
+                createProperties();
+            }
+            FileOutputStream os = new FileOutputStream(file);
+            properties.storeToXML(os, null);
+            os.close();
+        } catch (BiffException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
