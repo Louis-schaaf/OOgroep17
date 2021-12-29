@@ -1,6 +1,7 @@
 package view.admin;
 
 
+import controller.admin.InstellingenController;
 import controller.admin.OverzichtController;
 import controller.admin.StatistiekenController;
 import javafx.scene.control.Tab;
@@ -21,7 +22,7 @@ public class AdminMainPane extends BorderPane {
         ColumnConstraints col2 = new ColumnConstraints();
         col2.setPercentWidth(50);
         sandwichOverviewPane.getColumnConstraints().addAll(col1, col2);
-        SettingsPane settingsPane = new SettingsPane();
+        SettingsPane settingsPane = new SettingsPane(new InstellingenController());
         StatisticsPane statisticsPane = new StatisticsPane(new StatistiekenController());
         Tab broodjesTab = new Tab("Broodjes/Beleg",sandwichOverviewPane);
         Tab instellingTab = new Tab("Instellingen",settingsPane);
