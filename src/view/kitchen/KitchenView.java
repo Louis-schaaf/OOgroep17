@@ -47,6 +47,7 @@ public class KitchenView {
 
     public void update() {
 		this.getWachtrij().addAll(this.controller.getBetaaldeBestellingen());
+		this.kitchenKnoppen.update();
 		kitchenKnoppen.updateCounter();
 		kitchenKnoppen.updateBestellingsInfo();
 		//TODO hierin moet de update staan

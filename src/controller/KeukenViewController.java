@@ -34,8 +34,14 @@ public class KeukenViewController implements Observer {
         return this.bestelFacade.getBestelling();
     }
 
+    public void bestellingAfgewerkt() {
+        this.bestelFacade.bestellingAfgewerkt();
+    }
+
     @Override
     public void update() throws IOException, BiffException {
         this.kitchenView.update();
     }
+
+
 }

@@ -39,10 +39,13 @@ public class KitchenKnoppen extends GridPane {
 
     private Button setUpVolgendeBestellingButton() {
         volgendeBestelling.setText("Volgende bestelling");
+        this.volgendeBestelling.setDisable(true);
         volgendeBestelling.setOnAction(event -> {
             try {
                 // this.controller volgende bestelling methode
                 bestellingInfo.setVisible(true);
+                this.volgendeBestelling.setDisable(true);
+                this.bestellingAfgewerkt.setDisable(false);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -52,8 +55,17 @@ public class KitchenKnoppen extends GridPane {
 
     private Button setUpBestellingAfgewerkt() {
         bestellingAfgewerkt.setText("Bestelling afgewerkt");
+        this.bestellingAfgewerkt.setDisable(true);
         bestellingAfgewerkt.setOnAction(event -> {
             try {
+                this.bestellingInfo.setVisible(false);
+                this.bestellingAfgewerkt.setDisable(true);
+                this.controller.bestellingAfgewerkt();
+                if (this.controller.getBetaaldeBestellingen().size() > 0) {
+                    this.updateBestellingsInfo();
+                    this.volgendeBestelling.setDisable(false);
+                }
+                this.updateCounter();
                 // methode afgewerkt
             } catch (Exception e) {
                 e.printStackTrace();
@@ -69,7 +81,7 @@ public class KitchenKnoppen extends GridPane {
     }
 
     public void updateBestellingsInfo() {
-        Bestelling bestelling = controller.kitchenView.getWachtrij().get(0);
+        Bestelling bestelling = this.controller.getBetaaldeBestellingen().get(0);
         int aantal = bestelling.getBestellijnen().size();
         String broodjesInfo = "";
         while (bestelling.containsDuplicates() != null) {
@@ -104,8 +116,14 @@ public class KitchenKnoppen extends GridPane {
     }
 
     public void updateCounter() {
-        this.counter = controller.kitchenView.getWachtrij().size();
-        String tekst = "Aantal bestellingen in wachtrij: "+this.counter;
+        this.counter = this.controller.getBetaaldeBestellingen().size();
+        String tekst = "Aantal bestellingen in wachtrij: " + this.counter;
         this.aantalBestellingen.setText(tekst);
+    }
+
+    public void update() {
+        if (this.controller.getBetaaldeBestellingen().size() > 0) {
+            this.volgendeBestelling.setDisable(false);
+        }
     }
 }

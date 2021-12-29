@@ -29,7 +29,6 @@ public abstract class ExcelLoadSaveTemplate {
         }
         workbook.write();
         workbook.close();
-
     }
 
     public ArrayList<ArrayList<String>> read(File file)

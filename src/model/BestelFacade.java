@@ -148,6 +148,29 @@ public class BestelFacade implements Subject {
         return kortingStrategy.berekenPrijs(bedragPerBroodje);
     }
 
+    public boolean voegIdentiekBestellijnToe(Bestellijn selectedBestellijn) {
+        boolean mogelijk = true;
+        Broodje broodje = this.broodjesDatabase.getBroodje(selectedBestellijn.getNaamBroodje());
+        if (broodje.getActualStock() < 1){
+            mogelijk = false;
+        }
+        for (String belegSoortString: selectedBestellijn.getNamenBelegLijst()){
+            BelegSoort belegSoort = this.belegDatabase.getBeleg(belegSoortString);
+            if (belegSoort.getActualStock() < 1){
+                mogelijk = false;
+            }
+        }
+        return mogelijk;
+    }
+
+    public void setProperties() {
+        Instellingen.write();
+    }
+
+    public void bestellingAfgewerkt() {
+        this.betaaldeBestellingen.remove(0);
+    }
+
     @Override
     public void addObserver(Observer observer, String event) {
         if (observers.containsKey(event)){
@@ -169,23 +192,4 @@ public class BestelFacade implements Subject {
                 observer.update();
             }
         }
-
-    public boolean voegIdentiekBestellijnToe(Bestellijn selectedBestellijn) {
-        boolean mogelijk = true;
-        Broodje broodje = this.broodjesDatabase.getBroodje(selectedBestellijn.getNaamBroodje());
-        if (broodje.getActualStock() < 1){
-            mogelijk = false;
-        }
-        for (String belegSoortString: selectedBestellijn.getNamenBelegLijst()){
-            BelegSoort belegSoort = this.belegDatabase.getBeleg(belegSoortString);
-            if (belegSoort.getActualStock() < 1){
-                mogelijk = false;
-            }
-        }
-        return mogelijk;
-    }
-
-    public void setProperties() {
-        Instellingen.write();
-    }
 }
