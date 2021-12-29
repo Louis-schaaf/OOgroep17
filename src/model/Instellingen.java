@@ -57,7 +57,7 @@ public class Instellingen extends Properties {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return result;
+        return result.toUpperCase();
     }
 
     public static void setLoad(String string) {

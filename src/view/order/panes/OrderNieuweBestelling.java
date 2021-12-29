@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import jxl.read.biff.BiffException;
 import model.Bestelling;
+import model.Instellingen;
 
 import java.io.IOException;
 
@@ -35,9 +36,13 @@ public class OrderNieuweBestelling extends GridPane {
     // Zet een choicebox op en zet deze als standaardwaarde op disabled.
     private Node setUpChoiceBox() {
         choiceBox.getItems().addAll("GOEDKOOPSTEGRATIS", "GEENKORTING", "TIENPROCENT");
-        choiceBox.setValue("GEENKORTING");
+        choiceBox.setValue(Instellingen.getKorting());
         choiceBox.setDisable(true);
         return choiceBox;
+    }
+
+    private void updateChoiceBox() {
+        this.choiceBox.setValue(Instellingen.getKorting());
     }
 
     // Zet een orderButton van "Nieuwe Bestelling"
@@ -75,6 +80,7 @@ public class OrderNieuweBestelling extends GridPane {
     // en de choiceBox worden geanabled.
     public void update(Bestelling bestelling) {
         if (bestelling.getState().getClass().getName().contains("InWacht")) {
+            this.updateChoiceBox();
             buttonNieuweBestelling.setDisable(false);
             volgnummerText.setVisible(false);
             choiceBox.setDisable(true);
