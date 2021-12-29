@@ -46,8 +46,7 @@ public class KitchenView {
 	}
 
 	public void updateCounter() {
-		kitchenKnoppen.updateCounter();
-		kitchenKnoppen.updateBestellingsInfo();
+
 	}
 
 	public ArrayList<Bestelling> getWachtrij() {
@@ -55,6 +54,9 @@ public class KitchenView {
 	}
 
     public void update() {
+		this.getWachtrij().add(this.bestelViewController.getBestelling());
+		kitchenKnoppen.updateCounter();
+		kitchenKnoppen.updateBestellingsInfo();
 		//TODO hierin moet de update staan
     }
 }

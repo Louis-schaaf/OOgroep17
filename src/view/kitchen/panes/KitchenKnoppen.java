@@ -10,6 +10,7 @@ import model.Bestelling;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class KitchenKnoppen extends GridPane {
     public KeukenViewController controller;
@@ -66,25 +67,31 @@ public class KitchenKnoppen extends GridPane {
 
     public void updateBestellingsInfo() {
         Bestelling bestelling = controller.kitchenView.getWachtrij().get(0);
-
-        if (bestelling.containsDuplicates() != null) {
-            //TODO: Louis fixt dit morgen wel
-            // das voor broodjes die duplicates zijn te tonen als: aantal X broodjeinfo
+        int aantal = bestelling.getBestellijnen().size();
+        String broodjesInfo = "";
+        while (bestelling.containsDuplicates() != null) {
+            Bestellijn duplicate = bestelling.containsDuplicates();
+            ArrayList<Bestellijn> duplicates = getDuplicates(bestelling.bestellijnen, duplicate);
+            broodjesInfo += duplicates.size()+"x "+duplicate.naamBroodje+": "+duplicate.getNamenBeleg()+"\n";
+            bestelling.getBestellijnen().removeAll(duplicates);
         }
-
-        String tekst = "Volgnummer bestelling: "+ bestelling.getVolgnummer()+ " -- Aantal broodjes: "+bestelling.getBestellijnen().size() + "\n";
+        for (Bestellijn bestellijn : bestelling.getBestellijnen()) {
+            broodjesInfo+= "1x "+bestellijn.naamBroodje+": "+ bestellijn.getNamenBeleg();
+        }
+        String tekst = "Volgnummer bestelling: "+ bestelling.getVolgnummer()+ " -- Aantal broodjes: "+aantal + "\n" +
+                broodjesInfo;
         System.out.println(bestelling.containsDuplicates());
         bestellingInfo.setText(tekst);
     }
 
-    private int countOccurances(ArrayList<Bestellijn> bestellijnArrayList, Bestellijn duplicate) {
-        int counter = 0;
+    private ArrayList<Bestellijn> getDuplicates(List<Bestellijn> bestellijnArrayList, Bestellijn duplicate) {
+        ArrayList<Bestellijn> duplicates = new ArrayList<>();
         for (Bestellijn bestellijn : bestellijnArrayList) {
-            if (bestellijn.naamBroodje == duplicate.naamBroodje && bestellijn.getNamenBeleg() == duplicate.getNamenBeleg()) {
-                counter++;
+            if (bestellijn.naamBroodje.equals(duplicate.naamBroodje) && bestellijn.getNamenBeleg().equals(duplicate.getNamenBeleg())) {
+                duplicates.add(bestellijn);
             }
         }
-        return counter;
+        return duplicates;
     }
 
     private Text setUpAantalBestellingen() {

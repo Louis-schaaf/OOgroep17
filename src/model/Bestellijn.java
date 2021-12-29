@@ -38,6 +38,11 @@ public class Bestellijn {
         return result;
     }
 
+    public String getNamenBelegWithCount() {
+        List<String> namen = this.getNamenBelegLijst();
+        return "";
+    }
+
     public List<String> getNamenBelegLijst() {
         return this.namenBeleg;
     }
