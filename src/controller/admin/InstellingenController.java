@@ -1,13 +1,17 @@
 package controller.admin;
 
+import model.BelegSoort;
 import model.BestelFacade;
+import model.Broodje;
 import model.Observer;
 import view.admin.panes.SettingsPane;
 import view.admin.panes.StatisticsPane;
 
+import java.util.Map;
+
 public class InstellingenController implements Observer {
     public BestelFacade bestelFacade;
-    public SettingsPane pane;
+    public SettingsPane settingsPane;
 
     public InstellingenController() {
         setBestelFacade(new BestelFacade());
@@ -18,8 +22,12 @@ public class InstellingenController implements Observer {
         this.bestelFacade = bestelFacade;
     }
 
+    public void setSettingsPane(SettingsPane settingsPane) {
+        this.settingsPane = settingsPane;
+    }
+
     @Override
     public void update() {
-        pane.update();
+        settingsPane.update();
     }
 }

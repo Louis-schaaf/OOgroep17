@@ -24,6 +24,7 @@ public class SettingsPane extends GridPane {
 
     public SettingsPane(InstellingenController instellingenController){
         this.controller = instellingenController;
+        controller.setSettingsPane(this);
         this.setHgap(30);
         this.setVgap(10);
         this.setPadding(new Insets(10,10,10,20));
