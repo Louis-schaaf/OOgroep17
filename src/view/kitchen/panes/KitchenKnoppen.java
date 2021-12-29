@@ -19,6 +19,7 @@ public class KitchenKnoppen extends GridPane {
     Text bestellingInfo;
     Button volgendeBestelling;
     Button bestellingAfgewerkt;
+    public Bestelling current;
 
     public KitchenKnoppen(KeukenViewController controller) {
         volgendeBestelling = new Button();
@@ -33,6 +34,7 @@ public class KitchenKnoppen extends GridPane {
         this.add(this.setUpAantalBestellingen(),0,1);
         this.setHgap(60);
         this.add(this.setUpBestellingInfo(),0,2);
+        bestellingInfo.setVisible(false);
     }
 
     private Button setUpVolgendeBestellingButton() {
@@ -40,6 +42,7 @@ public class KitchenKnoppen extends GridPane {
         volgendeBestelling.setOnAction(event -> {
             try {
                 // this.controller volgende bestelling methode
+                bestellingInfo.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
             }

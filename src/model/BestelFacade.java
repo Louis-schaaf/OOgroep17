@@ -115,6 +115,7 @@ public class BestelFacade implements Subject {
             }
         }
         this.bestelling.betalen();
+        this.betaaldeBestellingen.add(this.bestelling);
         notifyObservers("BETAAL_BESTELLING");
     }
 
