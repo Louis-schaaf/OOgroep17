@@ -124,8 +124,6 @@ public class BestelViewController implements Observer {
     public void annuleerBestelling() throws BiffException, IOException {
         this.bestelFacade.annuleerBestelling();
         this.orderView.updateBestellijnen();
-        this.orderView.updateStatusBroodjesKnoppen(this.getVoorraadBroodjes());
-        this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
     }
 
     public void betaalBestelling() throws BiffException, IOException{
