@@ -110,6 +110,7 @@ public class OrderAfsluitingBestelling extends GridPane {
             this.afsluitKnop1.setDisable(true);
             this.betaalKnop.setDisable(true);
             this.keukenKnop.setDisable(false);
+            this.updateBedrag(0);
         }
         if (bestelling.getState().getClass().getName().contains("InKeuken")){
             this.keukenKnop.setDisable(true);
