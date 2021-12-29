@@ -7,13 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bestelling {
-
+    private int volgnummer;
     public List<Bestellijn> bestellijnen;
     public BestellingState state;
 
     public Bestelling() {
         bestellijnen = new ArrayList<>();
         this.state = new InWacht(this);
+    }
+
+    public void setVolgnummer(int volgnummer) {
+        this.volgnummer = volgnummer;
+    }
+
+    public int getVolgnummer() {
+        return volgnummer;
     }
 
     public List<Bestellijn> getBestellijnen() {
@@ -24,7 +32,18 @@ public class Bestelling {
         return state;
     }
 
-
+    public Bestellijn containsDuplicates() {
+        boolean found = false;
+        for (int j = 0; j != bestellijnen.size();j++) {
+            for (int i = 0; i != bestellijnen.size(); i++) {
+                if (found == false &&bestellijnen.get(j).naamBroodje == bestellijnen.get(i).naamBroodje && bestellijnen.get(j).getNamenBeleg().equals(bestellijnen.get(i).getNamenBeleg()) && i!=j) {
+                    found = true;
+                    return bestellijnen.get(i);
+                }
+            }
+        }
+        return null;
+    }
 
     public void voegBestellijnToe (Broodje broodje) {
         this.bestellijnen.add(new Bestellijn(broodje));

@@ -66,6 +66,7 @@ public class OrderNieuweBestelling extends GridPane {
     private void updateVolgnummer() {
         String tekst = "Volgnummer: " + this.volgnummer;
         this.volgnummerText.setText(tekst);
+        this.controller.getBestelling().setVolgnummer(volgnummer);
     }
 
     // De states worden met elkaar vergeleken.

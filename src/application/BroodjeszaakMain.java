@@ -1,6 +1,7 @@
 package application;
 	
 import controller.BestelViewController;
+import controller.KeukenViewController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.database.BroodjesDatabase;
@@ -14,8 +15,13 @@ public class BroodjeszaakMain extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		AdminView adminView = new AdminView();
-		OrderView orderView = new OrderView(new BestelViewController());
-		KitchenView kitchenView = new KitchenView();
+		BestelViewController controller = new BestelViewController();
+		OrderView orderView = new OrderView(controller);
+		KeukenViewController keukenViewController = new KeukenViewController();
+		controller.addObserver(keukenViewController, "ZendNaarKeuken");
+
+		KitchenView kitchenView = new KitchenView(keukenViewController);
+		kitchenView.setBestelViewController(controller);
 		String fileUseType = "Excel";
 
 	}

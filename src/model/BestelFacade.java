@@ -149,7 +149,7 @@ public class BestelFacade implements Subject {
     @Override
     public void notifyObservers(String event) throws IOException, BiffException {
         for (Observer observer : observers.get(event)) {
-                observer.update();
+                observer.update(event);
             }
         }
 }

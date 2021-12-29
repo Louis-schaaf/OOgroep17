@@ -19,7 +19,7 @@ public class InstellingenController implements Observer {
     }
 
     @Override
-    public void update() {
+    public void update(String event) {
         pane.update();
     }
 }

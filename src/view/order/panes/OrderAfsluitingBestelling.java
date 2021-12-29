@@ -81,13 +81,7 @@ public class OrderAfsluitingBestelling extends GridPane {
     private Button setUpKeukenKnop() {
         this.keukenKnop = new Button("Naar Keuken");
         this.keukenKnop.setOnAction(e -> {
-                /*try {
-                    controller.stuurBestellingNaarKeuken(); //TODO
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                } catch (BiffException biffException) {
-                    biffException.printStackTrace();
-                }*/
+            controller.stuurBestellingNaarKeuken();
         });
         this.keukenKnop.setDisable(true);
         return this.keukenKnop;

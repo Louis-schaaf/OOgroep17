@@ -19,6 +19,7 @@ public class BestelViewController implements Observer {
 
     public BestelViewController() {
         setBestelFacade(new BestelFacade());
+        //TODO: (LOUIS) waarom luisterd die naar alles?
         this.bestelFacade.addObserver(this, "TOEVOEGEN_BROODJE");
         this.bestelFacade.addObserver(this, "NIEUWE_BESTELLING");
         this.bestelFacade.addObserver(this, "TOEVOEGEN_BELEG");
@@ -29,6 +30,8 @@ public class BestelViewController implements Observer {
         this.bestelFacade.addObserver(this, "BETAAL_BESTELLING");
     }
 
+    public void addObserver(Observer observer, String event) {this.bestelFacade.addObserver(observer, event);}
+
     public void setBestelFacade(BestelFacade bestelFacade) {
         this.bestelFacade = bestelFacade;
     }
@@ -38,7 +41,7 @@ public class BestelViewController implements Observer {
     }
 
     @Override
-    public void update() {
+    public void update(String event) {
         orderView.update(this.getBestelling());
     }
 
@@ -120,5 +123,16 @@ public class BestelViewController implements Observer {
 
     public void betaalBestelling() throws BiffException, IOException{
         this.bestelFacade.betaalBestelling();
+    }
+
+    public void stuurBestellingNaarKeuken() {
+        try {
+            bestelFacade.notifyObservers("ZendNaarKeuken");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (BiffException e) {
+            e.printStackTrace();
+        }
     }
 }
