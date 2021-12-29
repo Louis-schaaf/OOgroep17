@@ -99,9 +99,11 @@ public class OrderNieuweBestelling extends GridPane {
             choiceBox.setDisable(true);
         }
         if (bestelling.getState().getClass().getName().contains("Betaald")) {
-            buttonNieuweBestelling.setDisable(false);
             choiceBox.setDisable(true);
             this.volgnummer++;
+        }
+        if (bestelling.getState().getClass().getName().contains("InKeuken")) {
+            buttonNieuweBestelling.setDisable(false);
         }
     }
 }
