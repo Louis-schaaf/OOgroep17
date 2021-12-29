@@ -97,4 +97,14 @@ public class Bestelling {
     public Bestellijn verwijderBestellijn(Bestellijn selectedBestellijn) {
         return this.bestellijnen.remove(this.getIndex(selectedBestellijn));
     }
+
+    public void setBestellijnen(Bestelling bestelling, List<Bestellijn> bestellijns) {
+        for (Bestellijn bestellijn: bestellijns){
+            bestelling.voegBestellijnToe(bestellijn);
+        }
+    }
+
+    public void voegBestellijnToe (Bestellijn bestellijn) {
+        this.bestellijnen.add(bestellijn);
+    }
 }

@@ -115,13 +115,15 @@ public class BestelFacade implements Subject {
             }
         }
         this.bestelling.betalen();
-        this.betaaldeBestellingen.add(this.bestelling);
+        Bestelling bestelling = new Bestelling();
+        List<Bestellijn> bestellijns = this.bestelling.getBestellijnen();
+        bestelling.setBestellijnen(bestelling, bestellijns);
+        this.betaaldeBestellingen.add(bestelling);
         notifyObservers("BETAAL_BESTELLING");
     }
 
     public void zendBestellingNaarKeuken() throws BiffException, IOException {
         this.bestelling.verzenden();
-        System.out.println(this.getBroodjes().values());
         notifyObservers("ZEND_NAAR_KEUKEN");
     }
 
