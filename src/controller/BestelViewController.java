@@ -124,6 +124,8 @@ public class BestelViewController implements Observer {
                 for (String beleg : selectedBestellijn.getNamenBelegLijst()){
                     voegBelegToe(beleg, getLijstBestellijnen().size()-1);
                 }
+            } else {
+                this.orderView.toonError();
             }
         }
     }
