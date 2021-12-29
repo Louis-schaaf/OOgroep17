@@ -16,7 +16,7 @@ public class StatistiekenController implements Observer {
 
     public StatistiekenController() {
         setBestelFacade(new BestelFacade());
-        this.bestelFacade.addObserver(this, "ZendNaarKeuken");
+        this.bestelFacade.addObserver(this, "ZEND_NAAR_KEUKEN");
     }
 
     private void setBestelFacade(BestelFacade bestelFacade) {

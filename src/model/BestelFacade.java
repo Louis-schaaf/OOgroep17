@@ -116,7 +116,7 @@ public class BestelFacade implements Subject {
 
     public void zendBestellingNaarKeuken() throws BiffException, IOException {
         this.bestelling.verzenden();
-        notifyObservers("ZendNaarKeuken");
+        notifyObservers("ZEND_NAAR_KEUKEN");
     }
 
     public List<Bestelling> getBetaaldeBestellingen() {
