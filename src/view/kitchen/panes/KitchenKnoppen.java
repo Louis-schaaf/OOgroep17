@@ -72,7 +72,7 @@ public class KitchenKnoppen extends GridPane {
         while (bestelling.containsDuplicates() != null) {
             Bestellijn duplicate = bestelling.containsDuplicates();
             ArrayList<Bestellijn> duplicates = getDuplicates(bestelling.bestellijnen, duplicate);
-            broodjesInfo += duplicates.size()+"x "+duplicate.naamBroodje+": "+duplicate.getNamenBeleg()+"\n";
+            broodjesInfo += duplicates.size()+"x "+duplicate.naamBroodje+": "+duplicate.getNamenBelegWithCount()+"\n";
             bestelling.getBestellijnen().removeAll(duplicates);
         }
         for (Bestellijn bestellijn : bestelling.getBestellijnen()) {
