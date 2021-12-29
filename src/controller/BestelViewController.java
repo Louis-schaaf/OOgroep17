@@ -90,6 +90,7 @@ public class BestelViewController implements Observer {
             this.bestelFacade.voegBelegToe(naamBeleg, bestelLijn);
             this.orderView.updateBestellijnen();
             this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
+            this.orderView.updateStatusBroodjesKnoppen(this.getVoorraadBroodjes());
         } else {
             this.orderView.toonError();
         }
@@ -117,8 +118,13 @@ public class BestelViewController implements Observer {
         if (selectedBestellijn == null) {
             this.orderView.toonError();
         } else {
-            getLijstBestellijnen().add(selectedBestellijn);
-            this.orderView.updateBestellijnen();
+            if (this.bestelFacade.voegIdentiekBestellijnToe(selectedBestellijn)){
+                Bestellijn nieuw = selectedBestellijn;
+                voegBestellijnToe(nieuw.getNaamBroodje());
+                for (String beleg : selectedBestellijn.getNamenBelegLijst()){
+                    voegBelegToe(beleg, getLijstBestellijnen().size()-1);
+                }
+            }
         }
     }
 

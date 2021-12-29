@@ -96,8 +96,12 @@ public class BestelFacade implements Subject {
     }
 
     public void verwijderBestellijn(Bestellijn selectedBestellijn) {
-        if (getLijstBestellijnen().contains(selectedBestellijn)) {
-            getLijstBestellijnen().remove(selectedBestellijn);
+        Bestellijn b = this.bestelling.verwijderBestellijn(selectedBestellijn);
+        Broodje broodje = this.broodjesDatabase.getBroodje(b.getNaamBroodje());
+        broodje.aanpassenVoorraad(1);
+        for (String s : b.getNamenBelegLijst()) {
+            BelegSoort beleg = this.belegDatabase.getBeleg(s);
+            beleg.aanpassenVoorraad(1);
         }
     }
 
@@ -160,4 +164,19 @@ public class BestelFacade implements Subject {
                 observer.update();
             }
         }
+
+    public boolean voegIdentiekBestellijnToe(Bestellijn selectedBestellijn) {
+        boolean mogelijk = true;
+        Broodje broodje = this.broodjesDatabase.getBroodje(selectedBestellijn.getNaamBroodje());
+        if (broodje.getActualStock() < 1){
+            mogelijk = false;
+        }
+        for (String belegSoortString: selectedBestellijn.getNamenBelegLijst()){
+            BelegSoort belegSoort = this.belegDatabase.getBeleg(belegSoortString);
+            if (belegSoort.getActualStock() < 1){
+                mogelijk = false;
+            }
+        }
+        return mogelijk;
+    }
 }
