@@ -36,7 +36,7 @@ public class OverzichtController implements Observer {
     }
 
     @Override
-    public void update(String event) {
+    public void update() {
         pane.update(this.getBroodjes(), this.getBeleg());
     }
 }

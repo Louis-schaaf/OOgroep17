@@ -30,10 +30,10 @@ public class KeukenViewController implements Observer {
     }
 
     @Override
-    public void update(String event) throws IOException, BiffException {
-        if (event.equals("ZendNaarKeuken")) {
-            kitchenView.getWachtrij().add(this.bestelFacade.getBestelling());
-            kitchenView.updateCounter();
-        }
+    public void update() throws IOException, BiffException {
+
+        kitchenView.getWachtrij().add(this.bestelFacade.getBestelling());
+        kitchenView.updateCounter();
+
     }
 }

@@ -36,7 +36,7 @@ public class StatistiekenController implements Observer {
     }
 
     @Override
-    public void update(String event) throws IOException, BiffException {
+    public void update() throws IOException, BiffException {
         statisticsPane.update(this.getBroodjes(), this.getBeleg());
     }
 }
