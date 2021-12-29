@@ -1,5 +1,6 @@
 package application;
 	
+import com.sun.scenario.Settings;
 import controller.BestelViewController;
 import controller.KeukenViewController;
 import javafx.application.Application;
@@ -23,7 +24,6 @@ public class BroodjeszaakMain extends Application {
 		KitchenView kitchenView = new KitchenView(keukenViewController);
 		kitchenView.setBestelViewController(controller);
 		String fileUseType = "Excel";
-
 	}
 	
 	public static void main(String[] args) {

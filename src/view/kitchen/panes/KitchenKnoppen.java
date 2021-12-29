@@ -18,6 +18,7 @@ public class KitchenKnoppen extends GridPane {
     Text bestellingInfo;
     Button volgendeBestelling;
     Button bestellingAfgewerkt;
+
     public KitchenKnoppen(KeukenViewController controller) {
         volgendeBestelling = new Button();
         bestellingAfgewerkt = new Button();
