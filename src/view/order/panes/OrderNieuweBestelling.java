@@ -90,7 +90,7 @@ public class OrderNieuweBestelling extends GridPane {
             choiceBox.setDisable(true);
         }
         if (bestelling.getState().getClass().getName().contains("Betaald")) {
-            buttonNieuweBestelling.setDisable(true);
+            buttonNieuweBestelling.setDisable(false);
             choiceBox.setDisable(true);
             this.volgnummer++;
         }
