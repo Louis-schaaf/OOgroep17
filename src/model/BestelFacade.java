@@ -116,6 +116,7 @@ public class BestelFacade implements Subject {
         }
         this.bestelling.betalen();
         Bestelling bestelling = new Bestelling();
+        bestelling.setVolgnummer(this.bestelling.getVolgnummer());
         List<Bestellijn> bestellijns = this.bestelling.getBestellijnen();
         bestelling.setBestellijnen(bestelling, bestellijns);
         this.betaaldeBestellingen.add(bestelling);
