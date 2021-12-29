@@ -13,10 +13,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Deze klasse stelt de strategie voor die gebruikt wordt wanneer we het excel-bestand met beleg willen gebruiken.
+ */
 public class BelegExcelLoadSaveStrategy extends ExcelLoadSaveTemplate implements LoadSaveStrategy{
     File file = new File("src/bestanden/beleg.xls");
-
-    public BelegExcelLoadSaveStrategy() {}
 
     public Map getData(File file){
         Map<String, BelegSoort> map = new HashMap<>();

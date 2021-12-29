@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Deze interface geeft alle mogelijke acties die de verschillende Subjects kunnen uitvoeren.
+ */
 public interface Subject {
     Map<String, ArrayList<Observer>> observers = new HashMap<>();
-    public void addObserver(Observer observer, String event);
-    public void removeObserver(Observer observer, String event);
-
-    public void notifyObservers(String event) throws IOException, BiffException;
+    void addObserver(Observer observer, String event);
+    void removeObserver(Observer observer, String event);
+    void notifyObservers(String event) throws IOException, BiffException;
 }

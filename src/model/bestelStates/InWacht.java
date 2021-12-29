@@ -2,6 +2,10 @@ package model.bestelStates;
 
 import model.Bestelling;
 
+/**
+ * Deze klasse stelt de staat voor waarin de bestelling zich bevindt als de bestelling nog niet is gestart.
+ * Deze staat wordt bereikt door op de "Annuleer"-knop of de "Naar Keuken"-knop in de Order-view te drukken.
+ */
 public class InWacht implements BestellingState{
     Bestelling bestelling;
     public InWacht(Bestelling bestelling) {

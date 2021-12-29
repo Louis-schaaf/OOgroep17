@@ -2,12 +2,14 @@ package model.database;
 
 import model.Broodje;
 import model.Instellingen;
-import model.database.loadSaveStrategies.BroodjesExcelLoadSaveStrategy;
 import model.database.loadSaveStrategies.LoadSaveStrategy;
 import model.database.loadSaveStrategies.LoadSaveStrategyFactory;
 
 import java.util.*;
 
+/**
+ * Deze klasse stelt de database met broodjes-items voor die we in onze broodjeszaak gebruiken.
+ */
 public class BroodjesDatabase {
     private Map<String,Broodje> broodjes;
     private LoadSaveStrategy loadSaveStrategy;
@@ -18,39 +20,17 @@ public class BroodjesDatabase {
         this.load();
     }
 
-    public void voegItemToe(Broodje broodje){
-        if (this.exists(broodje)) throw new IllegalStateException("Je kan geen broodje twee keer toevoegen.");
-        broodjes.put(broodje.getName(),broodje);
-    }
-
     public void setStrategy(LoadSaveStrategy strategy){
         this.loadSaveStrategy = strategy;
     }
-
-    public boolean exists(Broodje broodje){
-        return broodjes.containsKey(broodje.getName());
-    }
-
 
     public List<Broodje> getAll(){
         Collection<Broodje> values = broodjes.values();
         return new ArrayList<>(values);
     }
 
-    public void load() {
-        broodjes.putAll(loadSaveStrategy.load());
-    }
-
-    public void save() {
-        loadSaveStrategy.save(this.getAll());
-    }
-
     public Map<String, Broodje> getBroodjes() {
         return broodjes;
-    }
-
-    public void sellBroodjes(Broodje broodje) {
-        broodje.setActualStock(broodje.getActualStock()-1);
     }
 
     public Broodje getBroodje(String naamBroodje) {
@@ -73,5 +53,13 @@ public class BroodjesDatabase {
             result.put(b.getName(), b.getSoldAmount());
         }
         return result;
+    }
+
+    public void load() {
+        broodjes.putAll(loadSaveStrategy.load());
+    }
+
+    public void save() {
+        loadSaveStrategy.save(this.getAll());
     }
 }

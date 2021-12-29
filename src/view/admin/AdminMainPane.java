@@ -1,6 +1,5 @@
 package view.admin;
 
-
 import controller.admin.InstellingenController;
 import controller.admin.OverzichtController;
 import controller.admin.StatistiekenController;
@@ -13,10 +12,12 @@ import view.admin.panes.SandwichOverviewPane;
 import view.admin.panes.SettingsPane;
 import view.admin.panes.StatisticsPane;
 
+/**
+ * Deze klasse weergeeft de startpagina van de Admin-view.
+ */
 public class AdminMainPane extends BorderPane {
 	public AdminMainPane(BestelFacade bestelFacade){
-	    TabPane tabPane = new TabPane(); 	    
-        //Tab spelVerloopTab = new Tab("Spelverloop");
+	    TabPane tabPane = new TabPane();
         SandwichOverviewPane sandwichOverviewPane = new SandwichOverviewPane(new OverzichtController(bestelFacade));
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setPercentWidth(50);
@@ -28,7 +29,6 @@ public class AdminMainPane extends BorderPane {
         Tab broodjesTab = new Tab("Broodjes/Beleg",sandwichOverviewPane);
         Tab instellingTab = new Tab("Instellingen",settingsPane);
         Tab statistiekTab = new Tab("Statistieken", statisticsPane);
-        //tabPane.getTabs().add(spelVerloopTab);
         tabPane.getTabs().add(broodjesTab);
         tabPane.getTabs().add(statistiekTab);
         tabPane.getTabs().add(instellingTab);

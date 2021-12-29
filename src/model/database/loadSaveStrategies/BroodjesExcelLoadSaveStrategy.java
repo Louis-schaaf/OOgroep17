@@ -12,11 +12,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Deze klasse stelt de strategie voor die gebruikt wordt wanneer we het excel-bestand met broodjes willen gebruiken.
+ */
 public class BroodjesExcelLoadSaveStrategy extends ExcelLoadSaveTemplate implements LoadSaveStrategy{
     File file = new File("src/bestanden/broodjes.xls");
-
-     public BroodjesExcelLoadSaveStrategy() {
-     }
 
      public Map getData(File file){
          Map<String, Broodje> map = new HashMap<>();

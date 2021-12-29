@@ -1,21 +1,17 @@
 package view.admin.panes;
 
-import com.sun.scenario.Settings;
-import controller.BestelViewController;
 import controller.admin.InstellingenController;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import jxl.read.biff.BiffException;
-import model.Bestelling;
 import model.Instellingen;
 
-import java.io.IOException;
-
+/**
+ * Deze klasse geeft een overzicht van de instellingen van onze applicatie in de "Instellingen"-tab van de Admin-view.
+ */
 public class SettingsPane extends GridPane {
     public InstellingenController controller;
     private ChoiceBox choiceBox;
@@ -38,7 +34,6 @@ public class SettingsPane extends GridPane {
 
     }
 
-    // Zet een choicebox op en zet deze als standaardwaarde op disabled.
     private Node setUpChoiceBox() {
         choiceBox = new ChoiceBox<>();
         choiceBox.getItems().addAll("GOEDKOOPSTEGRATIS", "GEENKORTING", "TIENPROCENT");

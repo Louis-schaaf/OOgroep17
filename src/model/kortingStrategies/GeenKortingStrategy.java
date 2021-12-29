@@ -1,12 +1,10 @@
 package model.kortingStrategies;
 
-import model.Bestellijn;
-import model.Bestelling;
-
 import java.util.ArrayList;
 
-import static jdk.nashorn.internal.objects.NativeMath.round;
-
+/**
+ * Deze klasse stelt de strategie voor die gebruikt wordt indien er geen korting wordt verrekend op de bestelling.
+ */
 public class GeenKortingStrategy implements KortingStrategy{
 
     @Override

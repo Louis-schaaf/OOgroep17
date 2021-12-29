@@ -13,6 +13,9 @@ import model.Instellingen;
 
 import java.io.IOException;
 
+/**
+ * Deze klasse weergeeft de "Nieuwe bestelling"-pane van de Order-view.
+ */
 public class OrderNieuweBestelling extends GridPane {
     public BestelViewController controller;
     ChoiceBox choiceBox;
@@ -25,15 +28,14 @@ public class OrderNieuweBestelling extends GridPane {
         buttonNieuweBestelling = new Button();
         this.controller = controller;
         this.setPadding(new Insets(10,0,10,20));
-        this.setHgap(30); //horizontal gap in pixels => that's what you are asking for
-        this.setVgap(10); //vertical gap in pixels
+        this.setHgap(30);
+        this.setVgap(10);
         this.add(this.setUpOrderButton(),0, 0);
         this.add(this.setUpVolgnummer(), 1,0);
         this.add(this.setUpChoiceBox(),3,0);
         this.setHgap(60);
     }
 
-    // Zet een choicebox op en zet deze als standaardwaarde op disabled.
     private Node setUpChoiceBox() {
         choiceBox.getItems().addAll("GOEDKOOPSTEGRATIS", "GEENKORTING", "TIENPROCENT");
         choiceBox.setValue(Instellingen.getKorting());
@@ -41,13 +43,14 @@ public class OrderNieuweBestelling extends GridPane {
         return choiceBox;
     }
 
+    public String getChoiceBox(){
+        return this.choiceBox.getValue().toString();
+    }
+
     private void updateChoiceBox() {
         this.choiceBox.setValue(Instellingen.getKorting());
     }
 
-    // Zet een orderButton van "Nieuwe Bestelling"
-    // Wanneer deze wordt ingedrukt wordt er een nieuwe bestelling aangemaakt.
-    // De knop wort daarna teruggegeven.
     private Button setUpOrderButton() {
         buttonNieuweBestelling.setText("Nieuwe bestelling");
         buttonNieuweBestelling.setOnAction(event -> {
@@ -74,10 +77,10 @@ public class OrderNieuweBestelling extends GridPane {
         this.controller.getBestelling().setVolgnummer(volgnummer);
     }
 
-    // De states worden met elkaar vergeleken.
-    // Wanneer de state van de bestelling niet meer InWacht staat
-    // moet de bestelknop gedisabled worden
-    // en de choiceBox worden geanabled.
+    public void hideVolgNummer() {
+        this.volgnummerText.setVisible(false);
+    }
+
     public void update(Bestelling bestelling) {
         if (bestelling.getState().getClass().getName().contains("InWacht")) {
             this.updateChoiceBox();
@@ -100,8 +103,5 @@ public class OrderNieuweBestelling extends GridPane {
             choiceBox.setDisable(true);
             this.volgnummer++;
         }
-    }
-    public String getChoiceBox(){
-        return this.choiceBox.getValue().toString();
     }
 }

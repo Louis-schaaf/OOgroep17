@@ -1,5 +1,8 @@
 package model.kortingStrategies;
 
+/**
+ * Deze Enum bevat alle mogelijke strategieën die we kunnen gebruiken om korting te verrekenen op een bestelling.
+ */
 public enum KortingStrategyEnum {
     GEENKORTING("Geen Korting", "model.kortingStrategies.GeenKortingStrategy"),
     GOEDKOOPSTEGRATIS("Goedkoopste Gratis", "model.kortingStrategies.GoedkoopsteGratisStrategy"),
@@ -15,9 +18,5 @@ public enum KortingStrategyEnum {
 
     public String getKlasseNaam() {
         return klasseNaam;
-    }
-
-    public String getOmschrijving() {
-        return omschrijving;
     }
 }

@@ -1,8 +1,10 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.zip.ZipEntry;
 
+/**
+ * Deze klasse geeft de constructor en alle beschikbare methodes voor een Belegsoort weer.
+ */
 public class BelegSoort {
     private String name;
     private double salePrice;
@@ -20,21 +22,11 @@ public class BelegSoort {
         this("",0.0,0,0);
     }
 
-    // De huidige voorraad wordt ingesteld op de meegegeven waarde.
     private void setActualStock(int actualStock) {
         if (actualStock < 0) {
             throw new IllegalArgumentException("The actual stock cannot be less than 0.");
         }
         this.actualStock = actualStock;
-    }
-
-    // De
-    public void aanpassenVoorraad (int i) {
-        this.actualStock += i;
-    }
-
-    public void aanpassenVerkochtAantal (int i) {
-        this.soldAmount += i;
     }
 
     private void setSoldAmount(int soldAmount) {
@@ -56,6 +48,14 @@ public class BelegSoort {
             throw new IllegalArgumentException("The name cannot be empty.");
         }
         this.name = name;
+    }
+
+    public void aanpassenVoorraad (int i) {
+        this.actualStock += i;
+    }
+
+    public void aanpassenVerkochtAantal (int i) {
+        this.soldAmount += i;
     }
 
     public ArrayList<String> getArrayList() {

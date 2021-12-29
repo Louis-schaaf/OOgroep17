@@ -2,6 +2,10 @@ package model.bestelStates;
 
 import model.Bestelling;
 
+/**
+ * Deze klasse stelt de staat voor waarin de bestelling zich bevindt als de gebruiker alle gewilde broodjes heeft
+ * toegevoegd en op de "Afsluiten bestelling"-knop in de Order-view heeft gedrukt.
+ */
 public class Afgesloten implements BestellingState{
     Bestelling bestelling;
 

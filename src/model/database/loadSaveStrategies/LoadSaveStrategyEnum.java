@@ -1,5 +1,8 @@
 package model.database.loadSaveStrategies;
 
+/**
+ * Deze Enum bevat alle mogelijke laadstrategieën die we kunnen gebruiken om broodjes en beleg in te laden en opslaan.
+ */
 public enum LoadSaveStrategyEnum {
     EXCELBROODJES("ExcelBroodjes", "model.database.loadSaveStrategies.BroodjesExcelLoadSaveStrategy"),
     TEKSTBROODJES("TekstBroodjes", "model.database.loadSaveStrategies.BroodjesTekstLoadSaveStrategy"),
@@ -16,9 +19,5 @@ public enum LoadSaveStrategyEnum {
 
     public String getKlasseNaam() {
         return klasseNaam;
-    }
-
-    public String getOmschrijving() {
-        return omschrijving;
     }
 }

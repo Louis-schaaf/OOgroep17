@@ -10,6 +10,9 @@ import view.admin.panes.StatisticsPane;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * Deze klasse maakt een nieuwe controller aan die de Statistieken-tab van de Admin-view bediend.
+ */
 public class StatistiekenController implements Observer {
     public BestelFacade bestelFacade;
     public StatisticsPane statisticsPane;

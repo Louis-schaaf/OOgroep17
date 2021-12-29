@@ -2,6 +2,10 @@ package model.bestelStates;
 
 import model.Bestelling;
 
+/**
+ * Deze klasse stelt de staat voor waarin de bestelling zich bevindt als de bestelling in de wachtrij in de keuken zit.
+ * Deze staat wordt bereikt door op de "Naar keuken"-knop in de Order-view te drukken.
+ */
 public class InKeuken implements BestellingState {
     Bestelling bestelling;
     public InKeuken(Bestelling bestelling) {

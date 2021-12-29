@@ -4,12 +4,12 @@ import model.BelegSoort;
 import model.BestelFacade;
 import model.Broodje;
 import model.Observer;
-import view.admin.AdminView;
 import view.admin.panes.SandwichOverviewPane;
-import view.order.OrderView;
-
 import java.util.Map;
 
+/**
+ * Deze klasse maakt een nieuwe controller aan die de Broodjes/beleg-tab van de Admin-view bediend.
+ */
 public class OverzichtController implements Observer {
     public BestelFacade bestelFacade;
     public SandwichOverviewPane pane;

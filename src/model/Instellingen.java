@@ -8,13 +8,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * Deze klasse wordt gebruikt om de instellingen van onze applicatie in te lezen en op te slaan.
+ */
 public class Instellingen extends Properties {
     private final static String file = System.getProperty("user.dir") + "/src/bestanden/settings.xml";
     private volatile static Properties properties;
-
-    public static Properties Properties() throws IOException, BiffException {
-        return createProperties();
-    }
 
     public static Properties createProperties() throws IOException, BiffException {
         if (properties == null) {

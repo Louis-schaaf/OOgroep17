@@ -1,16 +1,12 @@
 package controller.admin;
 
-import jxl.read.biff.BiffException;
-import model.BelegSoort;
 import model.BestelFacade;
-import model.Broodje;
 import model.Observer;
 import view.admin.panes.SettingsPane;
-import view.admin.panes.StatisticsPane;
 
-import java.io.IOException;
-import java.util.Map;
-
+/**
+ * Deze klasse maakt een nieuwe controller aan die de Instellingen-tab van de Admin-view bediend.
+ */
 public class InstellingenController implements Observer {
     public BestelFacade bestelFacade;
     public SettingsPane settingsPane;

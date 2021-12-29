@@ -2,38 +2,32 @@ package view.order.panes;
 
 import controller.BestelViewController;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import jxl.read.biff.BiffException;
 import model.BelegSoort;
-import model.Bestellijn;
 import model.Broodje;
 import model.Bestelling;
-import model.database.loadSaveStrategies.LoadSaveStrategyFactory;
-
 import java.io.IOException;
-import java.nio.BufferUnderflowException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
+/**
+ * Deze klasse weergeeft de "Bestel opties"-pane van de Order-view.
+ */
 public class OrderOptions extends GridPane {
     public BestelViewController controller;
     ArrayList<Button> buttonsBroodjes = new ArrayList<>();
     ArrayList<Button> buttonsBeleg = new ArrayList<>();
     int broodjesIndex = 0;
     int belegIndex = 0;
-    //TODO
-    //Check Observer Style methode toepassen! (Story 3.3)
 
     public OrderOptions(BestelViewController controller){
         this.controller = controller;
         this.setPadding(new Insets(10,0,10,20));
-        this.setHgap(30); //horizontal gap in pixels => that's what you are asking for
-        this.setVgap(10); //vertical gap in pixels
-
+        this.setHgap(30);
+        this.setVgap(10);
         this.setHgap(10);
         this.setUpBroodjesKnoppen();
         this.setUpBelegKnoppen();
@@ -45,16 +39,12 @@ public class OrderOptions extends GridPane {
 
         for (Map.Entry<String, Broodje> entry : broodjes.entrySet()) {
             if (entry.getValue().getActualStock() > 0) {
-                BroodjesKnoppen(controller.getBestelling(), entry.getKey(), true, true);
+                BroodjesKnoppen(entry.getKey(), true, true);
             }
         }
     }
 
-    // Geeft een knop terug:
-    // a) buttonName: De naam van de knop
-    // b) gray: Indien true wordt de achtergrond van de knop grijs en anders geel
-    // c) border: Indien true wordt er een zwarte border getoond rond de knop.
-    private Button BroodjesKnoppen(Bestelling bestelling, String buttonName, boolean gray, boolean border){
+    private Button BroodjesKnoppen(String buttonName, boolean gray, boolean border){
         Button button = new Button(buttonName);
         if (gray == true){
             button.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(10), Insets.EMPTY)));
@@ -104,7 +94,7 @@ public class OrderOptions extends GridPane {
         buttonsBeleg.add(button);
         button.setOnAction(e -> {
                 try {
-                    controller.voegBelegToe(buttonName, controller.getLijstBestellijnen().indexOf(controller.getBestellijn()));
+                    controller.voegBelegToe(buttonName, bestelling.getBestellijnen().indexOf(controller.getBestellijn()));
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 } catch (BiffException biffException) {
@@ -116,13 +106,6 @@ public class OrderOptions extends GridPane {
         return button;
     }
 
-    public int getSelectedIndex(Bestellijn bestellijn) {
-        return controller.getLijstBestellijnen().indexOf(bestellijn);
-    }
-
-    //Zet alle knoppen van deze pane in een array
-    //Indien de voorraad van de broodjes de tekst van de knop contains
-    //Dan kijkt die als de voorraad kleiner is dan 1; als dit is dan wordt de knop uitgezet.
     public void updateStatusBroodjesKnoppen(Map<String, Integer> voorraadBroodjes) {
         for (Button b : this.buttonsBroodjes) {
             if (voorraadBroodjes.containsKey(b.getText())) {
@@ -136,9 +119,6 @@ public class OrderOptions extends GridPane {
         }
     }
 
-    //Zet alle knoppen van deze pane in een array
-    //Indien de voorraad van de beleg de tekst van de knop contains
-    //Dan kijkt die als de voorraad kleiner is dan 0; als dit is dan wordt de knop uitgezet.
     public void updateStatusBelegKnoppen(Map<String, Integer> voorraadBeleg) {
         Button[] buttons = this.getManagedChildren().toArray(new Button[0]);
         for (Button b : buttons) {

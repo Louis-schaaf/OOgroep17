@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * Deze Enum bevat alle mogelijke bestellingsevents die onze applicatie gebruikt.
+ */
 public enum BestellingEvents {
     NIEUWE_BESTELLING("NieuweBestelling", "model.bestelling.bestelFacade.startNieuweBestelling"),
     TOEVOEGEN_BROODJE("BroodjeToevoegen", "model.bestelling.bestelFacade.voegBestellijnToe"),
@@ -17,13 +20,5 @@ public enum BestellingEvents {
     BestellingEvents(String omschrijving, String klasseNaam){
         this.omschrijving = omschrijving;
         this.methodeNaam = klasseNaam;
-    }
-
-    public String getMethodeNaam() {
-        return methodeNaam;
-    }
-
-    public String getOmschrijving() {
-        return omschrijving;
     }
 }

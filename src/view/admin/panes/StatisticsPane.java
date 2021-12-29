@@ -9,8 +9,6 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import model.BelegSoort;
 import model.Broodje;
@@ -19,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Deze klasse geeft een overzicht van de statistieken van onze applicatie in de "Statistieken"-tab van de Admin-view.
+ */
 public class StatisticsPane extends GridPane {
     public StatistiekenController controller;
     private BarChart broodjesChart;
@@ -88,6 +89,5 @@ public class StatisticsPane extends GridPane {
         this.broodjesChart.setVisible(true);
         this.belegChart.setVisible(false);
         this.belegChart.setVisible(true);
-        //TODO update past niks aan
     }
 }

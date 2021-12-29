@@ -12,11 +12,13 @@ import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
+/**
+ * Deze klasse fungeert als een template voor het inlezen van bestanden van het excel-formaat.
+ */
 public abstract class ExcelLoadSaveTemplate {
 
     public void write(File file, ArrayList<ArrayList<String>> args)
             throws BiffException, IOException, RowsExceededException, WriteException {
-
         WritableWorkbook workbook = Workbook.createWorkbook(file);
         workbook.createSheet("sheet1", 0);
         WritableSheet sheet = workbook.getSheet(0);
@@ -33,14 +35,11 @@ public abstract class ExcelLoadSaveTemplate {
 
     public ArrayList<ArrayList<String>> read(File file)
             throws BiffException, IOException {
-
         Workbook workbook = Workbook.getWorkbook(file);
         Sheet sheet = workbook.getSheet(0);
         int row = 0;
-
         ArrayList<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
-        while(row < sheet.getRows())
-        {
+        while(row < sheet.getRows()) {
             int column = 0;
             ArrayList<String> rowinfo = new ArrayList<String>();
             while(column < sheet.getColumns()){
@@ -55,6 +54,4 @@ public abstract class ExcelLoadSaveTemplate {
         workbook.close();
         return info;
     }
-
-
 }

@@ -1,7 +1,6 @@
 package view.order;
 
 import controller.BestelViewController;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -14,10 +13,11 @@ import view.order.panes.OrderBroodjes;
 import view.order.panes.OrderNieuweBestelling;
 import view.order.panes.OrderOptions;
 
-import javax.xml.soap.Text;
-import java.awt.*;
 import java.util.Map;
 
+/**
+ * Deze klasse maakt de Order-view aan.
+ */
 public class OrderView {
 	private Stage stage = new Stage();
 	private Stage popup;
@@ -83,9 +83,18 @@ public class OrderView {
 		this.orderOptions.updateStatusBelegKnoppen(voorraadBeleg);
 	}
 
+	public void hideVolgNummer() {
+		this.orderNieuweBestelling.hideVolgNummer();
+	}
+
+	public void resetAantalBroodjes() {
+		this.orderBroodjes.resetAantalBroodjes();
+	}
+
 	public void updateBedrag(double bedrag) {
 		this.orderAfsluitingBestelling.updateBedrag(bedrag);
 	}
+
 	public String getKorting(){
 		return this.orderNieuweBestelling.getChoiceBox();
 	}

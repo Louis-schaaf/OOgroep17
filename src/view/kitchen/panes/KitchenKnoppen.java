@@ -8,26 +8,28 @@ import javafx.scene.text.Text;
 import model.Bestellijn;
 import model.Bestelling;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Deze klasse geeft een overzicht van de beschikbare knopen en bijhorende functies van de Kitchen-view.
+ */
 public class KitchenKnoppen extends GridPane {
     public KeukenViewController controller;
     private int counter;
+
     Text aantalBestellingen;
     Text bestellingInfo;
     Button volgendeBestelling;
     Button bestellingAfgewerkt;
-    public Bestelling current;
 
     public KitchenKnoppen(KeukenViewController controller) {
         volgendeBestelling = new Button();
         bestellingAfgewerkt = new Button();
         this.controller = controller;
         this.setPadding(new Insets(10,0,10,20));
-        this.setHgap(30); //horizontal gap in pixels => that's what you are asking for
-        this.setVgap(10); //vertical gap in pixels
+        this.setHgap(30);
+        this.setVgap(10);
         this.add(this.setUpVolgendeBestellingButton(),0,0);
         this.add(this.setUpBestellingAfgewerkt(),1,0);
         this.setHgap(60);
@@ -42,7 +44,6 @@ public class KitchenKnoppen extends GridPane {
         this.volgendeBestelling.setDisable(true);
         volgendeBestelling.setOnAction(event -> {
             try {
-                // this.controller volgende bestelling methode
                 bestellingInfo.setVisible(true);
                 this.volgendeBestelling.setDisable(true);
                 this.bestellingAfgewerkt.setDisable(false);
@@ -66,7 +67,6 @@ public class KitchenKnoppen extends GridPane {
                     this.volgendeBestelling.setDisable(false);
                 }
                 this.updateCounter();
-                // methode afgewerkt
             } catch (Exception e) {
                 e.printStackTrace();
             }

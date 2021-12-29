@@ -2,6 +2,10 @@ package model.bestelStates;
 
 import model.Bestelling;
 
+/**
+ * Deze klasse stelt de staat voor waarin de bestelling zich bevindt als de gebruiker bezig is met het toevoegen van de
+ * gewilde broodjes. Deze staat wordt bereikt door op de "Nieuwe bestelling"-knop in de Order-view te drukken.
+ */
 public class InBestelling implements BestellingState{
     Bestelling bestelling;
     public InBestelling(Bestelling bestelling) {

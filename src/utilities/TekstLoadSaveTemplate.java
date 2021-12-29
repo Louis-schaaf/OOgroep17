@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Deze klasse fungeert als een template voor het inlezen van bestanden van het tekst-formaat.
+ */
 public abstract class TekstLoadSaveTemplate<K,V>{
 
     public Map<K,V> read(File file) throws IOException {

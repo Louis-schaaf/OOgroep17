@@ -9,6 +9,9 @@ import view.kitchen.KitchenView;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Deze klasse maakt een nieuwe controller aan die de Kitchen-view bediend.
+ */
 public class KeukenViewController implements Observer {
     public BestelFacade bestelFacade;
     public KitchenView kitchenView;

@@ -2,6 +2,10 @@ package model.bestelStates;
 
 import model.Bestelling;
 
+/**
+ * Deze klasse stelt de staat voor waarin de bestelling zich bevindt terwijl hij wordt klaargemaakt. Deze staat wordt
+ * bekomen nadat op de "Volgende bestelling"-knop in de Kitchen-view wordt gedrukt.
+ */
 public class InBereiding implements BestellingState {
     Bestelling bestelling;
 

@@ -8,8 +8,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Deze klasse stelt de strategie voor die gebruikt wordt wanneer we het tekst-bestand met broodjes willen gebruiken.
+ */
 public class BroodjesTekstLoadSaveStrategy extends TekstLoadSaveTemplate implements LoadSaveStrategy{
     File file = new File("src/bestanden/broodjes.txt");
+
     @Override
     public Object maakObject(String[] tokens) {
         Broodje broodje = new Broodje(tokens[0], Double.parseDouble(tokens[1]), Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]));

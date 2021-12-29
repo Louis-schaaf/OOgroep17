@@ -7,6 +7,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.BestelFacade;
 
+/**
+ * Deze klasse maakt de Admin-view aan.
+ */
 public class AdminView {
 	private Stage stage = new Stage();		
 		

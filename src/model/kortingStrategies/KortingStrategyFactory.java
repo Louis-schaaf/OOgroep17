@@ -1,10 +1,10 @@
 package model.kortingStrategies;
 
-import model.database.loadSaveStrategies.LoadSaveStrategy;
-import model.database.loadSaveStrategies.LoadSaveStrategyEnum;
-
 import java.lang.reflect.Constructor;
 
+/**
+ * Deze factory gebruiken we om de kortingsstrategie te instantiëren.
+ */
 public class KortingStrategyFactory {
     public static KortingStrategy createKortingStrategy(String type, Object... args) {
         KortingStrategy instance = null;

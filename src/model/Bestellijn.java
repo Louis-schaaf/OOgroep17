@@ -1,20 +1,14 @@
 package model;
 
-import javafx.beans.value.ObservableValue;
-import model.BelegSoort;
-import model.Broodje;
-
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Deze klasse geeft de constructor en alle beschikbare methodes voor een Bestellijn weer.
+ */
 public class Bestellijn {
     public String naamBroodje;
     public List<String> namenBeleg;
-
-    public Bestellijn(String naamBroodje) {
-        this.naamBroodje = naamBroodje;
-        this.namenBeleg = new ArrayList<>();
-    }
 
     public Bestellijn(Broodje broodje) {
         this.naamBroodje = broodje.getName();

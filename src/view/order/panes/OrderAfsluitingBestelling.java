@@ -2,7 +2,6 @@ package view.order.panes;
 
 import controller.BestelViewController;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -11,19 +10,19 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import jxl.read.biff.BiffException;
-import model.Bestellijn;
 import model.Bestelling;
 
 import java.io.IOException;
-import java.util.List;
 
+/**
+ * Deze klasse weergeeft de "Afsluiting bestelling"-pane van de Order-view.
+ */
 public class OrderAfsluitingBestelling extends GridPane {
     public BestelViewController controller;
     Button afsluitKnop1;
     Button betaalKnop;
     Button keukenKnop;
     Text bedragTekst;
-    double bedrag = 0;
 
     public OrderAfsluitingBestelling(BestelViewController controller){
         afsluitKnop1 = new Button();

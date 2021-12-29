@@ -1,9 +1,11 @@
 package model.kortingStrategies;
 
-import model.Bestelling;
-
 import java.util.ArrayList;
 
+/**
+ * Deze klasse stelt de strategie voor die gebruikt wordt indien er eeb korting wordt verrekend op de bestelling waarbij
+ * de klant 10 procent korting krijgt op de gehele bestelling.
+ */
 public class TienProcentKortingStrategy implements KortingStrategy{
 
     @Override

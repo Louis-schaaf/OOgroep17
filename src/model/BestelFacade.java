@@ -1,7 +1,6 @@
 package model;
 
 import jxl.read.biff.BiffException;
-import model.bestelStates.BestellingState;
 import model.database.BelegDatabase;
 import model.database.BroodjesDatabase;
 import model.kortingStrategies.KortingStrategy;
@@ -12,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Deze klasse vormt de Facade voor bestelling. Deze Facade fungeert als centraal aanspreekpunt van onze applicatie.
+ */
 public class BestelFacade implements Subject {
     public BroodjesDatabase broodjesDatabase;
     public BelegDatabase belegDatabase;
@@ -25,10 +27,6 @@ public class BestelFacade implements Subject {
         this.betaaldeBestellingen = new ArrayList<>();
     }
 
-    public BestellingState getBestellingState() {
-        return this.bestelling.getState();
-    }
-
     public List<Bestellijn> getLijstBestellijnen() {
         return this.bestelling.getBestellijnen();
     }
@@ -39,14 +37,6 @@ public class BestelFacade implements Subject {
 
     public Map<String, Integer> getVoorraadBeleg() {
         return this.belegDatabase.getVoorraadlijstBeleg();
-    }
-
-    public Map<String, Integer> getVerkochteBroodjes() {
-        return this.broodjesDatabase.getVerkochteBroodjes();
-    }
-
-    public Map<String, Integer> getVerkochtBeleg() {
-        return this.belegDatabase.getVerkochtBeleg();
     }
 
     public Map<String, Broodje> getBroodjes() {

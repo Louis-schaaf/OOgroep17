@@ -2,6 +2,10 @@ package model.bestelStates;
 
 import model.Bestelling;
 
+/**
+ * Deze klasse stelt de staat voor waarin de bestelling zich bevindt als de gebruiker de bestelling heeft betaald door
+ * op de "Betaal"-knop in de Order-view te duwen.
+ */
 public class Betaald implements BestellingState {
     Bestelling bestelling;
     public Betaald(Bestelling bestelling) {

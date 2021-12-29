@@ -11,23 +11,21 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import model.BelegSoort;
-import model.Bestellijn;
 import model.Broodje;
-import model.database.BelegDatabase;
-import model.database.BroodjesDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * Deze klasse geeft een overzicht van de broodjes en belegsoorten in de "Broodjes/beleg"-tab van de Admin-view.
+ */
 public class SandwichOverviewPane extends GridPane{
 	public OverzichtController controller;
-	private TableView<Broodje> table = new TableView<>();
+	private TableView<Broodje> table;
 	List<Broodje> list;
 	ObservableList<Broodje> broodjeObservableList;
-
-	private TableView<BelegSoort> belegTableView = new TableView<>();
+	private TableView<BelegSoort> belegTableView;
 	List<BelegSoort> list2;
 	ObservableList<BelegSoort> belegObservableList;
 
@@ -93,6 +91,5 @@ public class SandwichOverviewPane extends GridPane{
 		this.table.setVisible(true);
 		this.belegTableView.setVisible(false);
 		this.belegTableView.setVisible(true);
-		//TODO update past niks aan
 	}
 }

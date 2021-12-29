@@ -3,13 +3,15 @@ package controller;
 import jxl.read.biff.BiffException;
 import model.*;
 import model.bestelStates.BestellingState;
-import view.admin.AdminView;
 import view.order.OrderView;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Deze klasse maakt een nieuwe controller aan die de Order-view bediend.
+ */
 public class BestelViewController implements Observer {
     public BestelFacade bestelFacade;
     public OrderView orderView;
@@ -27,19 +29,12 @@ public class BestelViewController implements Observer {
         this.bestelFacade.addObserver(this, "ZEND_NAAR_KEUKEN");
     }
 
-    public void addObserver(Observer observer, String event) {this.bestelFacade.addObserver(observer, event);}
-
     public void setBestelFacade(BestelFacade bestelFacade) {
         this.bestelFacade = bestelFacade;
     }
 
     public void setOrderView(OrderView orderView) {
         this.orderView = orderView;
-    }
-
-    @Override
-    public void update() {
-        orderView.update(this.getBestelling());
     }
 
     public Map<String, Broodje> getBroodjesDB() {
@@ -58,10 +53,6 @@ public class BestelViewController implements Observer {
         return this.bestelFacade.getVoorraadBeleg();
     }
 
-    public BestellingState getState() {
-        return this.bestelFacade.getBestellingState();
-    }
-
     public Bestelling getBestelling() {
         return this.bestelFacade.getBestelling();
     }
@@ -70,19 +61,14 @@ public class BestelViewController implements Observer {
         return this.orderView.getSelected();
     }
 
+    public List<Bestellijn> getLijstBestellijnen() {
+        return this.bestelFacade.getLijstBestellijnen();
+    }
+
     public void startNieuweBestelling() throws BiffException, IOException {
         this.bestelFacade.startNieuweBestelling();
         this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
         this.orderView.updateStatusBroodjesKnoppen(this.getVoorraadBroodjes());
-    }
-    public void afsluitenBestelling() throws BiffException, IOException {
-        String korting = orderView.getKorting();
-        this.bestelFacade.afsluitenBestelling();
-        this.orderView.updateBedrag(this.bestelFacade.updateBedrag(korting));
-    }
-
-    public List<Bestellijn> getLijstBestellijnen() {
-        return this.bestelFacade.getLijstBestellijnen();
     }
 
     public void voegBestellijnToe (String naamBroodje) throws BiffException, IOException {
@@ -102,24 +88,6 @@ public class BestelViewController implements Observer {
         }
     }
 
-    public void annuleerBestelling() throws BiffException, IOException {
-        this.bestelFacade.annuleerBestelling();
-        this.orderView.updateBestellijnen();
-        this.orderView.updateStatusBroodjesKnoppen(this.getVoorraadBroodjes());
-        this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
-    }
-
-    public void verwijderBestellijn(Bestellijn selectedBestellijn) throws BiffException, IOException {
-        if (selectedBestellijn == null) {
-            this.orderView.toonError();
-        } else {
-            this.bestelFacade.verwijderBestellijn(selectedBestellijn);
-            this.orderView.updateBestellijnen();
-            this.orderView.updateStatusBroodjesKnoppen(this.getVoorraadBroodjes());
-            this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
-        }
-    }
-
     public void voegIdentiekeBestellijnToe(Bestellijn selectedBestellijn) throws BiffException, IOException {
         if (selectedBestellijn == null) {
             this.orderView.toonError();
@@ -136,11 +104,42 @@ public class BestelViewController implements Observer {
         }
     }
 
+    public void verwijderBestellijn(Bestellijn selectedBestellijn) throws BiffException, IOException {
+        if (selectedBestellijn == null) {
+            this.orderView.toonError();
+        } else {
+            this.bestelFacade.verwijderBestellijn(selectedBestellijn);
+            this.orderView.updateBestellijnen();
+            this.orderView.updateStatusBroodjesKnoppen(this.getVoorraadBroodjes());
+            this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
+        }
+    }
+
+    public void afsluitenBestelling() throws BiffException, IOException {
+        String korting = orderView.getKorting();
+        this.bestelFacade.afsluitenBestelling();
+        this.orderView.updateBedrag(this.bestelFacade.updateBedrag(korting));
+    }
+
+    public void annuleerBestelling() throws BiffException, IOException {
+        this.bestelFacade.annuleerBestelling();
+        this.orderView.updateBestellijnen();
+        this.orderView.updateStatusBroodjesKnoppen(this.getVoorraadBroodjes());
+        this.orderView.updateStatusBelegKnoppen(this.getVoorraadBeleg());
+    }
+
     public void betaalBestelling() throws BiffException, IOException{
         this.bestelFacade.betaalBestelling();
     }
 
     public void stuurBestellingNaarKeuken() throws BiffException, IOException {
         this.bestelFacade.zendBestellingNaarKeuken();
+        this.orderView.hideVolgNummer();
+        this.orderView.resetAantalBroodjes();
+    }
+
+    @Override
+    public void update() {
+        orderView.update(this.getBestelling());
     }
 }

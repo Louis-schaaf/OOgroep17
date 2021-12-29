@@ -1,11 +1,8 @@
 package view.kitchen;
 
-import controller.BestelViewController;
 import controller.KeukenViewController;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Bestelling;
@@ -13,11 +10,12 @@ import view.kitchen.panes.KitchenKnoppen;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 
+/**
+ * Deze klasse maakt de Kitchen-view aan.
+ */
 public class KitchenView {
 	public KeukenViewController controller;
-	public BestelViewController bestelViewController;
 	private KitchenKnoppen kitchenKnoppen;
 	private Stage stage = new Stage();
 
@@ -50,6 +48,5 @@ public class KitchenView {
 		this.kitchenKnoppen.update();
 		kitchenKnoppen.updateCounter();
 		kitchenKnoppen.updateBestellingsInfo();
-		//TODO hierin moet de update staan
     }
 }

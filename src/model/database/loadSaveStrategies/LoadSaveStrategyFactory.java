@@ -2,6 +2,9 @@ package model.database.loadSaveStrategies;
 
 import java.lang.reflect.Constructor;
 
+/**
+ * Deze factory gebruiken we om de laadstrategie te instantiëren.
+ */
 public class LoadSaveStrategyFactory {
     public static LoadSaveStrategy createLoadSaveStrategy(String type, Object... args){
         LoadSaveStrategy instance = null;

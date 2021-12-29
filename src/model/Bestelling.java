@@ -6,6 +6,9 @@ import model.bestelStates.InWacht;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Deze klasse geeft de constructor en alle beschikbare methodes voor een Bestelling weer.
+ */
 public class Bestelling {
     private int volgnummer;
     public List<Bestellijn> bestellijnen;
@@ -80,18 +83,6 @@ public class Bestelling {
 
     public void verzenden () {
         this.state.verzenden();
-    }
-
-    public void bereiden () {
-        this.state.bereiden();
-    }
-
-    public void afwerken () {
-        this.state.afwerken();
-    }
-
-    public void annuleren () {
-        this.state.annuleren();
     }
 
     public Bestellijn verwijderBestellijn(Bestellijn selectedBestellijn) {
