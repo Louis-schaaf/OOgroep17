@@ -53,4 +53,8 @@ public class KitchenView {
 	public ArrayList<Bestelling> getWachtrij() {
 		return wachtrij;
 	}
+
+    public void update() {
+		//TODO hierin moet de update staan
+    }
 }

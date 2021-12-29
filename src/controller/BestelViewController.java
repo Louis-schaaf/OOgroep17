@@ -28,7 +28,7 @@ public class BestelViewController implements Observer {
         this.bestelFacade.addObserver(this, "IDENTIEKE_BESTELLIJN");
         this.bestelFacade.addObserver(this, "VERWIJDER_BROODJE");
         this.bestelFacade.addObserver(this, "BETAAL_BESTELLING");
-        this.bestelFacade.addObserver(this, "ZendNaarKeuken");
+        this.bestelFacade.addObserver(this, "ZEND_NAAR_KEUKEN");
     }
 
     public void addObserver(Observer observer, String event) {this.bestelFacade.addObserver(observer, event);}
@@ -42,7 +42,7 @@ public class BestelViewController implements Observer {
     }
 
     @Override
-    public void update(String event) {
+    public void update() {
         orderView.update(this.getBestelling());
     }
 

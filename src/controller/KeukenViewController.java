@@ -15,6 +15,7 @@ public class KeukenViewController implements Observer {
 
     public KeukenViewController() {
         setBestelFacade(new BestelFacade());
+        this.bestelFacade.addObserver(this, "ZEND_NAAR_KEUKEN");
     }
 
     public void setBestelFacade(BestelFacade bestelFacade) {
@@ -30,10 +31,7 @@ public class KeukenViewController implements Observer {
     }
 
     @Override
-    public void update(String event) throws IOException, BiffException {
-        if (event.equals("ZendNaarKeuken")) {
-            kitchenView.getWachtrij().add(this.bestelFacade.getBestelling());
-            kitchenView.updateCounter();
-        }
+    public void update() throws IOException, BiffException {
+        this.kitchenView.update();
     }
 }

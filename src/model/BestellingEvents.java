@@ -9,8 +9,6 @@ public enum BestellingEvents {
     AFSLUITEN_BESTELLING("AfsluitenBestelling", "model.bestelling.bestelFacade.afsluitenBestelling"),
     ANNULEER_BESTELLING("AnnuleerBestelling", "model.bestelling.bestelFacade.annuleerBestelling"),
     BETAAL_BESTELLING("BetaalBestelling", "model.bestelling.bestelFacade.betaalBestelling"),
-    //TODO: geen idee hoe we dit gebruiken
-    // volgens mij kloppen die klassenamen niet en die worden ook niet in onze code gebruikt
     ZEND_NAAR_KEUKEN("ZendNaarKeuken", "idk");
 
     private final String omschrijving;

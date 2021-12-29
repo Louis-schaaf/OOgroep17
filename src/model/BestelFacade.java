@@ -4,9 +4,6 @@ import jxl.read.biff.BiffException;
 import model.bestelStates.BestellingState;
 import model.database.BelegDatabase;
 import model.database.BroodjesDatabase;
-import model.database.loadSaveStrategies.LoadSaveStrategy;
-import model.database.loadSaveStrategies.LoadSaveStrategyEnum;
-import model.database.loadSaveStrategies.LoadSaveStrategyFactory;
 import model.kortingStrategies.KortingStrategy;
 import model.kortingStrategies.KortingStrategyFactory;
 
@@ -119,7 +116,7 @@ public class BestelFacade implements Subject {
 
     public void zendBestellingNaarKeuken() throws BiffException, IOException {
         this.bestelling.verzenden();
-        notifyObservers("ZendNaarKeuken");
+        notifyObservers("ZEND_NAAR_KEUKEN");
     }
 
     public List<Bestelling> getBetaaldeBestellingen() {
@@ -160,7 +157,7 @@ public class BestelFacade implements Subject {
     @Override
     public void notifyObservers(String event) throws IOException, BiffException {
         for (Observer observer : observers.get(event)) {
-                observer.update(event);
+                observer.update();
             }
         }
 }
