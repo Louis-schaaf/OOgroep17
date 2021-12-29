@@ -131,6 +131,8 @@ public class OrderOptions extends GridPane {
                 int i = voorraadBroodjes.get(b.getText());
                 if (i < 1) {
                     b.setDisable(true);
+                }else{
+                    b.setDisable(false);
                 }
             }
         }
@@ -146,6 +148,8 @@ public class OrderOptions extends GridPane {
                 int i = voorraadBeleg.get(b.getText());
                 if (i < 1) {
                     b.setDisable(true);
+                }else{
+                    b.setDisable(false);
                 }
             }
         }
