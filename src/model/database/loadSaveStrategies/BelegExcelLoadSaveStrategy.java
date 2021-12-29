@@ -16,8 +16,7 @@ import java.util.Map;
 public class BelegExcelLoadSaveStrategy extends ExcelLoadSaveTemplate implements LoadSaveStrategy{
     File file = new File("src/bestanden/beleg.xls");
 
-    public BelegExcelLoadSaveStrategy() {
-    }
+    public BelegExcelLoadSaveStrategy() {}
 
     public Map getData(File file){
         Map<String, BelegSoort> map = new HashMap<>();
