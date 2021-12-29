@@ -195,6 +195,9 @@ public class OrderBroodjes extends GridPane {
             this.verwijder.setDisable(true);
             this.identiek.setDisable(true);
         }
+        if (bestelling.getState().getClass().getName().contains("InKeuken")){
+            resetTable();
+        }
     }
 
     public Bestellijn getSelectedBestellijn() {
@@ -222,5 +225,16 @@ public class OrderBroodjes extends GridPane {
         table.setVisible(true);
         this.updateAantalBroodjes();
         this.selectedBestellijn = null;
+    }
+
+    private void resetTable(){
+        table.getItems().clear();
+        table.getColumns().get(0).setVisible(false);
+        table.getColumns().get(0).setVisible(true);
+        table.refresh();
+        broodjes.getChildren().remove(table);
+        setBroodjes(broodjes);
+        table.setVisible(false);
+        table.setVisible(true);
     }
 }
