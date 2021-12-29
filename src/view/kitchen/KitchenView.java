@@ -41,20 +41,12 @@ public class KitchenView {
 		controller.setKitchenView(this);
 	}
 
-	public void setBestelViewController(BestelViewController bestelViewController) {
-		this.bestelViewController = bestelViewController;
-	}
-
-	public void updateCounter() {
-
-	}
-
 	public ArrayList<Bestelling> getWachtrij() {
 		return wachtrij;
 	}
 
     public void update() {
-		this.getWachtrij().add(this.bestelViewController.getBestelling());
+		this.getWachtrij().add(this.controller.getBestelling());
 		kitchenKnoppen.updateCounter();
 		kitchenKnoppen.updateBestellingsInfo();
 		//TODO hierin moet de update staan

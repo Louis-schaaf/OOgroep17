@@ -14,8 +14,8 @@ public class BestelViewController implements Observer {
     public BestelFacade bestelFacade;
     public OrderView orderView;
 
-    public BestelViewController() {
-        setBestelFacade(new BestelFacade());
+    public BestelViewController(BestelFacade bestelFacade) {
+        setBestelFacade(bestelFacade);
         //TODO: (LOUIS) waarom luistert die naar alles? Omdat die bij elk van deze events moet updaten.
         this.bestelFacade.addObserver(this, "TOEVOEGEN_BROODJE");
         this.bestelFacade.addObserver(this, "NIEUWE_BESTELLING");
