@@ -1,5 +1,6 @@
 package view.admin.panes;
 
+import com.sun.scenario.Settings;
 import controller.BestelViewController;
 import controller.admin.InstellingenController;
 import javafx.geometry.Insets;
@@ -11,6 +12,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import jxl.read.biff.BiffException;
 import model.Bestelling;
+import model.Instellingen;
 
 import java.io.IOException;
 
@@ -40,7 +42,7 @@ public class SettingsPane extends GridPane {
     private Node setUpChoiceBox() {
         choiceBox = new ChoiceBox<>();
         choiceBox.getItems().addAll("GOEDKOOPSTEGRATIS", "GEENKORTING", "TIENPROCENT");
-        choiceBox.setValue("GEENKORTING");
+        choiceBox.setValue(Instellingen.getKorting());
         return choiceBox;
     }
     private Node setUpKortingsTextField(){
@@ -54,75 +56,21 @@ public class SettingsPane extends GridPane {
     private Node setUpLoadSaveStrategy() {
         loadSaveStrategy = new ChoiceBox();
         loadSaveStrategy.getItems().addAll("EXCEL", "TEKST");
-        loadSaveStrategy.setValue("EXCEL");
+        loadSaveStrategy.setValue(Instellingen.getLoad());
         return loadSaveStrategy;
     }
-    public void update(){
 
+    public void update(){
     }
 
     private Button setSaveButton() {
         buttonSave = new Button();
         buttonSave.setText("Save");
         buttonSave.setOnAction(event -> {
+            Instellingen.setKorting(this.choiceBox.getValue().toString());
+            Instellingen.setLoad(this.loadSaveStrategy.getValue().toString());
+            this.controller.setProperties();
         });
         return buttonSave;
     }
-    // Zet een orderButton van "Nieuwe Bestelling"
-    // Wanneer deze wordt ingedrukt wordt er een nieuwe bestelling aangemaakt.
-    // De knop wort daarna teruggegeven.
-    /*private Button setUpOrderButton() {
-        buttonNieuweBestelling.setText("Nieuwe bestelling");
-        buttonNieuweBestelling.setOnAction(event -> {
-            try {
-                this.controller.startNieuweBestelling();
-            } catch (BiffException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        return buttonNieuweBestelling;
-    }
-
-    private Text setUpVolgnummer() {
-        volgnummerText = new Text("Volgnummer: 1");
-        volgnummerText.setVisible(false);
-        return volgnummerText;
-    }
-
-    private void updateVolgnummer() {
-        String tekst = "Volgnummer: " + this.volgnummer;
-        this.volgnummerText.setText(tekst);
-        this.controller.getBestelling().setVolgnummer(volgnummer);
-    }
-
-    // De states worden met elkaar vergeleken.
-    // Wanneer de state van de bestelling niet meer InWacht staat
-    // moet de bestelknop gedisabled worden
-    // en de choiceBox worden geanabled.
-    public void update(Bestelling bestelling) {
-        if (bestelling.getState().getClass().getName().contains("InWacht")) {
-            buttonNieuweBestelling.setDisable(false);
-            volgnummerText.setVisible(false);
-            choiceBox.setDisable(true);
-        }
-        if (bestelling.getState().getClass().getName().contains("InBestelling")) {
-            buttonNieuweBestelling.setDisable(true);
-            this.updateVolgnummer();
-            volgnummerText.setVisible(true);
-            choiceBox.setDisable(false);
-        }
-        if (bestelling.getState().getClass().getName().contains("Afgesloten")) {
-            buttonNieuweBestelling.setDisable(true);
-            choiceBox.setDisable(true);
-        }
-        if (bestelling.getState().getClass().getName().contains("Betaald")) {
-            buttonNieuweBestelling.setDisable(true);
-            choiceBox.setDisable(true);
-            this.volgnummer++;
-        }
-    }
-    public void update() {
-    }*/
 }

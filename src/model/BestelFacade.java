@@ -181,4 +181,8 @@ public class BestelFacade implements Subject {
         }
         return mogelijk;
     }
+
+    public void setProperties() {
+        Instellingen.write();
+    }
 }

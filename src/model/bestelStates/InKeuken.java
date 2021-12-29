@@ -2,10 +2,10 @@ package model.bestelStates;
 
 import model.Bestelling;
 
-public class InKeuken extends BestellingState {
-
+public class InKeuken implements BestellingState {
+    Bestelling bestelling;
     public InKeuken(Bestelling bestelling) {
-        super(bestelling);
+        this.bestelling = bestelling;
     }
 
     @Override
